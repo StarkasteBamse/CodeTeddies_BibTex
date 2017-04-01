@@ -6,8 +6,14 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+
     public static void main(String[] args) {
-        System.out.println("Moi t. CodeTeddies");
+        // TODO: Ignore me from test reports
+        System.out.println(testMe("Moi t. CodeTeddies"));
+    }
+
+    public static String testMe(String lol) {
+        return lol;
     }
     
 }
