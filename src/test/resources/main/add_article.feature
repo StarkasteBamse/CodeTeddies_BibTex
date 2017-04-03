@@ -1,6 +1,9 @@
 Feature: A new article is added if all required fields are entered and none of the fields contains invalid characters
 
-    Scenario: addition successful with valid author and title and journal and year and volume
+# Required fields for article: Author, Title, Journal, Year, Volume
+# Optional fields for article: Number, Pages, Month, Note, Key
+
+    Scenario: addition succeeds with valid author and title and journal and year and volume
         Given command add is selected
         When author "Testerman" and title "Testingname" and journal "Testermag" and year "2017" and volume "13" are entered
         Then system will respond with "New article added successfully"

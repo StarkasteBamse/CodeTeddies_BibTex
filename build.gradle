@@ -39,12 +39,19 @@ apply plugin: 'application'
 apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
 
+project.ext {
+    cucumberVersion = '1.2.5'
+    junitVersion = '4.12'
+}
+
 repositories {
     jcenter()
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
+    testCompile 'info.cukes:cucumber-java:' + cucumberVersion
+    testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
+    testCompile 'junit:junit:' + junitVersion
 }
 
 mainClassName = 'main.Main'
