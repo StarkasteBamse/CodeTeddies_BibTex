@@ -10,9 +10,9 @@ import static org.junit.Assert.*;
 
 public class Stepdefs {
 
-    // TODO: Everything
+    /*
     List<String> inputLines = new ArrayList<>();
-    //App app;
+    App app;
     StubIO io;
 
     @Given("^command add is selected$")
@@ -40,13 +40,14 @@ public class Stepdefs {
         inputLines.add(Integer.toString(volume));
 
         io = new StubIO(inputLines);
-        //app = new App(io);
-        //app.run();
+        app = new App(io);
+        app.run();
     }
 
     @Then("^system will respond with \"([^\"]*)\"$")
     public void system_will_respond_with(String expectedOutput) 
             throws Throwable {
-        assertTrue(io.getPrints().contains(expectedOutput));
+        assertTrue(io.getPrints().contains(expectedOutput));   
     }
+    */
 }
