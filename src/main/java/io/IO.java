@@ -10,5 +10,6 @@ package io;
  * @author hans
  */
 public interface IO {
-    
+    void print(String toPrint);
+    String readLine();
 }
