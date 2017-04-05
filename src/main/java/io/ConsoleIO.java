@@ -8,6 +8,11 @@ public class ConsoleIO implements IO{
 
     @Override
     public void print(String toPrint) {
+        System.out.print(toPrint);
+    }
+
+    @Override
+    public void println(String toPrint) {
         System.out.println(toPrint);
     }
 
@@ -15,11 +20,11 @@ public class ConsoleIO implements IO{
     public String readLine() {
         return scanner.nextLine();
     }
-    
+
     public String readLine(String prompt) {
         System.out.println(prompt);
         return scanner.nextLine();
     }
-    
-    
+
+
 }
