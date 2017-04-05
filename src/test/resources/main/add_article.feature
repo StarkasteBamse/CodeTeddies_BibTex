@@ -30,5 +30,5 @@ Feature: A new article is added if all required fields are entered and none of t
 
     Scenario: addition fails with valid author and title and journal and year and invalid volume
         Given command add is selected
-        When author "Testerman and title "Testingname" and journal "Testermag" and year "2017" and volume "a" are entered
+        When author "Testerman" and title "Testingname" and journal "Testermag" and year "2017" and volume "a" are entered
         Then system will respond with "Invalid volume"
