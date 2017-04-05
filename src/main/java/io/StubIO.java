@@ -37,5 +37,10 @@ public class StubIO implements IO{
             return lines.get(i++);
         }
         return "";
-    }   
+    }
+    
+    @Override
+    public void println(String toPrint) {
+       // moi
+    }
 }
