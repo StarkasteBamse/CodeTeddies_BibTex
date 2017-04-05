@@ -30,6 +30,7 @@ public class Main {
             } else {
                 a.setAuthor(author);
             }
+            io.println("");
 
             io.print("Title: ");
             String title = io.readLine();
@@ -38,6 +39,7 @@ public class Main {
             } else {
                 a.setTitle(title);
             }
+            io.println("");
 
             io.print("Journal: ");
             String journal = io.readLine();
@@ -46,14 +48,17 @@ public class Main {
             } else {
                 a.setJournal(journal);
             }
+            io.println("");
 
             io.print("Year: ");
             String year = io.readLine();
             a.setYear(Integer.parseInt(year));
+            io.println("");
 
             io.print("Volume: ");
             String volume = io.readLine();
             a.setVolume(Integer.parseInt(volume));
+            io.println("");
 
             if (a.hasRequiredFields()) {
                 io.println("New article added succesfully");
