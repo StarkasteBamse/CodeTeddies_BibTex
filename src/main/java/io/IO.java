@@ -11,5 +11,6 @@ package io;
  */
 public interface IO {
     void print(String toPrint);
+    void println(String toPrint);
     String readLine();
 }
