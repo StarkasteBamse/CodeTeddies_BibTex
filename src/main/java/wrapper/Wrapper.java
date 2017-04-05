@@ -1,18 +1,16 @@
-
 package wrapper;
 
 import main.Article;
 
-
 public class Wrapper {
-    
+
     private int keyAdd;
-    
+
     public Wrapper() {
         keyAdd = 0;
     }
-    
-    public String wrap(Article art) { // wrappaa artikkelin - palauttaa bibtex-muotoisena Stringinä
+
+    public String wrap(Article art) { // palauttaa bibtex-Stringinä
         String type = "article";
         String key = art.title + keyAdd; // Jokaisella täytyy olla uniikki id
         String bib = "@" + type + "{" + key + ",\n";
@@ -30,7 +28,7 @@ public class Wrapper {
 //        }
         return bib;
     }
-    
+
 //        Main-code example:
 //        Wrapper wrp = new Wrapper();
 //        String bib = wrp.wrap(a);
