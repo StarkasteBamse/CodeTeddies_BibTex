@@ -5,8 +5,8 @@ public class Article extends Reference{
     public String author;
     public String title;
     public String journal;
-    public int year;
-    public int volume;
+    public String year;
+    public String volume;
 
     public Article() {
 
@@ -25,11 +25,11 @@ public class Article extends Reference{
         this.journal = journal;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(String volume) {
         this.volume = volume;
     }
 
@@ -40,9 +40,9 @@ public class Article extends Reference{
             return false;
         } else if (this.journal == null) {
             return false;
-        } else if (year == 0) {
+        } else if (this.year == null) {
             return false;
-        } else if (volume == 0) {
+        } else if (volume == null) {
             return false;
         }
         return true;

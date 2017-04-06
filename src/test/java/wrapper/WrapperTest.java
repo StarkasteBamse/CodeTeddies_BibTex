@@ -14,8 +14,8 @@ public class WrapperTest {
     private String author;
     private String journal;
     private String title;
-    private final int year = 1999;
-    private final int volume = 12;
+    private final String year = "1999";
+    private final String volume = "12";
     
     public WrapperTest() {
         a = new Article();
