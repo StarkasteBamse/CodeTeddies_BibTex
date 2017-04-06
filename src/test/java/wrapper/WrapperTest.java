@@ -2,7 +2,7 @@
 package wrapper;
 
 import java.util.Scanner;
-import main.Article;
+import domain.Article;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

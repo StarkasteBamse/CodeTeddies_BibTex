@@ -1,6 +1,6 @@
 package wrapper;
 
-import main.Article;
+import domain.Article;
 
 public class Wrapper {
 
