@@ -28,10 +28,10 @@ public class Main {
                 journal(io, a);
                 year(io, a);
                 volume(io, a);
-                checkRequiredFields(a, io, articles);                    
+                checkRequiredFields(a, io, articles);
             }
         }
-        
+
         printArticles(articles, wrp, io);
     }
 
@@ -42,25 +42,39 @@ public class Main {
         }
     }
 
-    public static void checkRequiredFields(Article a, ConsoleIO io, 
+    public static void checkRequiredFields(Article a, ConsoleIO io,
             ArrayList articles) {
         if (a.hasRequiredFields()) {
             articles.add(a);
-            io.println("New article added succesfully");       
-        }    
+            io.println("New article added succesfully");
+        }
     }
 
     public static void volume(ConsoleIO io, Article a) throws NumberFormatException {
         io.print("Volume: ");
         String volume = io.readLine();
-        a.setVolume(Integer.parseInt(volume));
+        int i = 0;
+        try {
+            i = Integer.parseInt(volume);
+        } catch (NumberFormatException e) {
+            i = 0;
+        }
+
+        a.setVolume(i);
         io.println("");
     }
 
     public static void year(ConsoleIO io, Article a) throws NumberFormatException {
         io.print("Year: ");
         String year = io.readLine();
-        a.setYear(Integer.parseInt(year));
+        int i = 0;
+        try {
+            i = Integer.parseInt(year);
+        } catch (NumberFormatException e) {
+            i = 0;
+        }
+
+        a.setYear(i);
         io.println("");
     }
 
@@ -98,10 +112,10 @@ public class Main {
     }
 
     public static boolean scandeja(String s) {
-        if (s.contains("ä") || s.contains("ö") || s.contains("Ä") || s.contains("Ö")) {
-            return true;
+        if (s.matches("^[a-zA-Z0-9!@#$%&*()_+=|<>?{}\\[\\]~-]*$")) {
+            return false;
         }
-        return false;
+        return true;
     }
 //CHECKSTYLE:ON
 }

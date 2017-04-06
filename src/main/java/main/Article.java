@@ -1,6 +1,7 @@
 package main;
 
 public class Article {
+
     public String author;
     public String title;
     public String journal;
@@ -11,6 +12,7 @@ public class Article {
 
     }
 //CHECKSTYLE:OFF
+
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -32,16 +34,16 @@ public class Article {
     }
 
     public boolean hasRequiredFields() {
-        if (this.author.isEmpty()) {
+        if (this.author == null) {
             return false;
-        } else if (this.title.isEmpty()) {
+        } else if (this.title == null) {
             return false;
-        } else if (this.journal.isEmpty()) {
+        } else if (this.journal == null) {
             return false;
         } else if (year == 0) {
             return false;
         } else if (volume == 0) {
-          return false;
+            return false;
         }
         return true;
     }
