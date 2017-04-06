@@ -1,6 +1,6 @@
-package main;
+package domain;
 
-public class Article {
+public class Article extends Reference{
 
     public String author;
     public String title;
