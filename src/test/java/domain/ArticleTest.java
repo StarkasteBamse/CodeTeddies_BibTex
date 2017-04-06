@@ -80,7 +80,7 @@ public class ArticleTest {
      */
     @Test
     public void testSetYear() {
-        int year = 2015;
+        String year = "2015";
         instance.setYear(year);
         assertEquals(instance.year, year);
     }
@@ -90,7 +90,7 @@ public class ArticleTest {
      */
     @Test
     public void testSetVolume() {
-        int volume = 20;
+        String volume = "20";
         instance.setVolume(volume);
         assertEquals(instance.volume, volume);
     }
@@ -106,7 +106,8 @@ public class ArticleTest {
     }
     
     /**
-     * Test of hasRequiredFields method when all fields are set, of class Article.
+     * Test of hasRequiredFields method when all fields are set, 
+     * of class Article.
      */
     @Test
     public void testHasRequiredFieldsWhenFieldsAreSet() {
@@ -114,8 +115,8 @@ public class ArticleTest {
         instance.setAuthor("Arto Hellas");
         instance.setJournal("SSCSI");
         instance.setTitle("My doctoral dissertation: never getting it ready");
-        instance.setYear(2014);
-        instance.setVolume(13);
+        instance.setYear("2014");
+        instance.setVolume("13");
         boolean expResult = true;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
