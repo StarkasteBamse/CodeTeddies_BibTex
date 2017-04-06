@@ -1,17 +1,15 @@
 package domain;
 
-public class Article extends Reference{
+public class Book extends Reference{
 
     public String author;
     public String title;
-    public String journal;
+    public String publisher;
     public String year;
-    public String volume;
 
-    public Article() {
+    public Book() {
 
     }
-//CHECKSTYLE:OFF
 
     public void setAuthor(String author) {
         this.author = author;
@@ -21,16 +19,12 @@ public class Article extends Reference{
         this.title = title;
     }
 
-    public void setJournal(String journal) {
-        this.journal = journal;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     public void setYear(String year) {
         this.year = year;
-    }
-
-    public void setVolume(String volume) {
-        this.volume = volume;
     }
 
     public boolean hasRequiredFields() {
@@ -38,14 +32,12 @@ public class Article extends Reference{
             return false;
         } else if (this.title == null) {
             return false;
-        } else if (this.journal == null) {
+        } else if (this.publisher == null) {
             return false;
         } else if (this.year == null) {
-            return false;
-        } else if (this.volume == null) {
             return false;
         }
         return true;
     }
-//CHECKSTYLE:ON
+
 }
