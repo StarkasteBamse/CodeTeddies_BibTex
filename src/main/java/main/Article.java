@@ -10,7 +10,7 @@ public class Article {
     public Article() {
 
     }
-
+//CHECKSTYLE:OFF
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -45,4 +45,5 @@ public class Article {
         }
         return true;
     }
+//CHECKSTYLE:ON
 }
