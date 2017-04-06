@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import static main.Main.testMe;
+
 
 
 public class TestMain {
@@ -32,9 +32,5 @@ public class TestMain {
     }
 
 
-    @Test
-    public void Mainluokkatoimii() {
-        String hello = "Moi t. CodeTeddies";
-        assertEquals(hello, testMe("Moi t. CodeTeddies"));
-    }
+    
 }

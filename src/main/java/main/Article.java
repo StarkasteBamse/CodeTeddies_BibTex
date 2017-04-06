@@ -10,7 +10,7 @@ public class Article {
     public Article() {
 
     }
-
+//CHECKSTYLE:OFF
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -30,4 +30,20 @@ public class Article {
     public void setVolume(int volume) {
         this.volume = volume;
     }
+
+    public boolean hasRequiredFields() {
+        if (this.author.isEmpty()) {
+            return false;
+        } else if (this.title.isEmpty()) {
+            return false;
+        } else if (this.journal.isEmpty()) {
+            return false;
+        } else if (year == 0) {
+            return false;
+        } else if (volume == 0) {
+          return false;
+        }
+        return true;
+    }
+//CHECKSTYLE:ON
 }
