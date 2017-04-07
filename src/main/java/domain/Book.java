@@ -10,6 +10,7 @@ public class Book extends Reference{
     public Book() {
 
     }
+//CHECKSTYLE:OFF
 
     public void setAuthor(String author) {
         this.author = author;
@@ -36,8 +37,10 @@ public class Book extends Reference{
             return false;
         } else if (this.year == null) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
+//CHECKSTYLE:ON
 
 }
