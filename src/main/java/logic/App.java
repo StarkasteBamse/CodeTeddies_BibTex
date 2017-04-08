@@ -1,43 +1,52 @@
-package Logic;
+package logic;
 
 import domain.Article;
 import domain.Reference;
+import domain.Inproceedings;
+import domain.Book;
 import io.ConsoleIO;
 import java.util.ArrayList;
 import wrapper.Wrapper;
 
 public class App {
-    
+
     private ConsoleIO io;
     private Wrapper wrp;
     private ArrayList<Reference> references;
-    
+
     public App() {
         this.io = new ConsoleIO();
         this.wrp = new Wrapper();
         this.references = new ArrayList<>();
     }
 
+    //CHECKSTYLE:OFF
     public void run() {
         ConsoleIO io = new ConsoleIO();
         Wrapper wrp = new Wrapper();
         ArrayList<Article> articles = new ArrayList<>();
-//CHECKSTYLE:OFF
         while (true) {
             io.print("Add? (y/n)");
             if (io.readLine().equals("n")) {
                 io.println("");
                 break;
             } else {
-                Article a = new Article();
                 io.println("");
-                io.println("BibTex an article!");
-                author(io, a);
-                title(io, a);
-                journal(io, a);
-                year(io, a);
-                volume(io, a);
-                checkRequiredFields(a, io, articles);
+                io.println("Which reference type?");
+                io.println("\t1. Article\n\t2. Book\n\t3. Inproceedings");
+                switch (io.readLine()) {
+                    case "1":
+                        addArticle(articles);
+                        break;
+                    case "2":
+                        addBook();
+                        break;
+                    case "3":
+                        addInproceedings();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -111,6 +120,28 @@ public class App {
             return false;
         }
         return true;
+    }
+
+    private void addArticle(ArrayList<Article> articles) {
+        Article a = new Article();
+        io.println("");
+        io.println("BibTex an article!");
+        author(io, a);
+        title(io, a);
+        journal(io, a);
+        year(io, a);
+        volume(io, a);
+        checkRequiredFields(a, io, articles);
+    }
+
+    private void addBook() {
+        io.println("BibTex a book!");
+    }
+
+    private void addInproceedings() {
+        io.println("BibTex an Inproceedings!");
+        Inproceedings i = new Inproceedings();
+        System.out.println(i.getRequiredFields());
     }
 //CHECKSTYLE:ON
 }
