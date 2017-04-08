@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Book extends Reference {
 
     public String author;
@@ -7,8 +10,13 @@ public class Book extends Reference {
     public String publisher;
     public String year;
 
-    public Book() {
+    private ArrayList<String> requiredFields;
+    private HashMap<String, String> fields;
 
+    public Book() {
+        this.requiredFields = new ArrayList<>();
+        this.fields = new HashMap<>();
+        initRequiredFields();
     }
 //CHECKSTYLE:OFF
 

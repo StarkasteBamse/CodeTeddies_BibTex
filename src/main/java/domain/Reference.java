@@ -17,6 +17,7 @@ public abstract class Reference {
      * values.
      */
 
+    /*
     public ArrayList<String> requiredFields;
     public HashMap<String, String> fields;
 
@@ -46,5 +47,6 @@ public abstract class Reference {
         return true;
     }
 
+    */
     abstract void initRequiredFields();
 }

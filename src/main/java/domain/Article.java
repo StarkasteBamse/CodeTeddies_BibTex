@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Article extends Reference {
 
     public String author;
@@ -8,8 +11,13 @@ public class Article extends Reference {
     public String year;
     public String volume;
 
-    public Article() {
+    private ArrayList<String> requiredFields;
+    private HashMap<String, String> fields;
 
+    public Article() {
+        this.requiredFields = new ArrayList<>();
+        this.fields = new HashMap<>();
+        initRequiredFields();
     }
 //CHECKSTYLE:OFF
 

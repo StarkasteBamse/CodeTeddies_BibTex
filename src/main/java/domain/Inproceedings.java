@@ -36,7 +36,7 @@ public class Inproceedings extends Reference {
         this.year = year;
     }
 
-    /*
+    // @Override
     public boolean hasRequiredFields() {
         if (this.author == null) {
             return false;
@@ -50,7 +50,6 @@ public class Inproceedings extends Reference {
             return true;
         }
     }
-    */
 //CHECKSTYLE:ON
 
     @Override
