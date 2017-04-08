@@ -1,6 +1,6 @@
 package domain;
 
-public class Book extends Reference{
+public class Book extends Reference {
 
     public String author;
     public String title;
@@ -42,5 +42,13 @@ public class Book extends Reference{
         }
     }
 //CHECKSTYLE:ON
+
+    @Override
+    void initRequiredFields() {
+        requiredFields.add("author");
+        requiredFields.add("title");
+        requiredFields.add("publisher");
+        requiredFields.add("year");
+    }
 
 }

@@ -1,6 +1,9 @@
 package wrapper;
 
+import domain.Reference;
 import domain.Article;
+import domain.Book;
+import domain.Inproceedings;
 
 public class Wrapper {
 

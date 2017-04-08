@@ -1,6 +1,12 @@
 package domain;
 
-public class Reference {
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+public abstract class Reference {
 
     /**
      * TODO: Superclass for references
@@ -10,29 +16,35 @@ public class Reference {
      * Fill requiredFields in each Class Constructor separately with correct
      * values.
      */
-    /*
-    private ArrayList<String> requiredFields;
-    private HashMap<String, String> fields;
+
+    public ArrayList<String> requiredFields;
+    public HashMap<String, String> fields;
+
+    public Reference() {
+        this.requiredFields = new ArrayList<>();
+        this.fields = new HashMap<>();
+    }
 
     public void setField(String field, String value) {
-        fields.put(field, value);
+        this.fields.put(field, value);
     }
 
     public String getField(String field) {
-        if (fields.get(field) == NULL) {
-            return NULL;
-        } else
+        if (this.fields.get(field) == null) {
+            return null;
+        } else return this.fields.get(field);
     }
 
     public List getRequiredFields() {
-        return requiredFields;
+        return this.requiredFields;
     }
 
     public boolean hasRequiredFields() {
-        for (String s : requiredFields) {
-            if (!fields.hasKey(s)) return false;
+        for (String s : this.requiredFields) {
+            if (!this.fields.containsKey(s)) return false;
         }
         return true;
     }
-    */
+
+    abstract void initRequiredFields();
 }

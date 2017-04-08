@@ -103,6 +103,14 @@ public class ArticleTest {
         boolean expResult = false;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
+        instance.setAuthor("testA");
+        assertEquals(expResult, instance.hasRequiredFields());
+        instance.setTitle("testT");
+        assertEquals(expResult, instance.hasRequiredFields());
+        instance.setJournal("testJ");
+        assertEquals(expResult, instance.hasRequiredFields());
+        instance.setVolume("testVol");
+        assertEquals(expResult, instance.hasRequiredFields());
     }
     
     /**

@@ -61,6 +61,13 @@ public class InproceedingsTest {
 
     @Test
     public void testHasRequiredFieldsWhenEmpty() {
+        // Test  all required fields one by one
+        assertEquals(false, instance.hasRequiredFields());
+        instance.setAuthor("testA");
+        assertEquals(false, instance.hasRequiredFields());
+        instance.setTitle("testT");
+        assertEquals(false, instance.hasRequiredFields());
+        instance.setBookTitle("testBT");
         assertEquals(false, instance.hasRequiredFields());
     }
     
