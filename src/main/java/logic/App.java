@@ -141,7 +141,6 @@ public class App {
     private void addInproceedings() {
         io.println("BibTex an Inproceedings!");
         Inproceedings i = new Inproceedings();
-        System.out.println(i.getRequiredFields());
     }
 //CHECKSTYLE:ON
 }
