@@ -58,6 +58,7 @@ public class Inproceedings extends Reference {
         this.requiredFields.add("author");
         this.requiredFields.add("title");
         this.requiredFields.add("booktitle");
-        this.requiredFields.add("year");    }
+        this.requiredFields.add("year");
+    }
 
 }
