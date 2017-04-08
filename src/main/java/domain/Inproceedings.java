@@ -1,14 +1,22 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Inproceedings extends Reference {
     
     public String author;
     public String title;
     public String booktitle;
     public String year;
-    
+
+    private ArrayList<String> requiredFields;
+    private HashMap<String, String> fields;
+
     public Inproceedings() {
-        
+        this.requiredFields = new ArrayList<>();
+        this.fields = new HashMap<>();
+        initRequiredFields();
     }
 
 //CHECKSTYLE:OFF
@@ -28,6 +36,7 @@ public class Inproceedings extends Reference {
         this.year = year;
     }
 
+    /*
     public boolean hasRequiredFields() {
         if (this.author == null) {
             return false;
@@ -41,6 +50,14 @@ public class Inproceedings extends Reference {
             return true;
         }
     }
+    */
 //CHECKSTYLE:ON
+
+    @Override
+    void initRequiredFields() {
+        this.requiredFields.add("author");
+        this.requiredFields.add("title");
+        this.requiredFields.add("booktitle");
+        this.requiredFields.add("year");    }
 
 }
