@@ -14,7 +14,23 @@ public class Inproceedings implements Reference {
         initRequiredFields();
     }
 //CHECKSTYLE:OFF
-
+    
+    public void setAuthor(String author) {
+        setField("author", author);
+    }
+    
+    public void setTitle(String title) {
+        setField("title", title);
+    }
+    
+    public void setYear(String year) {
+        setField("year", year);
+    }
+    
+    public void setBookTitle(String bookTitle) {
+        setField("booktitle", bookTitle);
+    }
+    
     @Override
     public boolean hasRequiredFields() {
         for (String field : this.requiredFields) {
@@ -25,7 +41,7 @@ public class Inproceedings implements Reference {
         return true;
     }
 //CHECKSTYLE:ON
-
+   
    @Override
     public void initRequiredFields() {
         this.requiredFields.add("author");
