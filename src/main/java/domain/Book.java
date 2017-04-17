@@ -2,13 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class Book extends Reference {
-
-    public String author;
-    public String title;
-    public String publisher;
-    public String year;
+public class Book implements Reference {
 
     private ArrayList<String> requiredFields;
     private HashMap<String, String> fields;
@@ -20,43 +16,40 @@ public class Book extends Reference {
     }
 //CHECKSTYLE:OFF
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
+    @Override
     public boolean hasRequiredFields() {
-        if (this.author == null) {
-            return false;
-        } else if (this.title == null) {
-            return false;
-        } else if (this.publisher == null) {
-            return false;
-        } else if (this.year == null) {
-            return false;
-        } else {
-            return true;
+        for (String field : this.requiredFields) {
+            if (this.fields.get(field) == null) {
+                return false;
+            }
         }
+        return true;
     }
 //CHECKSTYLE:ON
 
     @Override
-    void initRequiredFields() {
+    public void initRequiredFields() {
         requiredFields.add("author");
         requiredFields.add("title");
         requiredFields.add("publisher");
         requiredFields.add("year");
     }
 
+    @Override
+    public void setField(String field, String value) {
+        this.fields.put(field, value);
+    }
+
+    @Override
+    public String getField(String field) {
+        if (this.fields.get(field) == null) {
+            return null;
+        } else return this.fields.get(field);
+    }
+    
+    @Override
+    public List getRequiredFields() {
+        return this.requiredFields;
+    }
 }
+
