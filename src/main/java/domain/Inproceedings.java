@@ -13,7 +13,6 @@ public class Inproceedings implements Reference {
         this.fields = new HashMap<>();
         initRequiredFields();
     }
-//CHECKSTYLE:OFF
     
     public void setAuthor(String author) {
         setField("author", author);
@@ -40,9 +39,8 @@ public class Inproceedings implements Reference {
         }
         return true;
     }
-//CHECKSTYLE:ON
    
-   @Override
+    @Override
     public void initRequiredFields() {
         this.requiredFields.add("author");
         this.requiredFields.add("title");
