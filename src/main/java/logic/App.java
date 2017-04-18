@@ -57,24 +57,24 @@ public class App {
         printReferences(references, wrp, io);
     }
         
-    public void printReferences(ArrayList<Reference> refList, Wrapper wrp, IO io) {
+    private void printReferences(ArrayList<Reference> refList, Wrapper wrp, IO io) {
         if (references.isEmpty()) {
             io.println("No articles in memory");
         } 
         for (Reference reference : refList) {
-            // String bib = wrp.wrap(reference); // vaatii wrapperin refaktoroinnin
-            // io.println(bib);
+            String bib = wrp.wrap(reference); 
+            io.println(bib);
         }
     }
 
-    public boolean scandeja(String s) {
+    private boolean scandeja(String s) {
         if (s.matches("^[a-zA-Z0-9!@#$%&*()_+=|<>?{}\\[\\]~-]*$")) {
             return false;
         }
         return true;
     }
 
-    public void addReferenceToList(Reference reference, IO io, ArrayList refList) {
+    private void addReferenceToList(Reference reference, IO io, ArrayList refList) {
         if (reference.hasRequiredFields()) {
             refList.add(reference);
             io.println("New " + reference + " added succesfully");
