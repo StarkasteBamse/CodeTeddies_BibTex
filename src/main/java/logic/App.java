@@ -76,7 +76,7 @@ public class App {
             }
             if (!fileIo.writeFile(fileName, bib)) {
                 io.println("Error occurred while "
-                                    + "exporting file: " + fileName);
+                           + "exporting file: " + fileName);
             }
         }
     }

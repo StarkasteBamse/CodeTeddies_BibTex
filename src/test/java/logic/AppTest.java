@@ -32,7 +32,7 @@ public class AppTest {
     }
 
     private void createArticle1() {
-        ArrayList<String> article1 = new ArrayList<>(5);
+        ArrayList<String> article1 = new ArrayList<>();
         article1.add("");
         article1.add("Adventures of Gireoux");
         article1.add("Journal of Psychonometrics");
@@ -41,7 +41,7 @@ public class AppTest {
     }
     
     private void createBook1() {
-        ArrayList<String> article1 = new ArrayList<>(4);
+        ArrayList<String> article1 = new ArrayList<>();
         article1.add("Robin Mobb");
         article1.add("Adventures of Psyo");
         article1.add("Otava");
@@ -49,7 +49,7 @@ public class AppTest {
     }
     
     private ArrayList<String> createInproceedings1() {
-        ArrayList<String> article1 = new ArrayList<>(4);
+        ArrayList<String> article1 = new ArrayList<>();
         article1.add("Wayne Gre");
         article1.add("My years as");
         article1.add("Good: years as holigan");
@@ -59,7 +59,6 @@ public class AppTest {
     
     @Test
     public void testAddArticleSuccessful() {
-        stucreateArticle1();
     }
     
     @After
