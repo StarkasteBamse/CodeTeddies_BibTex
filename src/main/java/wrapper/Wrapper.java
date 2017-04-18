@@ -15,8 +15,8 @@ public class Wrapper {
 
     public String wrap(Reference reference) { // palauttaa bibtex-Stringinä
         String type = reference.toString();
-        String key = reference.getField("title") + keyAdd; // Jokaisella täytyy olla 
-                                                           // uniikki id
+        String key = reference.getField("title") + keyAdd; // uniikki id
+                                                           
         String bib = "@" + type + "{" + key + ",\n";
         keyAdd++;
         for (String field : reference.getRequiredFields()) {
