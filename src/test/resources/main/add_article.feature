@@ -23,7 +23,7 @@ Feature: A new article is added if all required fields are entered and none of t
         And year "2017" are entered
         And volume "13" are entered
         And command print is selected
-        Then system will respond with "Invalid author name"
+        Then system will respond with "Invalid author"
 
     Scenario: adding article fails with valid author and invalid title and valid journal and year and volume
         Given command add is selected
@@ -34,7 +34,7 @@ Feature: A new article is added if all required fields are entered and none of t
         And year "2017" are entered
         And volume "13" are entered
         And command print is selected
-        Then system will respond with "Invalid title name"
+        Then system will respond with "Invalid title"
 
     Scenario: adding article fails with valid author and title and invalid journal and valid year and volume
         Given command add is selected
@@ -45,7 +45,7 @@ Feature: A new article is added if all required fields are entered and none of t
         And year "2017" are entered
         And volume "13" are entered
         And command print is selected        
-        Then system will respond with "Invalid journal name"
+        Then system will respond with "Invalid journal"
 
     Scenario: adding article fails with valid author and title and journal and invalid year and valid volume
         Given command add is selected
