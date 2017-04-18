@@ -52,7 +52,7 @@ public class ArticleTest {
     public void testSetAuthor() {
         String author = "tekija";
         instance.setAuthor(author);
-        assertEquals(instance.author, author);
+        assertEquals(instance.getField("author"), author);
     }
 
     /**
@@ -62,7 +62,7 @@ public class ArticleTest {
     public void testSetTitle() {
         String title = "title";
         instance.setTitle(title);
-        assertEquals(instance.title, title);
+        assertEquals(instance.getField("title"), title);
     }
 
     /**
@@ -72,7 +72,7 @@ public class ArticleTest {
     public void testSetJournal() {
         String journal = "journal";
         instance.setJournal(journal);
-        assertEquals(instance.journal, journal);
+        assertEquals(instance.getField("journal"), journal);
     }
 
     /**
@@ -82,7 +82,7 @@ public class ArticleTest {
     public void testSetYear() {
         String year = "2015";
         instance.setYear(year);
-        assertEquals(instance.year, year);
+        assertEquals(instance.getField("year"), year);
     }
 
     /**
@@ -92,7 +92,7 @@ public class ArticleTest {
     public void testSetVolume() {
         String volume = "20";
         instance.setVolume(volume);
-        assertEquals(instance.volume, volume);
+        assertEquals(instance.getField("volume"), volume);
     }
 
     /**
@@ -103,6 +103,14 @@ public class ArticleTest {
         boolean expResult = false;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
+        instance.setAuthor("testA");
+        assertEquals(expResult, instance.hasRequiredFields());
+        instance.setTitle("testT");
+        assertEquals(expResult, instance.hasRequiredFields());
+        instance.setJournal("testJ");
+        assertEquals(expResult, instance.hasRequiredFields());
+        instance.setVolume("testVol");
+        assertEquals(expResult, instance.hasRequiredFields());
     }
     
     /**

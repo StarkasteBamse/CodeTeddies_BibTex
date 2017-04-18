@@ -1,6 +1,6 @@
 package main;
 
-import Logic.App;
+import logic.App;
 
 public class Main {
 

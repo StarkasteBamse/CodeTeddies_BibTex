@@ -7,11 +7,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class InproceedingsTest {
+public class BookTest {
     
-    private Inproceedings instance;
+    private Book instance;
     
-    public InproceedingsTest() {
+    public BookTest() {
     }
     
     @BeforeClass
@@ -24,7 +24,7 @@ public class InproceedingsTest {
     
     @Before
     public void setUp() {
-        instance = new Inproceedings();
+        instance = new Book();
     }
     
     @After
@@ -46,10 +46,10 @@ public class InproceedingsTest {
     }
 
     @Test
-    public void testSetBookTitle() {
-        String testBookTitle = "testBookTitle";
-        instance.setBookTitle(testBookTitle);
-        assertEquals(testBookTitle, instance.getField("booktitle"));
+    public void testSetPublisher() {
+        String testPublisher = "testPublisher";
+        instance.setPublisher(testPublisher);
+        assertEquals(testPublisher, instance.getField("publisher"));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class InproceedingsTest {
         assertEquals(false, instance.hasRequiredFields());
         instance.setTitle("testT");
         assertEquals(false, instance.hasRequiredFields());
-        instance.setBookTitle("testBT");
+        instance.setPublisher("testPub");
         assertEquals(false, instance.hasRequiredFields());
     }
     
@@ -77,8 +77,8 @@ public class InproceedingsTest {
         instance.setAuthor(testAuthor);
         String testTitle = "testTitle";
         instance.setTitle(testTitle);
-        String testBookTitle = "testBookTitle";
-        instance.setBookTitle(testBookTitle);
+        String testPublisher = "testPublisher";
+        instance.setPublisher(testPublisher);
         String testYear = "1984";
         instance.setYear(testYear);
         assertEquals(true, instance.hasRequiredFields());
