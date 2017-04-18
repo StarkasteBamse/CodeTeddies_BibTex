@@ -33,7 +33,7 @@ public class Inproceedings implements Reference {
     @Override
     public boolean hasRequiredFields() {
         for (String field : this.requiredFields) {
-            if (this.fields.get(field) == null) {
+            if (!this.fields.containsKey(field)) {
                 return false;
             }
         }
@@ -61,7 +61,12 @@ public class Inproceedings implements Reference {
     }
     
     @Override
-    public List getRequiredFields() {
+    public List<String> getRequiredFields() {
         return this.requiredFields;
+    }
+
+    @Override
+    public String toString() {
+        return "Inproceedings";
     }
 }
