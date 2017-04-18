@@ -4,26 +4,30 @@ import domain.Article;
 import domain.Reference;
 import domain.Inproceedings;
 import domain.Book;
-import io.ConsoleIO;
+import io.*;
 import java.util.ArrayList;
 import wrapper.Wrapper;
 
 public class App {
 
-    private ConsoleIO io;
+    private IO io;
     private Wrapper wrp;
     private ArrayList<Reference> references;
 
-    public App() {
-        this.io = new ConsoleIO();
+    public App(IO io) {
+        this.io = io;
         this.wrp = new Wrapper();
-        this.references = new ArrayList<>();
+        this.references = new ArrayList<>();        
+    }
+       
+    public App() {
+        this(new ConsoleIO());        
     }
 
     //CHECKSTYLE:OFF
     public void run() {
-        ConsoleIO io = new ConsoleIO();
-        Wrapper wrp = new Wrapper();
+//        ConsoleIO io = new ConsoleIO();
+//        Wrapper wrp = new Wrapper();
         ArrayList<Article> articles = new ArrayList<>();
         while (true) {
             io.print("Add? (y/n)");
@@ -53,14 +57,18 @@ public class App {
         printArticles(articles, wrp, io);
     }
 
-    public void printArticles(ArrayList<Article> articles, Wrapper wrp, ConsoleIO io) {
+    public void printArticles(ArrayList<Article> articles, Wrapper wrp, IO io) {
+        if (articles.isEmpty()) {
+            io.println("No articles in memory");
+        }
+        
         for (Article article : articles) {
             String bib = wrp.wrap(article);
             io.println(bib);
         }
     }
 
-    public void checkRequiredFields(Article a, ConsoleIO io,
+    public void checkRequiredFields(Article a, IO io,
             ArrayList articles) {
         if (a.hasRequiredFields()) {
             articles.add(a);
@@ -68,21 +76,21 @@ public class App {
         }
     }
 
-    public void volume(ConsoleIO io, Article a) throws NumberFormatException {
+    public void volume(IO io, Article a) throws NumberFormatException {
         io.print("Volume: ");
         String volume = io.readLine();
         a.setVolume(volume);
         io.println("");
     }
 
-    public void year(ConsoleIO io, Article a) throws NumberFormatException {
+    public void year(IO io, Article a) throws NumberFormatException {
         io.print("Year: ");
         String year = io.readLine();
         a.setYear(year);
         io.println("");
     }
 
-    public void journal(ConsoleIO io, Article a) {
+    public void journal(IO io, Article a) {
         io.print("Journal: ");
         String journal = io.readLine();
         if (scandeja(journal)) {
@@ -93,7 +101,7 @@ public class App {
         io.println("");
     }
 
-    public void title(ConsoleIO io, Article a) {
+    public void title(IO io, Article a) {
         io.print("Title: ");
         String title = io.readLine();
         if (scandeja(title)) {
@@ -104,7 +112,7 @@ public class App {
         io.println("");
     }
 
-    public void author(ConsoleIO io, Article a) {
+    public void author(IO io, Article a) {
         io.print("Author: ");
         String author = io.readLine();
         if (scandeja(author)) {

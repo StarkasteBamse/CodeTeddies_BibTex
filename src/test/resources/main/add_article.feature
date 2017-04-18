@@ -5,30 +5,66 @@ Feature: A new article is added if all required fields are entered and none of t
 
     Scenario: adding article succeeds with valid author and title and journal and year and volume
         Given command add is selected
-        When author "Testerman" and title "Testingname" and journal "Testermag" and year "2017" and volume "13" are entered
-        Then system will respond with "New article added successfully"
+        And command article is selected
+        When author "Testerman" are entered
+        And title "Testingname" are entered
+        And journal "Testermag" are entered
+        And year "2017" are entered
+        And volume "13" are entered
+        And command print is selected
+        Then system will respond with "New article added succesfully"
 
     Scenario: adding article fails with invalid author and valid title and journal and year and volume
         Given command add is selected
-        When author "ääkkösman" and title "Testingname" and journal "Testermag" and year "2017" and volume "13" are entered
+        And command article is selected
+        When author "ääkkösman" are entered
+        And title "Testingname" are entered
+        And journal "Testermag" are entered
+        And year "2017" are entered
+        And volume "13" are entered
+        And command print is selected
         Then system will respond with "Invalid author name"
 
     Scenario: adding article fails with valid author and invalid title and valid journal and year and volume
         Given command add is selected
-        When author "Testerman" and title "Ääkkösname" and journal "Testermag" and year "2017" and volume "13" are entered
+        And command article is selected
+        When author "Testerman" are entered
+        And title "Ääkkösname" are entered
+        And journal "Testermag" are entered
+        And year "2017" are entered
+        And volume "13" are entered
+        And command print is selected
         Then system will respond with "Invalid title name"
 
     Scenario: adding article fails with valid author and title and invalid journal and valid year and volume
         Given command add is selected
-        When author "Testerman" and title "Testingname" and journal "Testermäg" and year "2017" and volume "13" are entered
+        And command article is selected
+        When author "Testerman" are entered
+        And title "Testingname" are entered
+        And journal "Testermäg" are entered
+        And year "2017" are entered
+        And volume "13" are entered
+        And command print is selected        
         Then system will respond with "Invalid journal name"
 
     Scenario: adding article fails with valid author and title and journal and invalid year and valid volume
         Given command add is selected
-        When author "Testerman" and title "Testingname" and journal "Testermag" and year "ö" and volume "13" are entered
+        And command article is selected
+        When author "Testerman" are entered
+        And title "Testingname" are entered
+        And journal "Testermag" are entered
+        And year "ö" are entered
+        And volume "13" are entered
+        And command print is selected
         Then system will respond with "Invalid year"
 
     Scenario: adding article fails with valid author and title and journal and year and invalid volume
         Given command add is selected
-        When author "Testerman" and title "Testingname" and journal "Testermag" and year "2017" and volume "ö" are entered
+        And command article is selected
+        When author "Testerman" are entered
+        And title "Testingname" are entered
+        And journal "Testermag" are entered
+        And year "2017" are entered
+        And volume "ö" are entered
+        And command print is selected        
         Then system will respond with "Invalid volume"
