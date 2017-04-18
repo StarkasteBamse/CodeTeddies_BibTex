@@ -17,17 +17,14 @@ public class App {
     public App(IO io) {
         this.io = io;
         this.wrp = new Wrapper();
-        this.references = new ArrayList<>();        
-    }
-       
-    public App() {
-        this(new ConsoleIO());        
+        this.references = new ArrayList<>();
     }
 
-    //CHECKSTYLE:OFF
+    public App() {
+        this(new ConsoleIO());
+    }
+
     public void run() {
-//        ConsoleIO io = new ConsoleIO();
-//        Wrapper wrp = new Wrapper();
         ArrayList<Article> articles = new ArrayList<>();
         while (true) {
             io.print("Add? (y/n)");
@@ -46,23 +43,23 @@ public class App {
                         addReference("2");
                         break;
                     case "3":
-                        addReference("3");;
+                        addReference("3");
+                        ;
                         break;
                     default:
                         break;
                 }
             }
         }
-
         printReferences(references, wrp, io);
     }
-        
-    private void printReferences(ArrayList<Reference> refList, Wrapper wrp, IO io) {
+
+    private void printReferences(ArrayList<Reference> rList, Wrapper wrp, IO io) {
         if (references.isEmpty()) {
             io.println("No articles in memory");
-        } 
-        for (Reference reference : refList) {
-            String bib = wrp.wrap(reference); 
+        }
+        for (Reference reference : rList) {
+            String bib = wrp.wrap(reference);
             io.println(bib);
         }
     }
@@ -74,18 +71,18 @@ public class App {
         return true;
     }
 
-    private void addReferenceToList(Reference reference, IO io, ArrayList refList) {
+    private void addReferenceToList(Reference reference, IO io, ArrayList rList) {
         if (reference.hasRequiredFields()) {
-            refList.add(reference);
-            io.println("New " + reference + " added succesfully");
+            rList.add(reference);
+            io.println("New " + reference + " added successfully");
         } else {
             System.out.println("Not proper format!");
         }
     }
-    
+
     private void addReference(String i) {
         Reference reference = null;
-        
+
         switch (i) {
             case "1":
                 reference = new Article();
@@ -113,5 +110,5 @@ public class App {
             io.println("");
         }
     }
-//CHECKSTYLE:ON
+
 }
