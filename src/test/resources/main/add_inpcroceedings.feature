@@ -31,7 +31,7 @@ Feature: A new inproceedings is added if all required fields are entered and non
     And booktitle "ÄääÖöö" are entered
     And year "1999" are entered
     And command print is selected
-    Then system will respond with "Invalid booktitle name"
+    Then system will respond with "Invalid booktitle"
 
   Scenario: adding inproceedings fails with valid author and invalid title and valid booktitle and year
     Given command add is selected
@@ -41,9 +41,9 @@ Feature: A new inproceedings is added if all required fields are entered and non
     And booktitle "Testingbook" are entered
     And year "1999" are entered
     And command print is selected
-    Then system will respond with "Invalid title name"
+    Then system will respond with "Invalid title"
 
-Scenario: adding inproceedings fails with invalid valid author and valid title and booktitle and year
+Scenario: adding inproceedings fails with invalid author and valid title and booktitle and year
     Given command add is selected
     And command inproceedings is selected
     When author "TestermÄn" are entered
@@ -51,4 +51,4 @@ Scenario: adding inproceedings fails with invalid valid author and valid title a
     And booktitle "Testingbook" are entered
     And year "1999" are entered
     And command print is selected
-    Then system will respond with "Invalid author name"
+    Then system will respond with "Invalid author"

@@ -51,10 +51,10 @@ public class App {
                 }
             }
         }
-        printReferences(references, wrp, io);
+        printRef(references, wrp, io);
     }
 
-    private void printReferences(ArrayList<Reference> rList, Wrapper wrp, IO io) {
+    private void printRef(ArrayList<Reference> rList, Wrapper wrp, IO io) {
         if (references.isEmpty()) {
             io.println("No articles in memory");
         }
@@ -71,7 +71,7 @@ public class App {
         return true;
     }
 
-    private void addReferenceToList(Reference reference, IO io, ArrayList rList) {
+    private void addRefToList(Reference reference, IO io, ArrayList rList) {
         if (reference.hasRequiredFields()) {
             rList.add(reference);
             io.println("New " + reference + " added successfully");
@@ -99,14 +99,21 @@ public class App {
         }
         io.println("BibTex an " + reference + "!");
         inputFields(reference);
-        addReferenceToList(reference, io, references);
+        addRefToList(reference, io, references);
     }
 
     private void inputFields(Reference reference) {
         for (String inputField : reference.getRequiredFields()) {
             io.print(inputField + ": ");
             String inputLine = io.readLine();
+            if (scandeja(inputLine)) {
+                io.println("");
+                io.println("Invalid " + inputField);
+                continue;
+            }
             reference.setField(inputField, inputLine);
+                
+            
             io.println("");
         }
     }
