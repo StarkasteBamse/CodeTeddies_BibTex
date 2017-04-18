@@ -16,7 +16,7 @@
             <property name="max" value="80"/>
         </module>
         <module name="CyclomaticComplexity">
-            <property name="max" value="3"/>
+            <property name="max" value="6"/>
         </module>
         <module name="MagicNumber"/>
         <module name="FileContentsHolder"/>        

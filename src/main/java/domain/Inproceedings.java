@@ -67,6 +67,6 @@ public class Inproceedings implements Reference {
 
     @Override
     public String toString() {
-        return "Inproceedings";
+        return "inproceedings";
     }
 }
