@@ -64,8 +64,13 @@ public class Book implements Reference {
     }
     
     @Override
-    public List getRequiredFields() {
+    public List<String> getRequiredFields() {
         return this.requiredFields;
+    }
+    
+    @Override
+    public String toString() {
+        return "book";
     }
 }
 

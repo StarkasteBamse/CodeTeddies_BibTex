@@ -40,7 +40,7 @@ apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
 
 project.ext {
-    cucumberVersion = '1.2.5'
+    // cucumberVersion = '1.2.5'
     junitVersion = '4.12'
 }
 
@@ -49,8 +49,8 @@ repositories {
 }
 
 dependencies {
-    testCompile 'info.cukes:cucumber-java:' + cucumberVersion
-    testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
+    // testCompile 'info.cukes:cucumber-java:' + cucumberVersion
+    // testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
     testCompile 'junit:junit:' + junitVersion
 }
 

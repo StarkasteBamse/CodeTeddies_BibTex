@@ -61,7 +61,14 @@ public class Inproceedings implements Reference {
     }
     
     @Override
-    public List getRequiredFields() {
+    public List<String> getRequiredFields() {
         return this.requiredFields;
     }
+
+    @Override
+    public String toString() {
+        return "inproceedings";
+    }
+    
+    
 }

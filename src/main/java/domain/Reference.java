@@ -9,7 +9,7 @@ public interface Reference {
 
     void setField(String field, String value);
     String getField(String field);
-    List getRequiredFields();
+    List<String> getRequiredFields();
     boolean hasRequiredFields();
     void initRequiredFields();
 }

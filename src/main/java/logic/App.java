@@ -6,6 +6,7 @@ import domain.Inproceedings;
 import domain.Book;
 import io.ConsoleIO;
 import java.util.ArrayList;
+import java.util.List;
 import wrapper.Wrapper;
 
 public class App {
@@ -42,20 +43,19 @@ public class App {
                         addBook();
                         break;
                     case "3":
-                        addInproceedings();
+                        addReference(3);
                         break;
                     default:
                         break;
                 }
             }
         }
-
-        printArticles(articles, wrp, io);
+        printReferences(references, wrp, io);
     }
 
-    public void printArticles(ArrayList<Article> articles, Wrapper wrp, ConsoleIO io) {
-        for (Article article : articles) {
-            String bib = wrp.wrap(article);
+    public void printReferences(ArrayList<Reference> refList, Wrapper wrp, ConsoleIO io) {
+        for (Reference reference : refList) {
+            String bib = wrp.wrap(reference);
             io.println(bib);
         }
     }
@@ -65,6 +65,14 @@ public class App {
         if (a.hasRequiredFields()) {
             articles.add(a);
             io.println("New article added succesfully");
+        }
+    }
+    
+    public void addReferenceToList(Reference reference, ConsoleIO io,
+            ArrayList refList) {
+        if (reference.hasRequiredFields()) {
+            refList.add(reference);
+            io.println("New " + reference + " added succesfully");
         }
     }
 
@@ -116,16 +124,30 @@ public class App {
     }
 
     public boolean scandeja(String s) {
-        if (s.matches("^[a-zA-Z0-9!@#$%&*()_+=|<>?{}\\[\\]~-]*$")) {
+        if (!s.matches("^[a-zA-Z0-9!@#$%&*()_+=|<>?{}\\[\\]~-]*$")) {
             return false;
         }
         return true;
     }
+    
+//    private void addArticle(ArrayList<Article> articles) {
+//        Article a = new Article();
+//        io.println("");
+//        io.println("BibTex an article!");
+//        author(io, a);
+//        title(io, a);
+//        journal(io, a);
+//        year(io, a);
+//        volume(io, a);
+//        checkRequiredFields(a, io, articles);
+//    }
 
     private void addArticle(ArrayList<Article> articles) {
         Article a = new Article();
         io.println("");
         io.println("BibTex an article!");
+        
+        
         author(io, a);
         title(io, a);
         journal(io, a);
@@ -133,14 +155,34 @@ public class App {
         volume(io, a);
         checkRequiredFields(a, io, articles);
     }
-
+    
     private void addBook() {
         io.println("BibTex a book!");
     }
 
-    private void addInproceedings() {
-        io.println("BibTex an Inproceedings!");
-        Inproceedings i = new Inproceedings();
+    private void addReference(int i) {
+        Reference reference = null;
+        
+        switch (i) {
+            case 1:
+                reference = new Article();
+            case 2:
+                reference = new Book();
+            case 3:
+                reference = new Inproceedings();
+        }
+        io.println("BibTex an " + reference + "!");
+        inputFields(reference);
+        addReferenceToList(reference, io, references);
     }
 //CHECKSTYLE:ON
+
+    private void inputFields(Reference reference) {
+        for (String inputField : reference.getRequiredFields()) {
+            io.print(inputField + ": ");
+            String inputLine = io.readLine();
+            reference.setField(inputLine, inputLine);
+            io.println("");
+        }
+    }
 }
