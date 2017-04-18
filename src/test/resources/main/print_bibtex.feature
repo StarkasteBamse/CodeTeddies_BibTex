@@ -6,7 +6,12 @@ Feature: application prints BibTex formatted block for an article
 
     Scenario: printing succeeds when one article is added
         Given command add is selected
-        When author "Testerman" and title "Testingname" and journal "Testermag" and year "2017" and volume "13" are entered       
+        And command article is selected
+        When author "Testerman" are entered
+        And title "Testingname" are entered
+        And journal "Testermag" are entered
+        And year "2017" are entered
+        And volume "13" are entered
         And command print is selected
         Then system will respond with a valid wrapping
 # Formatting the output as a string is not wise, better to create a logic for 
