@@ -12,5 +12,6 @@ package io;
 public interface IO {
     void print(String toPrint);
     void println(String toPrint);
+    boolean writeFile(String filename, String toFile);
     String readLine();
 }

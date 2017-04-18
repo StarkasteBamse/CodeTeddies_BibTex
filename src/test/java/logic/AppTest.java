@@ -6,6 +6,7 @@
 package logic;
 
 import io.IO;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,21 +21,45 @@ import static org.junit.Assert.*;
 public class AppTest {
     
     private App app;
-    private IO io;
+    private IO stubIo;
     
     public AppTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
+        app = new App(stubIo);
+    }
+
+    private void createArticle1() {
+        ArrayList<String> article1 = new ArrayList<>(5);
+        article1.add("");
+        article1.add("Adventures of Gireoux");
+        article1.add("Journal of Psychonometrics");
+        article1.add("1922");
+        article1.add("122");
+    }
+    
+    private void createBook1() {
+        ArrayList<String> article1 = new ArrayList<>(4);
+        article1.add("Robin Mobb");
+        article1.add("Adventures of Psyo");
+        article1.add("Otava");
+        article1.add("2014");
+    }
+    
+    private ArrayList<String> createInproceedings1() {
+        ArrayList<String> article1 = new ArrayList<>(4);
+        article1.add("Wayne Gre");
+        article1.add("My years as");
+        article1.add("Good: years as holigan");
+        article1.add("1567");
+        return article1;
+    }
+    
+    @Test
+    public void testAddArticleSuccessful() {
+        stucreateArticle1();
     }
     
     @After

@@ -43,4 +43,9 @@ public class StubIO implements IO {
     public void println(String toPrint) {
         prints.add(toPrint);
     }
+
+    @Override
+    public boolean writeFile(String filename, String toFile) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
 }
