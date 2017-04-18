@@ -40,13 +40,13 @@ public class App {
                 io.println("\t1. Article\n\t2. Book\n\t3. Inproceedings");
                 switch (io.readLine()) {
                     case "1":
-                        addArticle(articles);
+                        addReference("1");
                         break;
                     case "2":
-                        addBook();
+                        addReference("2");
                         break;
                     case "3":
-                        addInproceedings();
+                        addReference("3");;
                         break;
                     default:
                         break;
@@ -54,73 +54,17 @@ public class App {
             }
         }
 
-        printArticles(articles, wrp, io);
+        printReferences(references, wrp, io);
     }
-
-    public void printArticles(ArrayList<Article> articles, Wrapper wrp, IO io) {
-        if (articles.isEmpty()) {
-            io.println("No articles in memory");
-        }
         
-        for (Article article : articles) {
-            String bib = wrp.wrap(article);
-            io.println(bib);
+    public void printReferences(ArrayList<Reference> refList, Wrapper wrp, IO io) {
+        if (references.isEmpty()) {
+            io.println("No articles in memory");
+        } 
+        for (Reference reference : refList) {
+            // String bib = wrp.wrap(reference); // vaatii wrapperin refaktoroinnin
+            // io.println(bib);
         }
-    }
-
-    public void checkRequiredFields(Article a, IO io,
-            ArrayList articles) {
-        if (a.hasRequiredFields()) {
-            articles.add(a);
-            io.println("New article added successfully");
-        }
-    }
-
-    public void volume(IO io, Article a) throws NumberFormatException {
-        io.print("Volume: ");
-        String volume = io.readLine();
-        a.setVolume(volume);
-        io.println("");
-    }
-
-    public void year(IO io, Article a) throws NumberFormatException {
-        io.print("Year: ");
-        String year = io.readLine();
-        a.setYear(year);
-        io.println("");
-    }
-
-    public void journal(IO io, Article a) {
-        io.print("Journal: ");
-        String journal = io.readLine();
-        if (scandeja(journal)) {
-            io.println("Invalid journal name");
-        } else {
-            a.setJournal(journal);
-        }
-        io.println("");
-    }
-
-    public void title(IO io, Article a) {
-        io.print("Title: ");
-        String title = io.readLine();
-        if (scandeja(title)) {
-            io.println("Invalid title name");
-        } else {
-            a.setTitle(title);
-        }
-        io.println("");
-    }
-
-    public void author(IO io, Article a) {
-        io.print("Author: ");
-        String author = io.readLine();
-        if (scandeja(author)) {
-            io.println("Invalid author name");
-        } else {
-            a.setAuthor(author);
-        }
-        io.println("");
     }
 
     public boolean scandeja(String s) {
@@ -130,25 +74,44 @@ public class App {
         return true;
     }
 
-    private void addArticle(ArrayList<Article> articles) {
-        Article a = new Article();
-        io.println("");
-        io.println("BibTex an article!");
-        author(io, a);
-        title(io, a);
-        journal(io, a);
-        year(io, a);
-        volume(io, a);
-        checkRequiredFields(a, io, articles);
+    public void addReferenceToList(Reference reference, IO io, ArrayList refList) {
+        if (reference.hasRequiredFields()) {
+            refList.add(reference);
+            io.println("New " + reference + " added succesfully");
+        } else {
+            System.out.println("Not proper format!");
+        }
+    }
+    
+    private void addReference(String i) {
+        Reference reference = null;
+        
+        switch (i) {
+            case "1":
+                reference = new Article();
+                break;
+            case "2":
+                reference = new Book();
+                break;
+            case "3":
+                reference = new Inproceedings();
+                break;
+            default:
+                System.out.println("Something went wrong!");
+                break;
+        }
+        io.println("BibTex an " + reference + "!");
+        inputFields(reference);
+        addReferenceToList(reference, io, references);
     }
 
-    private void addBook() {
-        io.println("BibTex a book!");
-    }
-
-    private void addInproceedings() {
-        io.println("BibTex an Inproceedings!");
-        Inproceedings i = new Inproceedings();
+    private void inputFields(Reference reference) {
+        for (String inputField : reference.getRequiredFields()) {
+            io.print(inputField + ": ");
+            String inputLine = io.readLine();
+            reference.setField(inputField, inputLine);
+            io.println("");
+        }
     }
 //CHECKSTYLE:ON
 }
