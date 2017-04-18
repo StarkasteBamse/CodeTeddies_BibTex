@@ -11,7 +11,7 @@ Feature: A new book is added if all required fields are entered and none of the 
         And publisher "Testingpublisher" are entered
         And year "2017" are entered
         And command print is selected
-        Then system will respond with "New book added succesfully"
+        Then system will respond with "New book added successfully"
 
     Scenario: adding book fails with invalid author and valid title and journal and year
         Given command add is selected

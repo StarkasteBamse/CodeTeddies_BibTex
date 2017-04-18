@@ -72,7 +72,7 @@ public class App {
             ArrayList articles) {
         if (a.hasRequiredFields()) {
             articles.add(a);
-            io.println("New article added succesfully");
+            io.println("New article added successfully");
         }
     }
 

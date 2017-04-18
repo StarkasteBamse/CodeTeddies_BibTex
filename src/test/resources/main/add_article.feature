@@ -12,7 +12,7 @@ Feature: A new article is added if all required fields are entered and none of t
         And year "2017" are entered
         And volume "13" are entered
         And command print is selected
-        Then system will respond with "New article added succesfully"
+        Then system will respond with "New article added successfully"
 
     Scenario: adding article fails with invalid author and valid title and journal and year and volume
         Given command add is selected
