@@ -52,6 +52,7 @@ public class App {
             }
         }
         printRef(references, wrp, io);
+        exportRef(references, wrp, io, new FileWriterIO(), "sigproc.bib");
     }
 
     private void printRef(ArrayList<Reference> rList, Wrapper wrp, IO io) {
@@ -61,6 +62,22 @@ public class App {
         for (Reference reference : rList) {
             String bib = wrp.wrap(reference);
             io.println(bib);
+        }
+    }
+
+    private void exportRef(ArrayList<Reference> rList, Wrapper wrp, 
+                           IO io, IO fileIo, String fileName) {
+        if (references.isEmpty()) {
+            io.println("No articles in memory");
+        } else {
+            String bib = "";
+            for (Reference reference : rList) {
+                bib += wrp.wrap(reference) + "\n\n";
+            }
+            if (!fileIo.writeFile(fileName, bib)) {
+                io.println("Error occurred while "
+                           + "exporting file: " + fileName);
+            }
         }
     }
 
@@ -76,7 +93,7 @@ public class App {
             rList.add(reference);
             io.println("New " + reference + " added successfully");
         } else {
-            System.out.println("Not proper format!");
+            io.println("Not proper format!");
         }
     }
 
@@ -94,7 +111,6 @@ public class App {
                 reference = new Inproceedings();
                 break;
             default:
-                System.out.println("Something went wrong!");
                 break;
         }
         io.println("BibTex an " + reference + "!");
@@ -112,8 +128,7 @@ public class App {
                 continue;
             }
             reference.setField(inputField, inputLine);
-                
-            
+
             io.println("");
         }
     }

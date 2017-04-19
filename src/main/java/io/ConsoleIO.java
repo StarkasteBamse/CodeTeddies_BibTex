@@ -26,5 +26,9 @@ public class ConsoleIO implements IO{
         return scanner.nextLine();
     }
 
-
+    @Override
+    public boolean writeFile(String filename, String toFile) {
+        throw new UnsupportedOperationException("Not supported."); 
+    }
+    
 }
