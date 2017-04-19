@@ -15,20 +15,17 @@ public class Wrapper {
 
     public String wrap(Reference reference) { // palauttaa bibtex-Stringinä
         String type = reference.toString();
-        String key = reference.getField("title") + keyAdd; // uniikki id
+        String key = reference.getField("title").replaceAll("\\s+", "");
+        key = key + keyAdd; // uniikki id
+        String n = System.getProperty("line.separator");
                                                            
-        String bib = "@" + type + "{" + key + ",\n";
+        String bib = "@" + type + "{" + key + "," + n;
         keyAdd++;
         for (String field : reference.getRequiredFields()) {
-            bib += "\t" + field +" = {" + reference.getField(field) + "},\n";
+            bib += "\t" + field +" = {" + reference.getField(field) + "}," + n;
         }
         bib += "}";
         
         return bib;
     }
-
-//        Main-code example:
-//        Wrapper wrp = new Wrapper();
-//        String bib = wrp.wrap(a);
-//        io.println(bib);
 }
