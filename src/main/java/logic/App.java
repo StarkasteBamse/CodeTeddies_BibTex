@@ -13,6 +13,7 @@ public class App {
     private IO io;
     private Wrapper wrp;
     private ArrayList<Reference> references;
+    private String n = System.getProperty("line.separator");
 
     public App(IO io) {
         this.io = io;
@@ -25,64 +26,57 @@ public class App {
     }
 
     public void run() {
-        ArrayList<Article> articles = new ArrayList<>();
         while (true) {
             io.print("Add? (y/n)");
-            if (io.readLine().equals("n")) {
+            String answer = io.readLine();
+            if (answer.equals("n")) {
                 io.println("");
                 break;
-            } else {
+            } else if (answer.equals("y")) {
                 io.println("");
                 io.println("Which reference type?");
-                io.println("\t1. Article\n\t2. Book\n\t3. Inproceedings");
-                switch (io.readLine()) {
-                    case "1":
-                        addReference("1");
-                        break;
-                    case "2":
-                        addReference("2");
-                        break;
-                    case "3":
-                        addReference("3");
-                        ;
-                        break;
-                    default:
-                        break;
+                io.println("\t1. Article");
+                io.println("\t2. Book");
+                io.println("\t3. Inproceedings");
+                String refType = io.readLine();
+                if (refType.matches("[123]")) { //lainaukset
+                    addReference(refType);
                 }
             }
         }
-        printRef(references, wrp, io);
-        exportRef(references, wrp, io, new FileWriterIO(), "sigproc.bib");
+        close();
+    }
+    
+    private void close() {
+        if (references.isEmpty()) {
+            io.println("No articles in memory");
+        } else {
+            printRef(references, wrp, io);
+            exportRef(references, wrp, io, new FileWriterIO(), "sigproc.bib"); 
+        }
     }
 
     private void printRef(ArrayList<Reference> rList, Wrapper wrp, IO io) {
-        if (references.isEmpty()) {
-            io.println("No articles in memory");
-        }
         for (Reference reference : rList) {
             String bib = wrp.wrap(reference);
             io.println(bib);
         }
     }
 
-    private void exportRef(ArrayList<Reference> rList, Wrapper wrp, 
-                           IO io, IO fileIo, String fileName) {
-        if (references.isEmpty()) {
-            io.println("No articles in memory");
-        } else {
-            String bib = "";
-            for (Reference reference : rList) {
-                bib += wrp.wrap(reference) + "\n\n";
-            }
-            if (!fileIo.writeFile(fileName, bib)) {
-                io.println("Error occurred while "
-                           + "exporting file: " + fileName);
-            }
+    private void exportRef(ArrayList<Reference> rList, Wrapper wrp,
+            IO io, IO fileIo, String fileName) {
+        String bib = "";
+        for (Reference reference : rList) {
+            bib += wrp.wrap(reference) + n + n;
+        }
+        if (!fileIo.writeFile(fileName, bib)) {
+            io.println("Error occurred while "
+                    + "exporting file: " + fileName);
         }
     }
 
     private boolean scandeja(String s) {
-        if (s.matches("^[a-zA-Z0-9!@#$%&*()_+=|<>?{}\\[\\]~-]*$")) {
+        if (s.matches("^[a-zA-Z0-9!@#$%&*()_+=|<>?{}\\s\\[\\]~-]*$")) {
             return false;
         }
         return true;
@@ -120,15 +114,22 @@ public class App {
 
     private void inputFields(Reference reference) {
         for (String inputField : reference.getRequiredFields()) {
+            String inputLine;
+
+            boolean failed = false;
             io.print(inputField + ": ");
-            String inputLine = io.readLine();
+            inputLine = io.readLine();
             if (scandeja(inputLine)) {
                 io.println("");
                 io.println("Invalid " + inputField);
-                continue;
+                failed = true;
+                break;
+            }
+
+            if (failed) {
+                break;
             }
             reference.setField(inputField, inputLine);
-
             io.println("");
         }
     }
