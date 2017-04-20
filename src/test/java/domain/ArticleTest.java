@@ -130,5 +130,15 @@ public class ArticleTest {
         assertEquals(expResult, result);
     }
     
+    @Test
+    public void getFieldReturnsNull() {
+        instance = new Article();
+        instance.setAuthor(null);
+        boolean result = false;
+        if(instance.getField("author") == null) {
+            result = true;
+        }
+        assertTrue(result);
+    }
 }
 

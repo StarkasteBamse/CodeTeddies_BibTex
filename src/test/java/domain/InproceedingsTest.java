@@ -83,4 +83,15 @@ public class InproceedingsTest {
         instance.setYear(testYear);
         assertEquals(true, instance.hasRequiredFields());
     }
+    
+    @Test
+    public void getFieldReturnsNull() {
+        instance = new Inproceedings();
+        instance.setAuthor(null);
+        boolean result = false;
+        if(instance.getField("author") == null) {
+            result = true;
+        }
+        assertTrue(result);
+    }
 }

@@ -44,6 +44,8 @@ public class App {
                 String refType = io.readLine();
                 if (refType.matches("[123]")) { //lainaukset
                     addReference(refType);
+                } else {
+                    io.println("Invalid reference type");
                 }
             }
         }
@@ -114,12 +116,11 @@ public class App {
         inputFields(reference);
         addRefToList(reference, io, references);
     }
-//CHECKSTYLE:OFF
+    
     private void inputFields(Reference reference) {
         for (String inputField : reference.getRequiredFields()) {
             String inputLine;
 
-            boolean failed = false;
             io.print(inputField + ": ");
             inputLine = io.readLine();
 
@@ -129,18 +130,14 @@ public class App {
                     || inputLine.isEmpty()) {
                 io.println("");
                 io.println("Invalid " + inputField);
-                failed = true;
                 break;
             }
 
-            if (failed) {
-                break;
-            }
             reference.setField(inputField, inputLine);
             io.println("");
         }
     }
-//CHECKSTYLE:ON
+    
     private void setNumerics() {
         numerics.add("year");
         numerics.add("volume");
