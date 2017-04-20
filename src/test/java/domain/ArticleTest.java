@@ -10,6 +10,7 @@
 package domain;
 
 import domain.Article;
+import logic.Validator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,6 +25,7 @@ import static org.junit.Assert.*;
 public class ArticleTest {
     
     private Article instance;
+    private Validator vali = new Validator();
     
     public ArticleTest() {
     }
@@ -51,7 +53,7 @@ public class ArticleTest {
     @Test
     public void testSetAuthor() {
         String author = "tekija";
-        instance.setAuthor(author);
+        instance.setAuthor(author, vali);
         assertEquals(instance.getField("author"), author);
     }
 
@@ -61,7 +63,7 @@ public class ArticleTest {
     @Test
     public void testSetTitle() {
         String title = "title";
-        instance.setTitle(title);
+        instance.setTitle(title, vali);
         assertEquals(instance.getField("title"), title);
     }
 
@@ -71,7 +73,7 @@ public class ArticleTest {
     @Test
     public void testSetJournal() {
         String journal = "journal";
-        instance.setJournal(journal);
+        instance.setJournal(journal, vali);
         assertEquals(instance.getField("journal"), journal);
     }
 
@@ -81,7 +83,7 @@ public class ArticleTest {
     @Test
     public void testSetYear() {
         String year = "2015";
-        instance.setYear(year);
+        instance.setYear(year, vali);
         assertEquals(instance.getField("year"), year);
     }
 
@@ -91,7 +93,7 @@ public class ArticleTest {
     @Test
     public void testSetVolume() {
         String volume = "20";
-        instance.setVolume(volume);
+        instance.setVolume(volume, vali);
         assertEquals(instance.getField("volume"), volume);
     }
 
@@ -103,13 +105,13 @@ public class ArticleTest {
         boolean expResult = false;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
-        instance.setAuthor("testA");
+        instance.setAuthor("testA", vali);
         assertEquals(expResult, instance.hasRequiredFields());
-        instance.setTitle("testT");
+        instance.setTitle("testT", vali);
         assertEquals(expResult, instance.hasRequiredFields());
-        instance.setJournal("testJ");
+        instance.setJournal("testJ", vali);
         assertEquals(expResult, instance.hasRequiredFields());
-        instance.setVolume("testVol");
+        instance.setVolume("testVol", vali);
         assertEquals(expResult, instance.hasRequiredFields());
     }
     
@@ -120,11 +122,12 @@ public class ArticleTest {
     @Test
     public void testHasRequiredFieldsWhenFieldsAreSet() {
         instance = new Article();
-        instance.setAuthor("Arto Hellas");
-        instance.setJournal("SSCSI");
-        instance.setTitle("My doctoral dissertation: never getting it ready");
-        instance.setYear("2014");
-        instance.setVolume("13");
+        instance.setAuthor("Arto Hellas", vali);
+        instance.setJournal("SSCSI", vali);
+        instance.setTitle("My doctoral dissertation: never getting it ready",
+                                                                          vali);
+        instance.setYear("2014", vali);
+        instance.setVolume("13", vali);
         boolean expResult = true;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
@@ -133,7 +136,7 @@ public class ArticleTest {
     @Test
     public void getFieldReturnsNull() {
         instance = new Article();
-        instance.setAuthor(null);
+        instance.setAuthor(null, vali);
         boolean result = false;
         if(instance.getField("author") == null) {
             result = true;
