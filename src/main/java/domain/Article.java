@@ -3,43 +3,48 @@ package domain;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import logic.Validator;
 
 public class Article implements Reference {
 
     private ArrayList<String> requiredFields;
-    private HashMap<String, String> fields;
+    private ArrayList<Field> requiredFieldObjects;
+    // private HashMap<String, String> fields;
+    private HashMap<String, Field> fieldObjects;
 
     public Article() {
         this.requiredFields = new ArrayList<>();
-        this.fields = new HashMap<>();
+        // this.fields = new HashMap<>();
         initRequiredFields();
+
+        this.fieldObjects = new HashMap<>();
     }
 //CHECKSTYLE:OFF
 
-    public void setAuthor(String author) {
-        setField("author", author);
-    }
-    
-    public void setTitle(String title) {
-        setField("title", title);
-    }
-    
-    public void setYear(String year) {
-        setField("year", year);
-    }
-    
-    public void setJournal(String journal) {
-        setField("journal", journal);
+    public void setAuthor(String author, Validator validator) {
+        setField("author", author, validator);
     }
 
-    public void setVolume(String volume) {
-        setField("volume", volume);
+    public void setTitle(String title, Validator validator) {
+        setField("title", title, validator);
     }
-    
+
+    public void setYear(String year, Validator validator) {
+        setField("year", year, validator);
+    }
+
+    public void setJournal(String journal, Validator validator) {
+        setField("journal", journal, validator);
+    }
+
+    public void setVolume(String volume, Validator validator) {
+        setField("volume", volume, validator);
+    }
+
     @Override
     public boolean hasRequiredFields() {
         for (String field : this.requiredFields) {
-            if (!this.fields.containsKey(field)) {
+            if (!this.fieldObjects.containsKey(field)) {
                 return false;
             }
         }
@@ -57,17 +62,40 @@ public class Article implements Reference {
     }
 
     @Override
-    public void setField(String field, String value) {
-        this.fields.put(field, value);
+    public boolean setField(String field, String value, Validator validator) {
+        // this.fields.put(field, value);
+        if (value == null) {
+            return false;
+        }
+        Field newField = getFieldType(field);
+        if (newField.setValue(value, validator) && newField != null) {
+            this.fieldObjects.put(field, newField);
+            return true;
+        }
+
+        return false;
+    }
+
+    /* Prototype for setField with validator passed */
+    public boolean setFieldObject(String field, String value,
+            Validator validator) {
+        Field newField = getFieldType(field);
+        if (newField.setValue(value, validator)) {
+            this.fieldObjects.put(field, newField);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public String getField(String field) {
-        if (this.fields.get(field) == null) {
+        if (this.fieldObjects.get(field) == null) {
             return null;
-        } else return this.fields.get(field);
+        } else {
+            return this.fieldObjects.get(field).getValue();
+        }
     }
-    
+
     @Override
     public List<String> getRequiredFields() {
         return this.requiredFields;
@@ -77,6 +105,22 @@ public class Article implements Reference {
     public String toString() {
         return "article";
     }
-    
-    
+
+    private Field getFieldType(String field) {
+        switch (field) {
+            case "author":
+                return new FieldAuthor();
+            case "title":
+                return new FieldTitle();
+            case "journal":
+                return new FieldJournal();
+            case "year":
+                return new FieldYear();
+            case "volume":
+                return new FieldVolume();
+            default:
+                return null;
+        }
+    }
+
 }
