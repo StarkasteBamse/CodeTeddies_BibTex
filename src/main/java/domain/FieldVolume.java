@@ -9,15 +9,16 @@ import logic.Validator;
 
 public class FieldVolume implements Field {
 
+    private final String fieldName = "volume";
     private String fieldValue;
-    private Validator validator;
+    // private Validator validator;
 
-    public FieldVolume(Validator validator) {
-        this.validator = validator;
+    public FieldVolume() {
+        // this.validator = validator;
     }
 
     @Override
-    public boolean setValue(String value) {
+    public boolean setValue(String value, Validator validator) {
         if (validator.checkValue(validator.regexNumeric, value)) {
             this.fieldValue = value;
             return true;
@@ -31,4 +32,10 @@ public class FieldVolume implements Field {
         return fieldValue;
     }
 
+    @Override
+    public String toString() {
+        return fieldName + " " + fieldValue;
+    }
+
+    
 }

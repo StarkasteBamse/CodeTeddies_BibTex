@@ -9,17 +9,18 @@ import logic.Validator;
 
 public class FieldAuthor implements Field {
 
+    private final String fieldName = "author";
     private String fieldValue;
-    private Validator validator;
+    // private Validator validator;
     // private final String regex = "";
 
-    public FieldAuthor(Validator validator) {
-        this.validator = validator;
+    public FieldAuthor() {
+        //this.validator = validator;
     }
 
     @Override
-    public boolean setValue(String value) {
-        if (validator.checkValue("", value)) {
+    public boolean setValue(String value, Validator validator) {
+        if (validator.checkValue(validator.regexString, value)) {
             fieldValue = value;
             return true;
         }
@@ -30,6 +31,11 @@ public class FieldAuthor implements Field {
     @Override
     public String getValue() {
         return fieldValue;
+    }
+
+    @Override
+    public String toString() {
+        return fieldName + " " + fieldValue;
     }
 
 }

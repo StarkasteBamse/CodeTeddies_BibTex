@@ -5,7 +5,9 @@
  */
 package domain;
 
+import logic.Validator;
+
 public interface Field {
-    public boolean setValue(String value);
+    public boolean setValue(String value, Validator validator);
     public String getValue();
 }

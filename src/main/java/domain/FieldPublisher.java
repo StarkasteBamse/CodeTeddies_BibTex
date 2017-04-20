@@ -7,23 +7,24 @@ package domain;
 
 import logic.Validator;
 
-public class FieldTitle implements Field {
+class FieldPublisher implements Field {
 
-    private final String fieldName = "title";
+    private final String fieldName = "publisher";
     private String fieldValue;
     // private Validator validator;
     // private final String regex = "";
 
-    public FieldTitle() {
-        // this.validator = validator;
+    public FieldPublisher() {
+        //this.validator = validator;
     }
 
     @Override
     public boolean setValue(String value, Validator validator) {
         if (validator.checkValue(validator.regexString, value)) {
-            this.fieldValue = value;
+            fieldValue = value;
             return true;
         }
+
         return false;
     }
 
@@ -36,5 +37,5 @@ public class FieldTitle implements Field {
     public String toString() {
         return fieldName + " " + fieldValue;
     }
-
+    
 }
