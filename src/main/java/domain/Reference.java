@@ -12,6 +12,5 @@ public interface Reference {
     List<String> getRequiredFields();
     boolean hasRequiredFields();
     void initRequiredFields();
-    
-    
+    HashMap<String, String> getAllFields();
 }

@@ -1,33 +1,48 @@
 package logic;
 
+import database.DAO;
+import database.ReferenceDAO;
 import domain.Article;
 import domain.Reference;
 import domain.Inproceedings;
 import domain.Book;
 import io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import wrapper.Wrapper;
 
 public class App {
 
     private IO io;
+    private DAO dao;
     private Wrapper wrp;
     private ArrayList<Reference> references;
     private String n = System.getProperty("line.separator");
     private ArrayList<String> numerics;
 
-    public App(IO io) {
+    public App(IO io, DAO dao) {
         this.io = io;
+        this.dao = dao;
         this.wrp = new Wrapper();
-        this.references = new ArrayList<>();
+        this.references = fetchDatabase();
         this.numerics = new ArrayList<>();
         setNumerics();
     }
 
     public App() {
-        this(new ConsoleIO());
+        this(new ConsoleIO(), new ReferenceDAO());
     }
-
+    
+    private ArrayList<Reference> fetchDatabase() {
+        ArrayList<Reference> fReferences = new ArrayList<>();
+        fReferences.addAll(dao.getAll());
+        if (fReferences == null) {
+            // initialize db
+        }
+        return fReferences;
+    }
+    
     public void run() {
         while (true) {
             io.print("Add? (y/n)");
