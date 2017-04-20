@@ -14,11 +14,14 @@ public class App {
     private Wrapper wrp;
     private ArrayList<Reference> references;
     private String n = System.getProperty("line.separator");
+    private ArrayList<String> numerics;
 
     public App(IO io) {
         this.io = io;
         this.wrp = new Wrapper();
         this.references = new ArrayList<>();
+        this.numerics = new ArrayList<>();
+        setNumerics();
     }
 
     public App() {
@@ -46,13 +49,13 @@ public class App {
         }
         close();
     }
-    
+
     private void close() {
         if (references.isEmpty()) {
             io.println("No articles in memory");
         } else {
             printRef(references, wrp, io);
-            exportRef(references, wrp, io, new FileWriterIO(), "sigproc.bib"); 
+            exportRef(references, wrp, io, new FileWriterIO(), "sigproc.bib");
         }
     }
 
@@ -111,7 +114,7 @@ public class App {
         inputFields(reference);
         addRefToList(reference, io, references);
     }
-
+//CHECKSTYLE:OFF
     private void inputFields(Reference reference) {
         for (String inputField : reference.getRequiredFields()) {
             String inputLine;
@@ -119,7 +122,11 @@ public class App {
             boolean failed = false;
             io.print(inputField + ": ");
             inputLine = io.readLine();
-            if (scandeja(inputLine)) {
+
+            if (scandeja(inputLine)
+                    || (numerics.contains(inputField)
+                    && !inputLine.matches("[0-9]+"))
+                    || inputLine.isEmpty()) {
                 io.println("");
                 io.println("Invalid " + inputField);
                 failed = true;
@@ -132,6 +139,11 @@ public class App {
             reference.setField(inputField, inputLine);
             io.println("");
         }
+    }
+//CHECKSTYLE:ON
+    private void setNumerics() {
+        numerics.add("year");
+        numerics.add("volume");
     }
 
 }

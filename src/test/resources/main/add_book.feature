@@ -49,7 +49,7 @@ Feature: A new book is added if all required fields are entered and none of the 
         When author "Testerman" are entered
         And title "Testingname" are entered
         And publisher "Testingpublisher" are entered
-        And year "ö" are entered
+        And year "TesterYear" are entered
         And command print is selected
         Then system will respond with "Invalid year"
 

@@ -19,7 +19,7 @@ Feature: A new inproceedings is added if all required fields are entered and non
     When author "Testerman" are entered
     And title "Testingtitle" are entered
     And booktitle "Testingbook" are entered
-    And year "ääää" are entered
+    And year "-98b" are entered
     And command print is selected
     Then system will respond with "Invalid year"
 
