@@ -53,7 +53,7 @@ Feature: A new article is added if all required fields are entered and none of t
         When author "Testerman" are entered
         And title "Testingname" are entered
         And journal "Testermag" are entered
-        And year "ö" are entered
+        And year "-2017" are entered
         And volume "13" are entered
         And command print is selected
         Then system will respond with "Invalid year"
@@ -65,6 +65,6 @@ Feature: A new article is added if all required fields are entered and none of t
         And title "Testingname" are entered
         And journal "Testermag" are entered
         And year "2017" are entered
-        And volume "ö" are entered
+        And volume "No Volume" are entered
         And command print is selected        
         Then system will respond with "Invalid volume"
