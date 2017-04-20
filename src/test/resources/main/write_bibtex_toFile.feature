@@ -9,5 +9,6 @@ Feature: application writes BibTex formatted block for an article
         And year "2017" are entered
         And volume "13" are entered
         And command print is selected
-        Then system will respond with a file writen in bibtex format
+        And filename "sigproc.bib" is entered
+        Then system will respond with a file written in bibtex format
 

@@ -12,6 +12,7 @@ Feature: A new article is added if all required fields are entered and none of t
         And year "2017" are entered
         And volume "13" are entered
         And command print is selected
+        And filename "sigproc.bib" is entered
         Then system will respond with "New article added successfully"
 
     Scenario: adding article fails with invalid author and valid title and journal and year and volume
@@ -23,6 +24,7 @@ Feature: A new article is added if all required fields are entered and none of t
         And year "2017" are entered
         And volume "13" are entered
         And command print is selected
+        And filename "sigproc.bib" is entered
         Then system will respond with "Invalid author"
 
     Scenario: adding article fails with valid author and invalid title and valid journal and year and volume
@@ -34,6 +36,7 @@ Feature: A new article is added if all required fields are entered and none of t
         And year "2017" are entered
         And volume "13" are entered
         And command print is selected
+        And filename "sigproc.bib" is entered
         Then system will respond with "Invalid title"
 
     Scenario: adding article fails with valid author and title and invalid journal and valid year and volume
@@ -44,7 +47,8 @@ Feature: A new article is added if all required fields are entered and none of t
         And journal "Testermäg" are entered
         And year "2017" are entered
         And volume "13" are entered
-        And command print is selected        
+        And command print is selected    
+        And filename "sigproc.bib" is entered    
         Then system will respond with "Invalid journal"
 
     Scenario: adding article fails with valid author and title and journal and invalid year and valid volume
@@ -56,6 +60,7 @@ Feature: A new article is added if all required fields are entered and none of t
         And year "-2017" are entered
         And volume "13" are entered
         And command print is selected
+        And filename "sigproc.bib" is entered
         Then system will respond with "Invalid year"
 
     Scenario: adding article fails with valid author and title and journal and year and invalid volume
@@ -66,5 +71,6 @@ Feature: A new article is added if all required fields are entered and none of t
         And journal "Testermag" are entered
         And year "2017" are entered
         And volume "No Volume" are entered
-        And command print is selected        
+        And command print is selected    
+        And filename "sigproc.bib" is entered    
         Then system will respond with "Invalid volume"

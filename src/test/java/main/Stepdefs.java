@@ -46,6 +46,12 @@ public class Stepdefs {
         inputLines.add("3");
     }
 
+    @Given("^filename \"([^\"]*)\" is entered")
+    public void filename_signed_is_entered(String fileName) throws Throwable {
+        inputLines.add(fileName);
+    }
+    
+    
     @When("^author \"([^\"]*)\" are entered")
     public void a_author_are_entered(String author) {
         inputLines.add(author);
@@ -102,13 +108,13 @@ public class Stepdefs {
         //needs logic for bibtex verification, 
         //now only prints what programn prints
         List<String> prints = io.getPrints();
-        String bibtex = prints.get(prints.size() - 1);
+        String bibtex = prints.get(prints.size() - 2);
         System.out.println("in bibtex format:\n" + bibtex);
         assertTrue(isThisBibTex(bibtex));
     }
 
-    @Then("^system will respond with a file writen in bibtex format$")
-    public void system_will_respond_with_a_file_writen_in_bibtex_format() {
+    @Then("^system will respond with a file written in bibtex format$")
+    public void system_will_respond_with_a_file_written_in_bibtex_format() {
         io = new StubIO(inputLines);
         app = new App(io);
         app.run();

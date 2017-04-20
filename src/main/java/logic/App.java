@@ -57,8 +57,22 @@ public class App {
             io.println("No articles in memory");
         } else {
             printRef(references, wrp, io);
-            exportRef(references, wrp, io, new FileWriterIO(), "sigproc.bib");
+            exportRef(references, wrp, io, new FileWriterIO(),readFileName());
         }
+    }
+
+    public String readFileName() {
+        String fileName = "";
+        while (true) {
+            io.print("Enter filename (.bib-format): ");
+            fileName = io.readLine();
+            if (fileName.contains(".bib") 
+                    && fileName.length() > ".bib".length()) {
+                break;
+            }
+            System.out.println("");
+        }
+        return fileName;
     }
 
     private void printRef(ArrayList<Reference> rList, Wrapper wrp, IO io) {

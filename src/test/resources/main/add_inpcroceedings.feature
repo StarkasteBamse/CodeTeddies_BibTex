@@ -11,6 +11,7 @@ Feature: A new inproceedings is added if all required fields are entered and non
     And booktitle "Testingbook" are entered
     And year "1999" are entered
     And command print is selected
+    And filename "sigproc.bib" is entered
     Then system will respond with "New inproceedings added successfully"
 
   Scenario: adding inproceedings fails with valid author and title and booktitle and invalid year
@@ -21,6 +22,7 @@ Feature: A new inproceedings is added if all required fields are entered and non
     And booktitle "Testingbook" are entered
     And year "-98b" are entered
     And command print is selected
+    And filename "sigproc.bib" is entered
     Then system will respond with "Invalid year"
 
   Scenario: adding inproceedings fails with valid author and title and invalid booktitle and valid year
@@ -31,6 +33,7 @@ Feature: A new inproceedings is added if all required fields are entered and non
     And booktitle "ÄääÖöö" are entered
     And year "1999" are entered
     And command print is selected
+    And filename "sigproc.bib" is entered
     Then system will respond with "Invalid booktitle"
 
   Scenario: adding inproceedings fails with valid author and invalid title and valid booktitle and year
@@ -41,6 +44,7 @@ Feature: A new inproceedings is added if all required fields are entered and non
     And booktitle "Testingbook" are entered
     And year "1999" are entered
     And command print is selected
+    And filename "sigproc.bib" is entered
     Then system will respond with "Invalid title"
 
 Scenario: adding inproceedings fails with invalid author and valid title and booktitle and year
@@ -51,4 +55,5 @@ Scenario: adding inproceedings fails with invalid author and valid title and boo
     And booktitle "Testingbook" are entered
     And year "1999" are entered
     And command print is selected
+    And filename "sigproc.bib" is entered
     Then system will respond with "Invalid author"
