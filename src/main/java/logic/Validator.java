@@ -7,9 +7,11 @@ package logic;
 
 public class Validator {
     
-    public final String regexString    = "^[a-zA-Z0-9!@#$%&*()_+=|<>?{}\\s\\[\\]~-]*$";
+    //CHECKSTYLE:OFF
+    public final String regexString    = "^[a-zA-Z0-9!@#$%&*(),.:;_+=|<>?{}\\s\\[\\]~-]*$";
     public final String regexNumeric      = "[0-9]+";
     // public final String regexMonth     = "";
+    //CHECKSTYLE:ON
     
     public boolean checkTitle() {
         return true;

@@ -15,12 +15,14 @@ public class App {
     private ArrayList<Reference> references;
     private String n = System.getProperty("line.separator");
     private ArrayList<String> numerics;
+    private Validator validator;
 
     public App(IO io) {
         this.io = io;
         this.wrp = new Wrapper();
         this.references = new ArrayList<>();
         this.numerics = new ArrayList<>();
+        this.validator = new Validator();
         setNumerics();
     }
 
@@ -57,7 +59,7 @@ public class App {
             io.println("No articles in memory");
         } else {
             printRef(references, wrp, io);
-            exportRef(references, wrp, io, new FileWriterIO(),readFileName());
+            exportRef(references, wrp, io, new FileWriterIO(), readFileName());
         }
     }
 
@@ -66,7 +68,7 @@ public class App {
         while (true) {
             io.print("Enter filename (.bib-format): ");
             fileName = io.readLine();
-            if (fileName.contains(".bib") 
+            if (fileName.contains(".bib")
                     && fileName.length() > ".bib".length()) {
                 break;
             }
@@ -130,7 +132,7 @@ public class App {
         inputFields(reference);
         addRefToList(reference, io, references);
     }
-    
+
     private void inputFields(Reference reference) {
         for (String inputField : reference.getRequiredFields()) {
             String inputLine;
@@ -138,20 +140,16 @@ public class App {
             io.print(inputField + ": ");
             inputLine = io.readLine();
 
-            if (scandeja(inputLine)
-                    || (numerics.contains(inputField)
-                    && !inputLine.matches("[0-9]+"))
-                    || inputLine.isEmpty()) {
+            if (!reference.setField(inputField, inputLine, validator)
+                    || inputLine.length() == 0) {
                 io.println("");
                 io.println("Invalid " + inputField);
                 break;
             }
-
-            reference.setField(inputField, inputLine);
             io.println("");
         }
     }
-    
+
     private void setNumerics() {
         numerics.add("year");
         numerics.add("volume");
