@@ -21,9 +21,7 @@ public class App {
         this.io = io;
         this.wrp = new Wrapper();
         this.references = new ArrayList<>();
-        this.numerics = new ArrayList<>();
         this.validator = new Validator();
-        setNumerics();
     }
 
     public App() {
@@ -96,13 +94,6 @@ public class App {
         }
     }
 
-    private boolean scandeja(String s) {
-        if (s.matches("^[a-zA-Z0-9!@#$%&*()_+=|<>?{}\\s\\[\\]~-]*$")) {
-            return false;
-        }
-        return true;
-    }
-
     private void addRefToList(Reference reference, IO io, ArrayList rList) {
         if (reference.hasRequiredFields()) {
             rList.add(reference);
@@ -149,11 +140,6 @@ public class App {
             reference.setField(inputField, inputLine);
             io.println("");
         }
-    }
-
-    private void setNumerics() {
-        numerics.add("year");
-        numerics.add("volume");
     }
 
 }
