@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 public class InproceedingsTest {
     
     private Inproceedings instance;
-    private Validator validator = new Validator();
     
     public InproceedingsTest() {
     }
@@ -36,28 +35,28 @@ public class InproceedingsTest {
     @Test
     public void testSetTitle() {
         String testTitle = "testTitle";
-        instance.setTitle(testTitle, validator);
+        instance.setTitle(testTitle);
         assertEquals(testTitle, instance.getField("title"));
     }
 
     @Test
     public void testSetAuthor() {
         String testAuthor = "testAuthor";
-        instance.setAuthor(testAuthor, validator);
+        instance.setAuthor(testAuthor);
         assertEquals(testAuthor, instance.getField("author"));
     }
 
     @Test
     public void testSetBookTitle() {
         String testBookTitle = "testBookTitle";
-        instance.setBookTitle(testBookTitle, validator);
+        instance.setBookTitle(testBookTitle);
         assertEquals(testBookTitle, instance.getField("booktitle"));
     }
 
     @Test
     public void testSetYear() {
         String testYear = "1984";
-        instance.setYear(testYear, validator);
+        instance.setYear(testYear);
         assertEquals(testYear, instance.getField("year"));
     }
 
@@ -65,31 +64,31 @@ public class InproceedingsTest {
     public void testHasRequiredFieldsWhenEmpty() {
         // Test  all required fields one by one
         assertEquals(false, instance.hasRequiredFields());
-        instance.setAuthor("testA", validator);
+        instance.setAuthor("testA");
         assertEquals(false, instance.hasRequiredFields());
-        instance.setTitle("testT", validator);
+        instance.setTitle("testT");
         assertEquals(false, instance.hasRequiredFields());
-        instance.setBookTitle("testBT", validator);
+        instance.setBookTitle("testBT");
         assertEquals(false, instance.hasRequiredFields());
     }
     
     @Test
     public void testHasRequiredFieldsReturnsTrueWhenSet() {
         String testAuthor = "testAuthor";
-        instance.setAuthor(testAuthor, validator);
+        instance.setAuthor(testAuthor);
         String testTitle = "testTitle";
-        instance.setTitle(testTitle, validator);
+        instance.setTitle(testTitle);
         String testBookTitle = "testBookTitle";
-        instance.setBookTitle(testBookTitle, validator);
+        instance.setBookTitle(testBookTitle);
         String testYear = "1984";
-        instance.setYear(testYear, validator);
+        instance.setYear(testYear);
         assertEquals(true, instance.hasRequiredFields());
     }
     
     @Test
     public void getFieldReturnsNull() {
         instance = new Inproceedings();
-        instance.setAuthor(null, validator);
+        instance.setAuthor(null);
         boolean result = false;
         if(instance.getField("author") == null) {
             result = true;

@@ -8,7 +8,7 @@ import logic.Validator;
 
 public interface Reference {
 
-    boolean setField(String field, String value, Validator validator);
+    void setField(String field, String value);
     String getField(String field);
     List<String> getRequiredFields();
     boolean hasRequiredFields();

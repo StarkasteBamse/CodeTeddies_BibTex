@@ -19,13 +19,9 @@ public class FieldAuthor implements Field {
     }
 
     @Override
-    public boolean setValue(String value, Validator validator) {
-        if (validator.checkValue(validator.regexString, value)) {
-            fieldValue = value;
-            return true;
-        }
+    public void setValue(String value) {
+        fieldValue = value;
 
-        return false;
     }
 
     @Override

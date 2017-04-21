@@ -18,13 +18,8 @@ public class FieldYear implements Field {
     }
 
     @Override
-    public boolean setValue(String value, Validator validator) {
-        if (validator.checkValue(validator.regexNumeric, value)) {
-            this.fieldValue = value;
-            return true;
-        }
-
-        return false;
+    public void setValue(String value) {
+        this.fieldValue = value;
     }
 
     @Override

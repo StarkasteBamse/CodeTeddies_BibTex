@@ -21,24 +21,24 @@ public class Article implements Reference {
     }
 //CHECKSTYLE:OFF
 
-    public void setAuthor(String author, Validator validator) {
-        setField("author", author, validator);
+    public void setAuthor(String author) {
+        setField("author", author);
     }
 
-    public void setTitle(String title, Validator validator) {
-        setField("title", title, validator);
+    public void setTitle(String title) {
+        setField("title", title);
     }
 
-    public void setYear(String year, Validator validator) {
-        setField("year", year, validator);
+    public void setYear(String year) {
+        setField("year", year);
     }
 
-    public void setJournal(String journal, Validator validator) {
-        setField("journal", journal, validator);
+    public void setJournal(String journal) {
+        setField("journal", journal);
     }
 
-    public void setVolume(String volume, Validator validator) {
-        setField("volume", volume, validator);
+    public void setVolume(String volume) {
+        setField("volume", volume);
     }
 
     @Override
@@ -62,29 +62,13 @@ public class Article implements Reference {
     }
 
     @Override
-    public boolean setField(String field, String value, Validator validator) {
+    public void setField(String field, String value) {
         // this.fields.put(field, value);
-        if (value == null) {
-            return false;
-        }
         Field newField = getFieldType(field);
-        if (newField.setValue(value, validator) && newField != null) {
+        if ((newField != null) && (value != null)) {
+            newField.setValue(value);
             this.fieldObjects.put(field, newField);
-            return true;
         }
-
-        return false;
-    }
-
-    /* Prototype for setField with validator passed */
-    public boolean setFieldObject(String field, String value,
-            Validator validator) {
-        Field newField = getFieldType(field);
-        if (newField.setValue(value, validator)) {
-            this.fieldObjects.put(field, newField);
-            return true;
-        }
-        return false;
     }
 
     @Override

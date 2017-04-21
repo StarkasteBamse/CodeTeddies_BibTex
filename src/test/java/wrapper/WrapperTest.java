@@ -17,19 +17,17 @@ public class WrapperTest {
     private String title;
     private final String year = "1999";
     private final String volume = "12";
-    
-    private Validator vali = new Validator();
-    
+
     public WrapperTest() {
         a = new Article();
         author = "author";
         journal = "journal";
         title = "title";
-        a.setAuthor(author, vali);
-        a.setJournal(journal, vali);
-        a.setTitle(title, vali);
-        a.setYear(year, vali);
-        a.setVolume(volume, vali);
+        a.setAuthor(author);
+        a.setJournal(journal);
+        a.setTitle(title);
+        a.setYear(year);
+        a.setVolume(volume);
     }
     
     @Before

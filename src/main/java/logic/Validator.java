@@ -5,36 +5,55 @@
  */
 package logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Validator {
     
     //CHECKSTYLE:OFF
+    public List<String> stringFields;
+    public List<String> numericFields;
     public final String regexString    = "^[a-zA-Z0-9!@#$%&*(),.:;_+=|<>?{}\\s\\[\\]~-]*$";
     public final String regexNumeric      = "[0-9]+";
     // public final String regexMonth     = "";
     //CHECKSTYLE:ON
     
-    public boolean checkTitle() {
-        return true;
-    }
-    
-    public boolean checkAuthor() {
-        return true;
-    }
-    
-    public boolean checkEditor() {
-        return true;
-    }
-    
-    public boolean checkPublisher() {
-        return true;
-    }
-    
-    public boolean checkBookTitle() {
-        return true;
+    public Validator() {
+        initStringFields();
+        initNumericFields();
     }
     
     public boolean checkValue(String regex, String value) {
         return value.matches(regex);
+    }
+    
+    public boolean checkInput(String inputType, String inputValue) {
+        if (inputValue.length() == 0) {
+            return false;
+        }
+        
+        if (stringFields.contains(inputType)) {
+            return checkValue(this.regexString, inputValue);
+        } else if (numericFields.contains(inputType)) {
+            return checkValue(this.regexNumeric, inputValue);
+        } else {
+            return false;
+        }
+    }
+
+    private void initStringFields() {
+        this.stringFields = new ArrayList<>();
+        stringFields.add("author");
+        stringFields.add("booktitle");
+        stringFields.add("journal");
+        stringFields.add("title");
+        stringFields.add("publisher");
+    }
+
+    private void initNumericFields() {
+        this.numericFields = new ArrayList<>();
+        numericFields.add("year");
+        numericFields.add("volume");
     }
     
 }

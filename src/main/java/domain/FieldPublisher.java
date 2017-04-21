@@ -19,13 +19,8 @@ class FieldPublisher implements Field {
     }
 
     @Override
-    public boolean setValue(String value, Validator validator) {
-        if (validator.checkValue(validator.regexString, value)) {
-            fieldValue = value;
-            return true;
-        }
-
-        return false;
+    public void setValue(String value) {
+        fieldValue = value;
     }
 
     @Override
@@ -37,5 +32,5 @@ class FieldPublisher implements Field {
     public String toString() {
         return fieldName + " " + fieldValue;
     }
-    
+
 }

@@ -8,7 +8,7 @@ package domain;
 import logic.Validator;
 
 class FieldBookTitle implements Field {
-    
+
     private final String fieldName = "booktitle";
     private String fieldValue;
 
@@ -16,13 +16,8 @@ class FieldBookTitle implements Field {
     }
 
     @Override
-    public boolean setValue(String value, Validator validator) {
-        if (validator.checkValue(validator.regexString, value)) {
-            fieldValue = value;
-            return true;
-        }
-
-        return false;
+    public void setValue(String value) {
+        fieldValue = value;
     }
 
     @Override
@@ -34,5 +29,5 @@ class FieldBookTitle implements Field {
     public String toString() {
         return fieldName + " " + fieldValue;
     }
-    
+
 }

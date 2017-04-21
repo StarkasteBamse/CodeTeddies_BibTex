@@ -8,6 +8,6 @@ package domain;
 import logic.Validator;
 
 public interface Field {
-    public boolean setValue(String value, Validator validator);
+    public void setValue(String value);
     public String getValue();
 }

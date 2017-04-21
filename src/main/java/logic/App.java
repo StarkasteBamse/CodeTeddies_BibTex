@@ -140,12 +140,13 @@ public class App {
             io.print(inputField + ": ");
             inputLine = io.readLine();
 
-            if (!reference.setField(inputField, inputLine, validator)
-                    || inputLine.length() == 0) {
+            if (!validator.checkInput(inputField, inputLine)) {
                 io.println("");
                 io.println("Invalid " + inputField);
                 break;
             }
+
+            reference.setField(inputField, inputLine);
             io.println("");
         }
     }
