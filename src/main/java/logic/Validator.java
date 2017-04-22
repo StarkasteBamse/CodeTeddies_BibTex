@@ -6,6 +6,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Validator {
@@ -39,6 +40,14 @@ public class Validator {
         } else {
             return false;
         }
+    }
+    
+    public boolean checkRequiredFields(String referenceType,
+                                            HashMap<String, String> fieldMap) {
+        
+        
+        
+        return true;
     }
 
     private void initStringFields() {

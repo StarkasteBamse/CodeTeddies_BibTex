@@ -3,21 +3,21 @@ package domain;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import logic.Validator;
 
 public class Article implements Reference {
 
     private ArrayList<String> requiredFields;
-    private ArrayList<Field> requiredFieldObjects;
-    // private HashMap<String, String> fields;
-    private HashMap<String, Field> fieldObjects;
+    private ArrayList<String> optionalFields;
+    private HashMap<String, String> fields;
 
     public Article() {
+        this.optionalFields = new ArrayList<>();
         this.requiredFields = new ArrayList<>();
-        // this.fields = new HashMap<>();
+        this.fields = new HashMap<>();
         initRequiredFields();
-
-        this.fieldObjects = new HashMap<>();
+        initOptionalFields();
     }
 //CHECKSTYLE:OFF
 
@@ -44,7 +44,7 @@ public class Article implements Reference {
     @Override
     public boolean hasRequiredFields() {
         for (String field : this.requiredFields) {
-            if (!this.fieldObjects.containsKey(field)) {
+            if (!this.fields.containsKey(field)) {
                 return false;
             }
         }
@@ -60,23 +60,27 @@ public class Article implements Reference {
         requiredFields.add("year");
         requiredFields.add("volume");
     }
+    
+    @Override
+    public void initOptionalFields() {
+        optionalFields.add("number");
+        optionalFields.add("pages");
+        optionalFields.add("month");
+        optionalFields.add("note");
+        optionalFields.add("key");
+    }
 
     @Override
     public void setField(String field, String value) {
-        // this.fields.put(field, value);
-        Field newField = getFieldType(field);
-        if ((newField != null) && (value != null)) {
-            newField.setValue(value);
-            this.fieldObjects.put(field, newField);
-        }
+        this.fields.put(field, value);
     }
 
     @Override
     public String getField(String field) {
-        if (this.fieldObjects.get(field) == null) {
+        if (this.fields.get(field) == null) {
             return null;
         } else {
-            return this.fieldObjects.get(field).getValue();
+            return this.fields.get(field);
         }
     }
 
@@ -84,27 +88,19 @@ public class Article implements Reference {
     public List<String> getRequiredFields() {
         return this.requiredFields;
     }
+    
+    public List<String> getOptionalFields() {
+        return this.optionalFields;
+    }
 
     @Override
     public String toString() {
         return "article";
     }
 
-    private Field getFieldType(String field) {
-        switch (field) {
-            case "author":
-                return new FieldAuthor();
-            case "title":
-                return new FieldTitle();
-            case "journal":
-                return new FieldJournal();
-            case "year":
-                return new FieldYear();
-            case "volume":
-                return new FieldVolume();
-            default:
-                return null;
-        }
+    @Override
+    public HashMap<String, String> getFieldsMap() {
+        return this.fields;
     }
 
 }

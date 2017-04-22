@@ -3,20 +3,21 @@ package domain;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import logic.Validator;
 
 public class Book implements Reference {
 
     private ArrayList<String> requiredFields;
-    // private HashMap<String, String> fields;
-    private HashMap<String, Field> fieldObjects;
+    private ArrayList<String> optionalFields;
+    private HashMap<String, String> fields;
 
     public Book() {
+        this.optionalFields = new ArrayList<>();
         this.requiredFields = new ArrayList<>();
-        // this.fields = new HashMap<>();
+        this.fields = new HashMap<>();
         initRequiredFields();
-        
-        this.fieldObjects = new HashMap<>();
+        initOptionalFields();
     }
 //CHECKSTYLE:OFF
 
@@ -39,7 +40,7 @@ public class Book implements Reference {
     @Override
     public boolean hasRequiredFields() {
         for (String field : this.requiredFields) {
-            if (!this.fieldObjects.containsKey(field)) {
+            if (!this.fields.containsKey(field)) {
                 return false;
             }
         }
@@ -57,19 +58,14 @@ public class Book implements Reference {
 
     @Override
     public void setField(String field, String value) {
-        // this.fields.put(field, value);
-        Field newField = getFieldType(field);
-        if ((newField != null) && (value != null)) {
-            newField.setValue(value);
-            this.fieldObjects.put(field, newField);
-        }
+        this.fields.put(field, value);
     }
 
     @Override
     public String getField(String field) {
-        if (this.fieldObjects.get(field) == null) {
+        if (this.fields.get(field) == null) {
             return null;
-        } else return this.fieldObjects.get(field).getValue();
+        } else return this.fields.get(field);
     }
     
     @Override
@@ -82,19 +78,25 @@ public class Book implements Reference {
         return "book";
     }
 
-    private Field getFieldType(String field) {
-        switch (field) {
-            case "author":
-                return new FieldAuthor();
-            case "title":
-                return new FieldTitle();
-            case "publisher":
-                return new FieldPublisher();
-            case "year":
-                return new FieldYear();
-            default:
-                return null;
-        }
+    @Override
+    public HashMap<String, String> getFieldsMap() {
+        return this.fields;
+    }
+
+    @Override
+    public void initOptionalFields() {
+        optionalFields.add("number");
+        optionalFields.add("series");
+        optionalFields.add("address");
+        optionalFields.add("edition");
+        optionalFields.add("month");
+        optionalFields.add("note");
+        optionalFields.add("key");
+    }
+
+    @Override
+    public List<String> getOptionalFields() {
+        return optionalFields;
     }
 }
 
