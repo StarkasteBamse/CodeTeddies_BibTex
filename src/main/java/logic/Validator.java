@@ -5,6 +5,7 @@
  */
 package logic;
 
+import domain.Reference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,25 +43,44 @@ public class Validator {
         }
     }
     
-    public boolean checkRequiredFields(String referenceType,
-                                            HashMap<String, String> fieldMap) {
-        
-        
-        
+    public boolean checkRequiredFields(Reference reference) {
+        for (String field : reference.getRequiredFields()) {
+            if (!reference.getFieldsMap().containsKey(field)) {
+                return false;
+            }
+        }
+
         return true;
     }
 
     private void initStringFields() {
         this.stringFields = new ArrayList<>();
+        stringFields.add("address");
+        stringFields.add("annote");
         stringFields.add("author");
         stringFields.add("booktitle");
+        stringFields.add("crossref");
+        stringFields.add("edition");
+        stringFields.add("editor");
+        stringFields.add("howpublished");
+        stringFields.add("institution");
         stringFields.add("journal");
+        stringFields.add("key");
+        stringFields.add("note");
+        stringFields.add("organization");
+        stringFields.add("school");
         stringFields.add("title");
         stringFields.add("publisher");
+        stringFields.add("series");
+        stringFields.add("type");
     }
 
     private void initNumericFields() {
         this.numericFields = new ArrayList<>();
+        stringFields.add("chapter");
+        stringFields.add("month");
+        stringFields.add("number");
+        stringFields.add("pages");
         numericFields.add("year");
         numericFields.add("volume");
     }

@@ -95,7 +95,7 @@ public class App {
     }
 
     private void addRefToList(Reference reference, IO io, ArrayList rList) {
-        if (reference.hasRequiredFields()) {
+        if (validator.checkRequiredFields(reference)) {
             rList.add(reference);
             io.println("New " + reference + " added successfully");
         } else {
