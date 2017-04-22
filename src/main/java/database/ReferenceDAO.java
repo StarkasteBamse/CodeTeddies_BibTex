@@ -39,11 +39,11 @@ public class ReferenceDAO implements DAO<Reference> {
         this.database = mongoClient.getDatabase("bibdb");
         this.collection = database.getCollection("references");
     }
-
+//CHECKSTYLE:OFF
     public ReferenceDAO() {
         this(new MongoClient( "localhost" , 27017 ));
     }
-    
+//CHECKSTYLE:ON    
     @Override
     public void delete(Reference key) {
         throw new UnsupportedOperationException("Not supported yet."); 
