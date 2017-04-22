@@ -15,13 +15,13 @@ public class App {
     private ArrayList<Reference> references;
     private String n = System.getProperty("line.separator");
     private ArrayList<String> numerics;
+    private Validator validator;
 
     public App(IO io) {
         this.io = io;
         this.wrp = new Wrapper();
         this.references = new ArrayList<>();
-        this.numerics = new ArrayList<>();
-        setNumerics();
+        this.validator = new Validator();
     }
 
     public App() {
@@ -57,7 +57,7 @@ public class App {
             io.println("No articles in memory");
         } else {
             printRef(references, wrp, io);
-            exportRef(references, wrp, io, new FileWriterIO(),readFileName());
+            exportRef(references, wrp, io, new FileWriterIO(), readFileName());
         }
     }
 
@@ -66,7 +66,7 @@ public class App {
         while (true) {
             io.print("Enter filename (.bib-format): ");
             fileName = io.readLine();
-            if (fileName.contains(".bib") 
+            if (fileName.contains(".bib")
                     && fileName.length() > ".bib".length()) {
                 break;
             }
@@ -94,15 +94,8 @@ public class App {
         }
     }
 
-    private boolean scandeja(String s) {
-        if (s.matches("^[a-zA-Z0-9!@#$%&*()_+=|<>?{}\\s\\[\\]~-]*$")) {
-            return false;
-        }
-        return true;
-    }
-
     private void addRefToList(Reference reference, IO io, ArrayList rList) {
-        if (reference.hasRequiredFields()) {
+        if (validator.checkRequiredFields(reference)) {
             rList.add(reference);
             io.println("New " + reference + " added successfully");
         } else {
@@ -130,7 +123,7 @@ public class App {
         inputFields(reference);
         addRefToList(reference, io, references);
     }
-    
+
     private void inputFields(Reference reference) {
         for (String inputField : reference.getRequiredFields()) {
             String inputLine;
@@ -138,10 +131,7 @@ public class App {
             io.print(inputField + ": ");
             inputLine = io.readLine();
 
-            if (scandeja(inputLine)
-                    || (numerics.contains(inputField)
-                    && !inputLine.matches("[0-9]+"))
-                    || inputLine.isEmpty()) {
+            if (!validator.checkInput(inputField, inputLine)) {
                 io.println("");
                 io.println("Invalid " + inputField);
                 break;
@@ -150,11 +140,6 @@ public class App {
             reference.setField(inputField, inputLine);
             io.println("");
         }
-    }
-    
-    private void setNumerics() {
-        numerics.add("year");
-        numerics.add("volume");
     }
 
 }

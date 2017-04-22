@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import logic.Validator;
 
 public interface Reference {
 
@@ -12,6 +13,9 @@ public interface Reference {
     List<String> getRequiredFields();
     boolean hasRequiredFields();
     void initRequiredFields();
-    
+    void initOptionalFields();
+    List<String> getOptionalFields();
+    HashMap<String, String> getFieldsMap();
+
     
 }

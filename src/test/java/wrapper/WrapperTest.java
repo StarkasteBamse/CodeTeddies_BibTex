@@ -3,6 +3,7 @@ package wrapper;
 
 import java.util.Scanner;
 import domain.Article;
+import logic.Validator;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -16,7 +17,7 @@ public class WrapperTest {
     private String title;
     private final String year = "1999";
     private final String volume = "12";
-    
+
     public WrapperTest() {
         a = new Article();
         author = "author";
