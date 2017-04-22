@@ -3,16 +3,21 @@ package domain;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import logic.Validator;
 
 public class Book implements Reference {
 
     private ArrayList<String> requiredFields;
+    private ArrayList<String> optionalFields;
     private HashMap<String, String> fields;
 
     public Book() {
+        this.optionalFields = new ArrayList<>();
         this.requiredFields = new ArrayList<>();
         this.fields = new HashMap<>();
         initRequiredFields();
+        initOptionalFields();
     }
 //CHECKSTYLE:OFF
 
@@ -71,6 +76,27 @@ public class Book implements Reference {
     @Override
     public String toString() {
         return "book";
+    }
+
+    @Override
+    public HashMap<String, String> getFieldsMap() {
+        return this.fields;
+    }
+
+    @Override
+    public void initOptionalFields() {
+        optionalFields.add("number");
+        optionalFields.add("series");
+        optionalFields.add("address");
+        optionalFields.add("edition");
+        optionalFields.add("month");
+        optionalFields.add("note");
+        optionalFields.add("key");
+    }
+
+    @Override
+    public List<String> getOptionalFields() {
+        return optionalFields;
     }
 }
 

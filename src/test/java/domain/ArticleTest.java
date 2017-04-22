@@ -10,6 +10,7 @@
 package domain;
 
 import domain.Article;
+import logic.Validator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -140,5 +141,16 @@ public class ArticleTest {
         }
         assertTrue(result);
     }
+    
+    /*
+    @Test
+    public void setFieldFailsWithInvalidFieldType() {
+        instance = new Article();
+        instance.setField("invaliidi", "I won't be used");
+        
+        String expResult = null;
+        assertEquals(expResult, instance.getField("invaliidi"));
+    }
+    */
 }
 

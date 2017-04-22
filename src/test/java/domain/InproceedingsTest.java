@@ -1,5 +1,6 @@
 package domain;
 
+import logic.Validator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -8,25 +9,25 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class InproceedingsTest {
-    
+
     private Inproceedings instance;
-    
+
     public InproceedingsTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         instance = new Inproceedings();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -70,7 +71,7 @@ public class InproceedingsTest {
         instance.setBookTitle("testBT");
         assertEquals(false, instance.hasRequiredFields());
     }
-    
+
     @Test
     public void testHasRequiredFieldsReturnsTrueWhenSet() {
         String testAuthor = "testAuthor";
@@ -83,15 +84,26 @@ public class InproceedingsTest {
         instance.setYear(testYear);
         assertEquals(true, instance.hasRequiredFields());
     }
-    
+
     @Test
     public void getFieldReturnsNull() {
         instance = new Inproceedings();
         instance.setAuthor(null);
         boolean result = false;
-        if(instance.getField("author") == null) {
+        if (instance.getField("author") == null) {
             result = true;
         }
         assertTrue(result);
     }
+
+    /*
+    @Test
+    public void setFieldFailsWithInvalidFieldType() {
+        instance = new Inproceedings();
+        instance.setField("invaliidi", "I won't be used");
+
+        String expResult = null;
+        assertEquals(expResult, instance.getField("invaliidi"));
+    }
+    */
 }

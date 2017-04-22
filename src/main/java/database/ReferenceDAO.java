@@ -61,7 +61,7 @@ public class ReferenceDAO implements DAO<Reference> {
     @Override
     public void add(Reference reference) {
         Document doc = new Document("type", reference.toString());
-        HashMap<String, String> fields = reference.getAllFields();
+        HashMap<String, String> fields = reference.getFieldsMap();
         
         for (String field : fields.keySet()) {
             doc.append(field, fields.get(field));
