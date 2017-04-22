@@ -5,6 +5,8 @@
  */
 package logic;
 
+import database.DAO;
+import database.ReferenceDAO;
 import io.IO;
 import io.StubIO;
 import java.util.ArrayList;
@@ -31,53 +33,9 @@ public class AppTest {
     @Before
     public void setUp() {
     }
-
-    private void createArticle1() {
-        ArrayList<String> article1 = new ArrayList<>();
-        article1.add("");
-        article1.add("Adventures of Gireoux");
-        article1.add("Journal of Psychonometrics");
-        article1.add("1922");
-        article1.add("122");
-    }
-    
-    private void createBook1() {
-        ArrayList<String> article1 = new ArrayList<>();
-        article1.add("Robin Mobb");
-        article1.add("Adventures of Psyo");
-        article1.add("Otava");
-        article1.add("2014");
-    }
-    
-    private ArrayList<String> createInproceedings1() {
-        ArrayList<String> article1 = new ArrayList<>();
-        article1.add("Wayne Gre");
-        article1.add("My years as");
-        article1.add("Good: years as holigan");
-        article1.add("1567");
-        return article1;
-    }
-    
-    @Test
-    public void testAddArticleSuccessful() {
-    }
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of run method, of class App.
-     */
-    @Test
-    public void testRun() {
-    }
-
-    /**
-     * Test of printReferences method, of class App.
-     */
-    @Test
-    public void testPrintReferences() {
     }
 
     @Test
@@ -85,7 +43,7 @@ public class AppTest {
         List<String> inputLines = new ArrayList<>();
         inputLines.add("n");
         StubIO io = new StubIO(inputLines);
-        App ap = new App(io);
+        App ap = new App(io, new ReferenceDAO());
         ap.run();
         assertTrue(io.getPrints().contains("No articles in memory"));
     }
@@ -97,7 +55,7 @@ public class AppTest {
         inputLines.add("kissa");
         inputLines.add("n");
         StubIO io = new StubIO(inputLines);
-        App ap = new App(io);
+        App ap = new App(io, new ReferenceDAO());
         ap.run();
         assertTrue(io.getPrints().contains("Invalid reference type"));
     }
@@ -110,7 +68,7 @@ public class AppTest {
         inputLines.add("");
         inputLines.add("n");
         StubIO io = new StubIO(inputLines);
-        App ap = new App(io);
+        App ap = new App(io, new ReferenceDAO());
         ap.run();
         assertTrue(io.getPrints().contains("Invalid author"));
     }

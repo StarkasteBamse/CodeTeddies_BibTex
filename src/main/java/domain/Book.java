@@ -47,13 +47,21 @@ public class Book implements Reference {
         return true;
     }
 //CHECKSTYLE:ON
-
-    @Override
-    public void initRequiredFields() {
+    private void initRequiredFields() {
         requiredFields.add("author");
         requiredFields.add("title");
         requiredFields.add("publisher");
         requiredFields.add("year");
+    }
+    
+    private void initOptionalFields() {
+        optionalFields.add("number");
+        optionalFields.add("series");
+        optionalFields.add("address");
+        optionalFields.add("edition");
+        optionalFields.add("month");
+        optionalFields.add("note");
+        optionalFields.add("key");
     }
 
     @Override
@@ -81,17 +89,6 @@ public class Book implements Reference {
     @Override
     public HashMap<String, String> getFieldsMap() {
         return this.fields;
-    }
-
-    @Override
-    public void initOptionalFields() {
-        optionalFields.add("number");
-        optionalFields.add("series");
-        optionalFields.add("address");
-        optionalFields.add("edition");
-        optionalFields.add("month");
-        optionalFields.add("note");
-        optionalFields.add("key");
     }
 
     @Override

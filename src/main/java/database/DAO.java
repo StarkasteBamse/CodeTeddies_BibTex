@@ -10,11 +10,11 @@ import java.util.List;
 /**
  *
  * @author Willburner
- * @param <T>
+ * @param <Reference> 
  */
-public interface DAO<T> {
-    void delete(T key);
-    void add(T key);
-    void update(T key);
-    List<T> getAll();
+public interface DAO<Reference> {
+    void delete(Reference key);
+    void add(Reference key);
+    void update(Reference key);
+    List<Reference> getAll();
 }

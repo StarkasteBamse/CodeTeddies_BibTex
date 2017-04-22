@@ -38,9 +38,6 @@ public class App {
     private ArrayList<Reference> fetchDatabase() {
         ArrayList<Reference> fReferences = new ArrayList<>();
         fReferences.addAll(dao.getAll());
-        if (fReferences == null) {
-            // initialize db
-        }
         return fReferences;
     }
     
@@ -99,7 +96,7 @@ public class App {
     }
 
     private void exportRef(ArrayList<Reference> rList, Wrapper wrp,
-            IO io, IO fileIo, String fileName) {
+                           IO io, IO fileIo, String fileName) {
         String bib = "";
         for (Reference reference : rList) {
             bib += wrp.wrap(reference) + n + n;
@@ -138,6 +135,7 @@ public class App {
         io.println("BibTex an " + reference + "!");
         inputFields(reference);
         addRefToList(reference, io, references);
+        dao.add(reference);
     }
 
     private void inputFields(Reference reference) {

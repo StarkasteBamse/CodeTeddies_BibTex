@@ -10,20 +10,15 @@ import java.util.List;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.ServerAddress;
-
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 
 import org.bson.Document;
 import java.util.Arrays;
-import com.mongodb.Block;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import com.mongodb.client.MongoCursor;
-import static com.mongodb.client.model.Filters.*;
-import com.mongodb.client.result.DeleteResult;
-import static com.mongodb.client.model.Updates.*;
-import com.mongodb.client.result.UpdateResult;
 import domain.Article;
 import domain.Book;
 import domain.Inproceedings;
@@ -49,13 +44,9 @@ public class ReferenceDAO implements DAO<Reference> {
         this(new MongoClient( "localhost" , 27017 ));
     }
     
-    /*
-    1. Reference tarvitsee metodit getRequiredFields ja getAllInfo
-    2. 
-    */
     @Override
     public void delete(Reference key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
@@ -71,12 +62,11 @@ public class ReferenceDAO implements DAO<Reference> {
 
     @Override
     public void update(Reference key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public List<Reference> getAll() {
-        Gson mapper = new Gson();
         List<Reference> references = new ArrayList<>();
         MongoCursor<Document> cursor = collection.find().iterator();
         try {
@@ -84,24 +74,41 @@ public class ReferenceDAO implements DAO<Reference> {
                 String json = cursor.next().toJson();
                 
                 if (json.contains("article")) {
-                    Reference reference = mapper.fromJson(json, Article.class);
-                    references.add(reference);
+                    references.add(fetchSingleReference(json, 
+                                        new Article()));
                     
                 } else if (json.contains("book")) {
-                    Reference reference = mapper.fromJson(json, Book.class);
-                    references.add(reference);
+                    references.add(fetchSingleReference(json, 
+                                        new Book()));
                     
                 } else if (json.contains("inproceedings")) {
-                    Reference reference = mapper.fromJson(json, Inproceedings.class);
-                    references.add(reference);
+                    references.add(fetchSingleReference(json, 
+                                        new Inproceedings()));
                 }
-                cursor.next().toJson();
             }
+        } catch (JsonSyntaxException se) {
+            System.out.println(se.getMessage());
         } finally {
             cursor.close();
         }
         return references;
     }
     
-    
+    private Reference fetchSingleReference(String json, Reference reference) 
+                                                throws JsonSyntaxException{
+        Gson mapper = new Gson();
+        HashMap<String, String> fieldMap = mapper.fromJson(json, HashMap.class);
+        
+        for (String field : reference.getRequiredFields()) {
+            if (fieldMap.containsKey(field)) {
+                reference.setField(field, fieldMap.get(field));
+            }
+        }
+        for (String field : reference.getOptionalFields()) {
+            if (fieldMap.containsKey(field)) {
+                reference.setField(field, fieldMap.get(field));
+            }
+        }
+        return reference;
+    }
 }
