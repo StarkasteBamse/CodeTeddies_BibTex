@@ -4,3 +4,4 @@
 /src/.gradle/
 .nb-gradle-properties
 /sigproc.bib
+/src/tmp/
