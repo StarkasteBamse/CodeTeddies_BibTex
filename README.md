@@ -1,6 +1,6 @@
 # CodeTeddies_BibTex
 
-## Tästä tulee Ohjelmistotuotanto Kevät 2017 miniprojekti.
+## Tästä tulee Ohjelmistotuotanto Kevät 2017 miniprojekti
 
 * [Speksi] (https://github.com/mluukkai/ohtu2017/wiki/miniprojekti-speksi) 
  
@@ -12,10 +12,11 @@
 ## Devaajille MongoDb-ohje
 ### Miniprojekti käyttää MongoDB dokumentti-tietokantaa viitteiden säilömiseen.
 * MongoDb on integroitu gradlen kanssa. Se täytyy käynnistää ennen varsinaisen ohjelman ajoa localhostin tarjoamana TCP-palveluna (ip-osoite on 127.0.0.1 ja portti: 27017).
-Huom! Tietokanta on konffattu tällä hetkellä build-kansioon, joten ```gradle clean```-käsky pyyhkii myös tietokannan joka kerta tyhjäksi.
 
-1. __Ennen ohjelman ajoa__ suorita komento: ```gradle startMongoDb``` tai vaihtoehtoisesti ```./gradlew startMongoDb```-käskyllä
-   -> MongoDB luo ```build/db```-kansioon uuden tietokannan, tietokannan suorituksen aikana kirjoittamat logit löytyvät ```build```-kansiosta ```embedded-mongo.log```-tiedostosta
+__Huom!__ Tietokanta on konffattu tällä hetkellä build-kansioon, joten ```gradle clean```-käsky pyyhkii myös tietokannan joka kerta tyhjäksi.
+
+1. __Ennen ohjelman ajoa__ suorita komento: ```gradle startMongoDb``` tai vaihtoehtoisesti ```./gradlew startMongoDb```
+   * MongoDB luo ```build/db```-kansioon uuden tietokannan, tietokannan suorituksen aikana kirjoittamat logit löytyvät ```build```-kansiosta ```embedded-mongo.log```-tiedostosta
 2. __Suorittamisen jälkeen__ tietokanta suljetaan: ```gradle stopMongoDb``` tai vaihtoehtoisesti ```./gradlew stopMongoDb```-käskyllä
 
 ### Testaus/Buildaus:
