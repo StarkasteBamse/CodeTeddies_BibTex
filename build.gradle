@@ -64,6 +64,8 @@ dependencies {
 }
 
 mongo {
+	logging = 'file'
+    storageLocation = 'build/db/'
     mongoVersion = 'PRODUCTION'
 }
 

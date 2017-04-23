@@ -21,7 +21,7 @@ public class App {
     private String n = System.getProperty("line.separator");
     private ArrayList<String> numerics;
     private Validator validator;
-    private boolean testMode = false; // for database
+    private boolean testMode = false; // flag for removing db when testing
 
     public App(IO io, DAO dao) {
         this.io = io;
