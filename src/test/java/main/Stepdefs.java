@@ -93,7 +93,7 @@ public class Stepdefs {
             throws Throwable {
 
         io = new StubIO(inputLines);
-        app = new App(io, new ReferenceDAO());
+        app = new App(io, new ReferenceDAO(true));
         app.run();
         assertTrue(io.getPrints().contains(expectedOutput));
     }
@@ -103,7 +103,7 @@ public class Stepdefs {
             throws Throwable {
 
         io = new StubIO(inputLines);
-        app = new App(io, new ReferenceDAO());
+        app = new App(io, new ReferenceDAO(true));
         app.run();
 
         //needs logic for bibtex verification, 
@@ -117,7 +117,7 @@ public class Stepdefs {
     @Then("^system will respond with a file written in bibtex format$")
     public void system_will_respond_with_a_file_written_in_bibtex_format() {
         io = new StubIO(inputLines);
-        app = new App(io, new ReferenceDAO());
+        app = new App(io, new ReferenceDAO(true));
         app.run();
         Scanner reader;
         String bibtex = "";

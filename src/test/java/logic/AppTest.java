@@ -43,7 +43,7 @@ public class AppTest {
         List<String> inputLines = new ArrayList<>();
         inputLines.add("n");
         StubIO io = new StubIO(inputLines);
-        App ap = new App(io, new ReferenceDAO());
+        App ap = new App(io, new ReferenceDAO(true));
         ap.run();
         assertTrue(io.getPrints().contains("No articles in memory"));
     }
@@ -55,7 +55,7 @@ public class AppTest {
         inputLines.add("kissa");
         inputLines.add("n");
         StubIO io = new StubIO(inputLines);
-        App ap = new App(io, new ReferenceDAO());
+        App ap = new App(io, new ReferenceDAO(true));
         ap.run();
         assertTrue(io.getPrints().contains("Invalid reference type"));
     }
@@ -68,7 +68,7 @@ public class AppTest {
         inputLines.add("");
         inputLines.add("n");
         StubIO io = new StubIO(inputLines);
-        App ap = new App(io, new ReferenceDAO());
+        App ap = new App(io, new ReferenceDAO(true));
         ap.run();
         assertTrue(io.getPrints().contains("Invalid author"));
     }

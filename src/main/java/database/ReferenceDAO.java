@@ -25,15 +25,22 @@ public class ReferenceDAO implements DAO<Reference> {
     private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection<Document> collection;
+    private boolean testMode;
     
-    public ReferenceDAO(MongoClient mongoClient) { 
+    public ReferenceDAO(MongoClient mongoClient, boolean mode) {
         this.mongoClient = mongoClient;
         this.database = mongoClient.getDatabase("bibdb");
-        this.collection = database.getCollection("references");
+        this.testMode = mode;
+        String collectionName = "references";
+        if (mode) {
+            collectionName = "test";
+        }
+        this.collection = database.getCollection(collectionName);
     }
+    
 //CHECKSTYLE:OFF
-    public ReferenceDAO() {
-        this(new MongoClient( "localhost" , 27017 ));
+    public ReferenceDAO(boolean mode) {
+            this(new MongoClient("localhost", 27017), mode);
     }
 //CHECKSTYLE:ON    
     @Override
@@ -95,6 +102,11 @@ public class ReferenceDAO implements DAO<Reference> {
     }
     
     @Override
+    public void clearDatabase() {
+        this.collection.drop();
+    }
+    
+    @Override
     public void delete(Reference key) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
@@ -103,5 +115,7 @@ public class ReferenceDAO implements DAO<Reference> {
     public void update(Reference key) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+
+    
 
 }

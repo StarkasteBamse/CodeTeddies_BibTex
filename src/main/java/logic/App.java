@@ -21,6 +21,7 @@ public class App {
     private String n = System.getProperty("line.separator");
     private ArrayList<String> numerics;
     private Validator validator;
+    private boolean testMode = false; // for database
 
     public App(IO io, DAO dao) {
         this.io = io;
@@ -30,9 +31,14 @@ public class App {
         this.numerics = new ArrayList<>();
         this.validator = new Validator();
     }
-
+    
     public App() {
-        this(new ConsoleIO(), new ReferenceDAO());
+        this(new ConsoleIO(), new ReferenceDAO(false));
+    }
+    
+    public App(boolean test) {
+        this(new ConsoleIO(), new ReferenceDAO(false));
+        this.testMode = true;
     }
     
     private ArrayList<Reference> fetchDatabase() {
@@ -61,7 +67,7 @@ public class App {
                     io.println("Invalid reference type");
                 }
             }
-        }
+        }        
         close();
     }
 
@@ -71,6 +77,9 @@ public class App {
         } else {
             printRef(references, wrp, io);
             exportRef(references, wrp, io, new FileWriterIO(), readFileName());
+        }
+        if (this.testMode) {
+            this.dao.clearDatabase();
         }
     }
 
