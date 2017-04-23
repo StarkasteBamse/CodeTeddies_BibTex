@@ -47,8 +47,8 @@ public class ValidatorTest {
         String badYear = "aä";
         String badVolume = "aä";
         boolean expResult = false;
-        assertEquals(expResult, vali.checkInput("year", badYear));
-        assertEquals(expResult, vali.checkInput("volume", badVolume));
+        assertEquals(expResult, vali.checkInput("year", badYear, true));
+        assertEquals(expResult, vali.checkInput("volume", badVolume, true));
     }
     
     @Test
@@ -57,6 +57,6 @@ public class ValidatorTest {
         String badValue = "1234ABCD";
         boolean expResult = false;
         
-        assertEquals(expResult, vali.checkInput(badType, badValue));
+        assertEquals(expResult, vali.checkInput(badType, badValue, true));
     }
 }

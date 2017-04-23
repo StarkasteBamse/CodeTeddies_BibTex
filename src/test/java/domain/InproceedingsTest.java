@@ -96,7 +96,6 @@ public class InproceedingsTest {
         assertTrue(result);
     }
 
-    /*
     @Test
     public void setFieldFailsWithInvalidFieldType() {
         instance = new Inproceedings();
@@ -105,5 +104,5 @@ public class InproceedingsTest {
         String expResult = null;
         assertEquals(expResult, instance.getField("invaliidi"));
     }
-    */
+
 }

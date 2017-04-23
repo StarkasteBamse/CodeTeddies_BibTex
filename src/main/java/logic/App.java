@@ -6,6 +6,7 @@ import domain.Inproceedings;
 import domain.Book;
 import io.*;
 import java.util.ArrayList;
+import java.util.List;
 import wrapper.Wrapper;
 
 public class App {
@@ -120,18 +121,25 @@ public class App {
                 break;
         }
         io.println("BibTex an " + reference + "!");
-        inputFields(reference);
+        inputFields(reference, true);
+        // inputFields(reference, false);
         addRefToList(reference, io, references);
     }
 
-    private void inputFields(Reference reference) {
-        for (String inputField : reference.getRequiredFields()) {
+    private void inputFields(Reference reference, boolean required) {
+        List<String> fields;
+        if (required) {
+            fields = reference.getRequiredFields();
+        } else {
+            fields = reference.getOptionalFields();
+        }
+        for (String inputField : fields) {
             String inputLine;
 
             io.print(inputField + ": ");
             inputLine = io.readLine();
 
-            if (!validator.checkInput(inputField, inputLine)) {
+            if (!validator.checkInput(inputField, inputLine, true)) {
                 io.println("");
                 io.println("Invalid " + inputField);
                 break;
