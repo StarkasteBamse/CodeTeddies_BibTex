@@ -3,5 +3,5 @@
 /.gradle/
 /src/.gradle/
 .nb-gradle-properties
-/*.*.bib
+/*.bib
 /src/tmp/
