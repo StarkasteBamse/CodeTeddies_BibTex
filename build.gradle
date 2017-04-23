@@ -64,7 +64,6 @@ dependencies {
 }
 
 mongo {
-	logging = 'console'
     mongoVersion = 'PRODUCTION'
 }
 
