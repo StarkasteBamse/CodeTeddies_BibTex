@@ -80,7 +80,7 @@ public class AppTest {
         inputLines.add("kissa");
         inputLines.add("n");
         StubIO io = new StubIO(inputLines);
-        App ap = new App(io, new ReferenceDAO(true));
+        App ap = new App(io, mockDao);
         ap.run();
         assertTrue(io.getPrints().contains("Invalid reference type"));
     }
@@ -93,7 +93,7 @@ public class AppTest {
         inputLines.add("");
         inputLines.add("n");
         StubIO io = new StubIO(inputLines);
-        App ap = new App(io, new ReferenceDAO(true));
+        App ap = new App(io, mockDao);
         ap.run();
         assertTrue(io.getPrints().contains("Invalid author"));
     }

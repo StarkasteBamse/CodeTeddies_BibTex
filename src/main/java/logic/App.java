@@ -21,7 +21,7 @@ public class App {
     private String n = System.getProperty("line.separator");
     private ArrayList<String> numerics;
     private Validator validator;
-    private boolean testMode = false; // flag for removing db when testing
+    private boolean testMode;
 
     public App(IO io, DAO dao) {
         this.io = io;
@@ -30,15 +30,12 @@ public class App {
         this.references = fetchDatabase();
         this.numerics = new ArrayList<>();
         this.validator = new Validator();
+        this.testMode = true;
     }
     
     public App() {
         this(new ConsoleIO(), new ReferenceDAO(false));
-    }
-    
-    public App(boolean test) {
-        this(new ConsoleIO(), new ReferenceDAO(false));
-        this.testMode = true;
+        this.testMode = false;
     }
     
     private ArrayList<Reference> fetchDatabase() {
