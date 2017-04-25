@@ -96,7 +96,7 @@ public class BookTest {
         assertTrue(result);
     }
 
-    /*
+    
     @Test
     public void setFieldFailsWithInvalidFieldType() {
         instance = new Book();
@@ -105,5 +105,5 @@ public class BookTest {
         String expResult = null;
         assertEquals(expResult, instance.getField("invaliidi"));
     }
-    */
+    
 }

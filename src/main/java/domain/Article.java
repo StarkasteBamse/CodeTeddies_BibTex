@@ -72,7 +72,9 @@ public class Article implements Reference {
 
     @Override
     public void setField(String field, String value) {
-        this.fields.put(field, value);
+        if (requiredFields.contains(field) || optionalFields.contains(field)) {
+            this.fields.put(field, value);
+        }
     }
 
     @Override

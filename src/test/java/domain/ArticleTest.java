@@ -142,7 +142,7 @@ public class ArticleTest {
         assertTrue(result);
     }
     
-    /*
+    
     @Test
     public void setFieldFailsWithInvalidFieldType() {
         instance = new Article();
@@ -151,6 +151,23 @@ public class ArticleTest {
         String expResult = null;
         assertEquals(expResult, instance.getField("invaliidi"));
     }
-    */
+
+    
+    @Test
+    public void setOptionalFieldsWorksOnRightTypes() {
+        instance = new Article();
+        
+        instance.setField("number", "1");
+        instance.setField("pages", "2");
+        instance.setField("month", "march");
+        instance.setField("note", "helloworld");
+        instance.setField("key", "ABCD1234");
+        
+        assertEquals("1", instance.getField("number"));
+        assertEquals("2", instance.getField("pages"));
+        assertEquals("march", instance.getField("month"));
+        assertEquals("helloworld", instance.getField("note"));
+        assertEquals("ABCD1234", instance.getField("key"));
+    }
 }
 
