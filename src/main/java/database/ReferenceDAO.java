@@ -53,7 +53,7 @@ public class ReferenceDAO implements DAO<Reference> {
         }
         collection.insertOne(doc);
     }
-
+    
     @Override
     public List<Reference> getAll() {
         List<Reference> references = new ArrayList<>();
@@ -61,19 +61,12 @@ public class ReferenceDAO implements DAO<Reference> {
         try {
             while (cursor.hasNext()) {
                 String json = cursor.next().toJson();
-                
-                if (json.contains("article")) {
-                    references.add(fetchSingleReference(json, 
-                                        new Article()));
-                    
-                } else if (json.contains("book")) {
-                    references.add(fetchSingleReference(json, 
-                                        new Book()));
-                    
-                } else if (json.contains("inproceedings")) {
-                    references.add(fetchSingleReference(json, 
-                                        new Inproceedings()));
-                }
+                String jsonCaseInsensitive = json.toLowerCase();
+                Reference referenceType = identifyReferenceType(
+                                          jsonCaseInsensitive,
+                                          references
+                                          );
+                references.add(fetchSingleReference(json, referenceType));
             }
         } catch (JsonSyntaxException se) {
             System.out.println(se.getMessage());
@@ -81,6 +74,19 @@ public class ReferenceDAO implements DAO<Reference> {
             cursor.close();
         }
         return references;
+    }
+
+    public Reference identifyReferenceType(String jsonCaseInsensitive,
+                    List<Reference> references) throws JsonSyntaxException {
+        if (jsonCaseInsensitive.contains("\"type\" : \"article\"")) {
+            return new Article();
+        } else if (jsonCaseInsensitive.contains("\"type\" : \"book\"")) {
+            return new Book();
+        } else if (jsonCaseInsensitive.contains("\"type\" : "
+                                              + "\"inproceedings\"")) {
+            return new Inproceedings();
+        }
+        return null;
     }
     
     private Reference fetchSingleReference(String json, Reference reference) 
