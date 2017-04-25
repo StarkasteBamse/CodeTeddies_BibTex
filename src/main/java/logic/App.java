@@ -1,33 +1,49 @@
 package logic;
 
+import database.DAO;
+import database.ReferenceDAO;
 import domain.Article;
 import domain.Reference;
 import domain.Inproceedings;
 import domain.Book;
 import io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import wrapper.Wrapper;
 
 public class App {
 
     private IO io;
+    private DAO dao;
     private Wrapper wrp;
     private ArrayList<Reference> references;
     private String n = System.getProperty("line.separator");
     private ArrayList<String> numerics;
     private Validator validator;
+    private boolean testMode;
 
-    public App(IO io) {
+    public App(IO io, DAO dao) {
         this.io = io;
+        this.dao = dao;
         this.wrp = new Wrapper();
-        this.references = new ArrayList<>();
+        this.references = fetchDatabase();
+        this.numerics = new ArrayList<>();
         this.validator = new Validator();
+        this.testMode = true;
     }
-
+    
     public App() {
-        this(new ConsoleIO());
+        this(new ConsoleIO(), new ReferenceDAO(false));
+        this.testMode = false;
     }
-
+    
+    private ArrayList<Reference> fetchDatabase() {
+        ArrayList<Reference> fReferences = new ArrayList<>();
+        fReferences.addAll(dao.getAll());
+        return fReferences;
+    }
+    
     public void run() {
         while (true) {
             io.print("Add? (y/n)");
@@ -48,7 +64,7 @@ public class App {
                     io.println("Invalid reference type");
                 }
             }
-        }
+        }        
         close();
     }
 
@@ -58,6 +74,9 @@ public class App {
         } else {
             printRef(references, wrp, io);
             exportRef(references, wrp, io, new FileWriterIO(), readFileName());
+        }
+        if (this.testMode) {
+            this.dao.clearDatabase();
         }
     }
 
@@ -83,7 +102,7 @@ public class App {
     }
 
     private void exportRef(ArrayList<Reference> rList, Wrapper wrp,
-            IO io, IO fileIo, String fileName) {
+                           IO io, IO fileIo, String fileName) {
         String bib = "";
         for (Reference reference : rList) {
             bib += wrp.wrap(reference) + n + n;
@@ -97,6 +116,7 @@ public class App {
     private void addRefToList(Reference reference, IO io, ArrayList rList) {
         if (validator.checkRequiredFields(reference)) {
             rList.add(reference);
+            dao.add(reference);
             io.println("New " + reference + " added successfully");
         } else {
             io.println("Not proper format!");
@@ -141,5 +161,5 @@ public class App {
             io.println("");
         }
     }
-
+    
 }
