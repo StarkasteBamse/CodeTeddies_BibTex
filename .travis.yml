@@ -1,4 +1,6 @@
 language: java
 
+script:
+- ./gradlew startManagedMongoDb build
 after_success:
 - ./gradlew jacocoTestReport coveralls
