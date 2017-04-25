@@ -24,6 +24,11 @@ public class Wrapper {
         for (String field : reference.getRequiredFields()) {
             bib += "\t" + field +" = {" + reference.getField(field) + "}," + n;
         }
+        /* Wrap optional fields
+        for (String field : reference.getOptionalFields()) {
+            bib += "\t" + field + " = {" + reference.getField(field) +"}," + n;
+        }
+        */
         bib += "}";
         
         return bib;

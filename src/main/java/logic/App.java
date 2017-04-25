@@ -122,7 +122,7 @@ public class App {
         }
         io.println("BibTex an " + reference + "!");
         inputFields(reference, true);
-        // inputFields(reference, false);
+        // inputFields(reference, false); // Add parse input for optional fields
         addRefToList(reference, io, references);
     }
 
