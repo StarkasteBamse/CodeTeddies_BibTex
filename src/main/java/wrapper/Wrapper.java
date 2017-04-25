@@ -6,10 +6,10 @@ import domain.Book;
 import domain.Inproceedings;
 
 public class Wrapper {
-//CHECKSTYLE:OFF
     private int keyAdd;
     private final int idLength = 6;
-//CHECKSTYLE:ON
+    private final int randomFactor = 100000;
+
     public String wrap(Reference reference) { // palauttaa bibtex-Stringinä
         String type = reference.toString();
         String key = reference.getField("title").replaceAll("\\s+", "");
@@ -17,7 +17,7 @@ public class Wrapper {
         if (key.length() >= idLength) {
             key = key.substring(0, idLength);
         } 
-        key += ((int) (Math.random() * 100000)); // pseudouniikki id
+        key += ((int) (Math.random() * randomFactor)); // pseudouniikki id
         String n = System.getProperty("line.separator");  
         
         String bib = "@" + type + "{" + key + "," + n;
