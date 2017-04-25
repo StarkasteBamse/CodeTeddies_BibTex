@@ -26,12 +26,37 @@ public class AppTest {
     
     private App app;
     private IO stubIo;
+    private DAO mockDao;
     
     public AppTest() {
     }
     
     @Before
     public void setUp() {
+        mockDao = new DAO() {
+
+            @Override
+            public void delete(Object key) {
+            }
+
+            @Override
+            public void clearDatabase() {
+            }
+
+            @Override
+            public void add(Object key) {
+            }
+
+            @Override
+            public void update(Object key) {
+            }
+
+            @Override
+            public List getAll() {
+                List list = new ArrayList();
+                return list;
+            }
+        };
     }
     
     @After
@@ -43,7 +68,7 @@ public class AppTest {
         List<String> inputLines = new ArrayList<>();
         inputLines.add("n");
         StubIO io = new StubIO(inputLines);
-        App ap = new App(io, new ReferenceDAO(true));
+        App ap = new App(io, mockDao);
         ap.run();
         assertTrue(io.getPrints().contains("No articles in memory"));
     }
