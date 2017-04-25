@@ -3,7 +3,6 @@ package main;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import database.DAO;
 import database.ReferenceDAO;
 import io.StubIO;
 import java.io.File;
@@ -22,7 +21,6 @@ public class Stepdefs {
     List<String> inputLines = new ArrayList<>();
     App app;
     StubIO io;
-    DAO dao = new ReferenceDAO(true);
 
     @Given("^command add is selected$")
     public void command_add_selected() throws Throwable {
@@ -93,8 +91,9 @@ public class Stepdefs {
     @Then("^system will respond with \"([^\"]*)\"$")
     public void system_will_respond_with(String expectedOutput)
             throws Throwable {
+
         io = new StubIO(inputLines);
-        app = new App(io, this.dao);
+        app = new App(io, new ReferenceDAO(true));
         app.run();
         assertTrue(io.getPrints().contains(expectedOutput));
     }
@@ -104,7 +103,7 @@ public class Stepdefs {
             throws Throwable {
 
         io = new StubIO(inputLines);
-        app = new App(io, this.dao);
+        app = new App(io, new ReferenceDAO(true));
         app.run();
 
         //needs logic for bibtex verification, 
@@ -118,7 +117,7 @@ public class Stepdefs {
     @Then("^system will respond with a file written in bibtex format$")
     public void system_will_respond_with_a_file_written_in_bibtex_format() {
         io = new StubIO(inputLines);
-        app = new App(io, this.dao);
+        app = new App(io, new ReferenceDAO(true));
         app.run();
         Scanner reader;
         String bibtex = "";
