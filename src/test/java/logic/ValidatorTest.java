@@ -59,4 +59,12 @@ public class ValidatorTest {
         
         assertEquals(expResult, vali.checkInput(badType, badValue, true));
     }
+    
+    @Test
+    public void validatorAcceptsZeroLengthOptional() {
+        String emptyField = "";
+        String type = "title";
+        boolean expResult = true;
+        assertEquals(expResult, vali.checkInput(type, emptyField, false));
+    }
 }

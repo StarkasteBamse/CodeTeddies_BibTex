@@ -35,7 +35,7 @@ public class Validator {
             return false;
         }
 
-        if (!required) {
+        if (inputValue.length() == 0) {
             return true;
         } else if (stringFields.contains(inputType)) {
             return checkValue(this.regexString, inputValue);
