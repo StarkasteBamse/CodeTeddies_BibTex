@@ -141,7 +141,7 @@ public class App {
         }
         io.println("BibTex an " + reference + "!");
         inputFields(reference, true);
-        // inputFields(reference, false); // Add parse input for optional fields
+        inputFields(reference, false); // Add parse input for optional fields
         addRefToList(reference, io, references);
     }
 
@@ -158,7 +158,7 @@ public class App {
             io.print(inputField + ": ");
             inputLine = io.readLine();
 
-            if (!validator.checkInput(inputField, inputLine, true)) {
+            if (!validator.checkInput(inputField, inputLine, required)) {
                 io.println("");
                 io.println("Invalid " + inputField);
                 break;
