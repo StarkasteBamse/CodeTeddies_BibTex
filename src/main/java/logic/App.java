@@ -9,11 +9,14 @@ import domain.Book;
 import io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import javax.swing.text.StyledEditorKit;
 import wrapper.Wrapper;
 
 public class App {
 
+    //CHECKSTYLE:OFF
     private IO io;
     private DAO dao;
     private Wrapper wrp;
@@ -22,64 +25,123 @@ public class App {
     private ArrayList<String> numerics;
     private Validator validator;
     private boolean testMode;
+    private HashMap<Integer, String> supportedRefs;
 
     public App(IO io, DAO dao) {
         this.io = io;
         this.dao = dao;
         this.wrp = new Wrapper();
-        this.references = fetchDatabase();
+        this.references = new ArrayList<>();
         this.numerics = new ArrayList<>();
         this.validator = new Validator();
+        this.supportedRefs = initSupRefs();
         this.testMode = true;
     }
-    
+
     public App() {
         this(new ConsoleIO(), new ReferenceDAO(false));
         this.testMode = false;
     }
-    
+
+    private HashMap initSupRefs() {
+        HashMap<Integer, String> supportedRefs = new HashMap<>();
+        supportedRefs.put(1, "Article");
+        supportedRefs.put(2, "Book");
+        supportedRefs.put(3, "Inproceedings");
+        return supportedRefs;
+    }
+
     private ArrayList<Reference> fetchDatabase() {
         ArrayList<Reference> fReferences = new ArrayList<>();
         fReferences.addAll(dao.getAll());
         return fReferences;
     }
-    
+
     public void run() {
         while (true) {
-            io.print("Add? (y/n)");
-            String answer = io.readLine();
-            if (answer.equals("n")) {
-                io.println("");
+            io.print("Commands: " + n
+                    + "(add) Add reference" + n
+                    // + "(save) Save references to database" + n
+                    // at the moment (add)automaticly saves new reference to 
+                    // database, need dublicate regocnition for (save) to work
+                    + "(load) Load references from database" + n
+                    + "(clear) Clear memory, Warning deletes all "
+                    + "data from memory" + n
+                    + "(delete) Delete database, Warning deletes all data" + n
+                    + "(print) Print to screen references in" + n
+                    + "(file) Export references in to a file" + n
+                    + "(quit) Stop using this program" + n
+                    + "Command: ");
+            String command = io.readLine().toLowerCase();
+            io.println("");
+
+            if (command.equals("quit")) {
+                io.println("See you next time, bye byeh...");
                 break;
-            } else if (answer.equals("y")) {
+            } else if (command.equals("add")) {
                 io.println("");
                 io.println("Which reference type?");
-                io.println("\t1. Article");
-                io.println("\t2. Book");
-                io.println("\t3. Inproceedings");
+                for (Integer i : supportedRefs.keySet()) {
+                    io.println("\t" + i + ". " + supportedRefs.get(i));
+                }
+                io.print("Give a number of reference: ");
                 String refType = io.readLine();
+                io.println("");
                 if (refType.matches("[123]")) { //lainaukset
                     addReference(refType);
                 } else {
                     io.println("Invalid reference type");
                 }
-            }
-        }        
-        close();
-    }
 
-    private void close() {
-        if (references.isEmpty()) {
-            io.println("No articles in memory");
-        } else {
-            printRef(references, wrp, io);
-            exportRef(references, wrp, io, new FileWriterIO(), readFileName());
+//            } else if (command.equals("save")) {
+//                io.println("oho!");
+            } else if (command.equals("load")) {
+//              Dumps now database over the data in memory, needs refactorin for
+//              dublicates recognition!
+                ArrayList<Reference> temp = fetchDatabase();
+                this.references = temp;
+                io.println("References loaded to memory!");
+            } else if (command.equals("clear")) {
+                this.references = new ArrayList<>();
+                io.println("MY MEMORIES ARE GONE!");
+            } else if (command.equals("delete")) {
+                this.dao.clearDatabase();
+                io.println("DATABASE IS NOW GONE!");
+            } else if (command.equals("print")) {
+                if (references.isEmpty()) {
+                    io.println("No articles in memory");
+                } else {
+                    printRef(references, wrp, io);
+                }
+            } else if (command.equals("file")) {
+                if (references.isEmpty()) {
+                    io.println("No articles in memory, you don't want a "
+                            + "empty .bib file!");
+                } else {
+                    exportRef(references, wrp, io, new FileWriterIO(), readFileName());
+                }
+            } else {
+                io.println("Please type in a command from list!");
+            }
         }
+
         if (this.testMode) {
             this.dao.clearDatabase();
         }
+        //close();
     }
 
+//    private void close() {
+//        if (references.isEmpty()) {
+//            io.println("No articles in memory");
+//        } else {
+//            printRef(references, wrp, io);
+//            exportRef(references, wrp, io, new FileWriterIO(), readFileName());
+//        }
+//        if (this.testMode) {
+//            this.dao.clearDatabase();
+//        }
+//    }
     public String readFileName() {
         String fileName = "";
         while (true) {
@@ -102,7 +164,7 @@ public class App {
     }
 
     private void exportRef(ArrayList<Reference> rList, Wrapper wrp,
-                           IO io, IO fileIo, String fileName) {
+            IO io, IO fileIo, String fileName) {
         String bib = "";
         for (Reference reference : rList) {
             bib += wrp.wrap(reference) + n + n;
@@ -154,8 +216,13 @@ public class App {
         }
         for (String inputField : fields) {
             String inputLine;
-
-            io.print(inputField + ": ");
+            String reqOrOpt;
+            if (required) {
+                reqOrOpt = "(required)";
+            } else {
+                reqOrOpt = "(optional)";
+            }
+            io.print(inputField + " " + reqOrOpt + ": ");
             inputLine = io.readLine();
 
             if (!validator.checkInput(inputField, inputLine, required)) {
@@ -164,9 +231,14 @@ public class App {
                 break;
             }
 
+            if (inputLine.isEmpty()) {
+                io.println("");
+                continue;
+            }
+
             reference.setField(inputField, inputLine);
             io.println("");
         }
     }
-    
+    //CHECKSTYLE:ON
 }

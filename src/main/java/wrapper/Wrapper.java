@@ -11,6 +11,8 @@ public class Wrapper {
     private final int idLength = 6;
     private final int randomFactor = 100000;
 
+    //CHECKSTYLE:OFF
+    
     public String wrap(Reference reference) { // palauttaa bibtex-Stringinä
         String type = reference.toString();
         String key = reference.getField("title").replaceAll("\\s+", "");
@@ -23,18 +25,26 @@ public class Wrapper {
 
         String bib = "@" + type + "{" + key + "," + n;
         keyAdd++;
+        // Wrap fields that have been initiated
+        for (String field : reference.getFieldsMap().keySet()) {
+            bib += "\t" + field +" = {" + reference.getField(field) + "}," + n;
+        } 
+        /* Wrap required fields
         for (String field : reference.getRequiredFields()) {
             bib += "\t" + field + " = {" + reference.getField(field) + "}," + n;
         }
-        // Wrap optional fields
+        */       
+        /* Wrap optional fields
         for (String field : reference.getOptionalFields()) {
             if (reference.getField(field) != null) {
                 bib += "\t" + field + " = {" + reference.getField(field) + "}," + n;
             }
         }
-
+        */
         bib += "}";
 
         return bib;
     }
+    
+    //CHECKSTYLE:ON
 }
