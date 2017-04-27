@@ -66,7 +66,8 @@ public class AppTest {
     @Test
     public void closingWorks() {
         List<String> inputLines = new ArrayList<>();
-        inputLines.add("n");
+        inputLines.add("print");
+        inputLines.add("quit");
         StubIO io = new StubIO(inputLines);
         App ap = new App(io, mockDao);
         ap.run();
@@ -76,9 +77,9 @@ public class AppTest {
     @Test
     public void incorrectReferenceDoesntWork() {
         List<String> inputLines = new ArrayList<>();
-        inputLines.add("y");
+        inputLines.add("add");
         inputLines.add("kissa");
-        inputLines.add("n");
+        inputLines.add("quit");
         StubIO io = new StubIO(inputLines);
         App ap = new App(io, mockDao);
         ap.run();
@@ -88,10 +89,10 @@ public class AppTest {
     @Test
     public void emptyInputNotAccepted() {
         List<String> inputLines = new ArrayList<>();
-        inputLines.add("y");
+        inputLines.add("add");
         inputLines.add("1");
         inputLines.add("");
-        inputLines.add("n");
+        inputLines.add("quit");
         StubIO io = new StubIO(inputLines);
         App ap = new App(io, mockDao);
         ap.run();
