@@ -13,4 +13,5 @@ public interface DAO<Reference> {
     void add(Reference key);
     void update(Reference key);
     List<Reference> getAll();
+    String getNewId();
 }

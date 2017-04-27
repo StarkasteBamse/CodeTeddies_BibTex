@@ -10,6 +10,8 @@ public interface Reference {
 
     void setField(String field, String value);
     String getField(String field);
+    String getID();
+    void setID(String id);
     List<String> getRequiredFields();
     boolean hasRequiredFields();
     List<String> getOptionalFields();

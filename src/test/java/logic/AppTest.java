@@ -56,6 +56,11 @@ public class AppTest {
                 List list = new ArrayList();
                 return list;
             }
+
+            @Override
+            public String getNewId() {
+                return "1";
+            }
         };
     }
     

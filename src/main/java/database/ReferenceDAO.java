@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.bson.types.ObjectId;
 /**
  *
  * @author Willburner
@@ -28,6 +31,7 @@ public class ReferenceDAO implements DAO<Reference> {
     private boolean testMode;
     
     public ReferenceDAO(MongoClient mongoClient, boolean mode) {
+        setLogging();
         this.mongoClient = mongoClient;
         this.database = mongoClient.getDatabase("bibdb");
         this.testMode = mode;
@@ -42,11 +46,17 @@ public class ReferenceDAO implements DAO<Reference> {
     public ReferenceDAO(boolean mode) {
             this(new MongoClient("localhost", 27017), mode);
     }
+    
+    private void setLogging() {
+        Logger mongoLogger = Logger.getLogger("com.mongodb");
+        mongoLogger.setLevel(Level.SEVERE);
+    }
 //CHECKSTYLE:ON    
     @Override
     public void add(Reference reference) {
         Document doc = new Document("type", reference.toString());
         HashMap<String, String> fields = reference.getFieldsMap();
+        doc.append("_id", reference.getID());
         
         for (String field : fields.keySet()) {
             doc.append(field, fields.get(field));
@@ -68,7 +78,7 @@ public class ReferenceDAO implements DAO<Reference> {
                                           );
                 references.add(fetchSingleReference(json, referenceType));
             }
-        } catch (JsonSyntaxException se) {
+        } catch (Exception se) {
             System.out.println(se.getMessage());
         } finally {
             cursor.close();
@@ -77,7 +87,7 @@ public class ReferenceDAO implements DAO<Reference> {
     }
 
     public Reference identifyReferenceType(String jsonCaseInsensitive,
-                    List<Reference> references) throws JsonSyntaxException {
+                    List<Reference> references) throws Exception {
         if (jsonCaseInsensitive.contains("\"type\" : \"article\"")) {
             return new Article();
         } else if (jsonCaseInsensitive.contains("\"type\" : \"book\"")) {
@@ -93,6 +103,7 @@ public class ReferenceDAO implements DAO<Reference> {
                                                 throws JsonSyntaxException {
         Gson mapper = new Gson();
         HashMap<String, String> fieldMap = mapper.fromJson(json, HashMap.class);
+        reference.setID(fieldMap.get("_id"));
         
         for (String field : reference.getRequiredFields()) {
             if (fieldMap.containsKey(field)) {
@@ -120,6 +131,11 @@ public class ReferenceDAO implements DAO<Reference> {
     @Override
     public void update(Reference key) {
         throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+    @Override
+    public String getNewId() {
+        return new ObjectId().toString();
     }
 
     

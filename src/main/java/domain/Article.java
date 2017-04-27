@@ -11,6 +11,7 @@ public class Article implements Reference {
     private ArrayList<String> requiredFields;
     private ArrayList<String> optionalFields;
     private HashMap<String, String> fields;
+    private String id;
 
     public Article() {
         this.optionalFields = new ArrayList<>();
@@ -101,6 +102,16 @@ public class Article implements Reference {
     @Override
     public HashMap<String, String> getFieldsMap() {
         return this.fields;
+    }
+
+    @Override
+    public String getID() {
+        return this.id;
+    }
+
+    @Override
+    public void setID(String id) {
+        this.id = id;
     }
 
 }

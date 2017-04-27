@@ -203,11 +203,11 @@ public class App {
         }
         io.println("BibTex an " + reference + "!");
         boolean allRequiredFields = inputFields(reference, true);
-        boolean isThisGoodReference = false;
+        boolean isValidReference = false;
         if (allRequiredFields) {
-            isThisGoodReference = inputFields(reference, false);
+            isValidReference = inputFields(reference, false);
         } // Add parse input for optional fields
-        if (isThisGoodReference) { //needed check for optional fields
+        if (isValidReference) { //needed check for optional fields
             addRefToList(reference, io, references);
         } else {
             io.println("Not proper format!");
@@ -216,11 +216,14 @@ public class App {
 //CHECKSTYLE:OFF
     private boolean inputFields(Reference reference, boolean required) {
         List<String> fields;
+        reference.setID(dao.getNewId());
+        
         if (required) {
             fields = reference.getRequiredFields();
         } else {
             fields = reference.getOptionalFields();
         }
+        
         for (String inputField : fields) {
             String inputLine;
             String reqOrOpt;

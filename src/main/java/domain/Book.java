@@ -11,6 +11,7 @@ public class Book implements Reference {
     private ArrayList<String> requiredFields;
     private ArrayList<String> optionalFields;
     private HashMap<String, String> fields;
+    private String id;
 
     public Book() {
         this.optionalFields = new ArrayList<>();
@@ -96,6 +97,16 @@ public class Book implements Reference {
     @Override
     public List<String> getOptionalFields() {
         return optionalFields;
+    }
+    
+    @Override
+    public String getID() {
+        return this.id;
+    }
+
+    @Override
+    public void setID(String id) {
+        this.id = id;
     }
 }
 
