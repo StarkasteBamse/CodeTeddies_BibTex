@@ -117,7 +117,7 @@ public class App {
                     io.println("No articles in memory, you don't want an "
                             + "empty .bib file!");
                 } else {
-                    exportRef(references, wrp, io, new FileWriterIO(), readFileName());
+                    exportRef(references, wrp, io, readFileName());
                 }
             } else {
                 io.println("Please type in a command from list!");
@@ -164,12 +164,12 @@ public class App {
     }
 
     private void exportRef(ArrayList<Reference> rList, Wrapper wrp,
-            IO io, IO fileIo, String fileName) {
+            IO io, String fileName) {
         String bib = "";
         for (Reference reference : rList) {
             bib += wrp.wrap(reference) + n + n;
         }
-        if (!fileIo.writeFile(fileName, bib)) {
+        if (!io.writeFile(fileName, bib)) {
             io.println("Error occurred while "
                     + "exporting file: " + fileName);
         }

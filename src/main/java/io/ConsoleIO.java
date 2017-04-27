@@ -1,6 +1,11 @@
 
 package io;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.Scanner;
 
 public class ConsoleIO implements IO{
@@ -28,7 +33,14 @@ public class ConsoleIO implements IO{
 
     @Override
     public boolean writeFile(String filename, String toFile) {
-        throw new UnsupportedOperationException("Not supported."); 
+        try {
+            Writer out = new BufferedWriter(new OutputStreamWriter(
+                            new FileOutputStream(filename), "UTF-8"));
+            out.write(toFile);
+            out.close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
-    
 }
