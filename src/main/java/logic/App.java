@@ -114,7 +114,7 @@ public class App {
                 }
             } else if (command.equals("file")) {
                 if (references.isEmpty()) {
-                    io.println("No articles in memory, you don't want a "
+                    io.println("No articles in memory, you don't want an "
                             + "empty .bib file!");
                 } else {
                     exportRef(references, wrp, io, new FileWriterIO(), readFileName());
@@ -202,12 +202,19 @@ public class App {
                 break;
         }
         io.println("BibTex an " + reference + "!");
-        inputFields(reference, true);
-        inputFields(reference, false); // Add parse input for optional fields
-        addRefToList(reference, io, references);
+        boolean allRequiredFields = inputFields(reference, true);
+        boolean isThisGoodReference = false;
+        if (allRequiredFields) {
+            isThisGoodReference = inputFields(reference, false);
+        } // Add parse input for optional fields
+        if (isThisGoodReference) { //needed check for optional fields
+            addRefToList(reference, io, references);
+        } else {
+            io.println("Not proper format!");
+        }
     }
-
-    private void inputFields(Reference reference, boolean required) {
+//CHECKSTYLE:OFF
+    private boolean inputFields(Reference reference, boolean required) {
         List<String> fields;
         if (required) {
             fields = reference.getRequiredFields();
@@ -224,10 +231,11 @@ public class App {
             }
             io.print(inputField + " " + reqOrOpt + ": ");
             inputLine = io.readLine();
+
             if (!validator.checkInput(inputField, inputLine, required)) {
                 io.println("");
                 io.println("Invalid " + inputField);
-                break;
+                return false;
             }
             if (inputLine.isEmpty()) {
                 io.println("");
@@ -236,6 +244,8 @@ public class App {
             reference.setField(inputField, inputLine);
             io.println("");
         }
+        return true;
     }
+//CHECKSTYLE:ON
 
 }

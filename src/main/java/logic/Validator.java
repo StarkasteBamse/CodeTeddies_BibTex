@@ -29,8 +29,9 @@ public class Validator {
         return value.matches(regex);
     }
 
-    public boolean checkInput(String inputType, String inputValue,
-                                                            boolean required) {
+    public boolean checkInput(String inputType, 
+                              String inputValue,
+                              boolean required) {
         if (required && inputValue.length() == 0) {
             return false;
         }
