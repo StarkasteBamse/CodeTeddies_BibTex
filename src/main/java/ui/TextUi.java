@@ -14,7 +14,7 @@ public class TextUi {
         this.printViewMap = initializePrintViews();
         this.n = System.getProperty("line.separator");
     }
-    
+//CHECKSTYLE:OFF
     public HashMap initSupportedReferences() {
         HashMap<Integer, String> supportedRefs = new HashMap<>();
         supportedRefs.put(1, "Article");
@@ -22,7 +22,7 @@ public class TextUi {
         supportedRefs.put(3, "Inproceedings");
         return supportedRefs;
     }
-    
+//CHECKSTYLE:ON    
     public void printCommands() {
         io.print("Commands: " + n
                 + "(add) Add reference" + n
@@ -43,13 +43,17 @@ public class TextUi {
         this.printViewMap.get(command).run();
     }
     
+//CHECKSTYLE:OFF
     public HashMap<String,Runnable> initializePrintViews() {
         HashMap<String,Runnable> printViews = new HashMap<>();
-        printViews.put("quit", () -> io.println("See you next time, bye byeh..."));
-        printViews.put("whichType", () -> {
+        printViews.put("quit", () 
+            -> io.println("See you next time, "
+                    + "bye byeh..."));
+        printViews.put("whichType", () 
+            -> {
                 io.println("");
                 io.println("Which reference type?");
-        });
+                });
         printViews.put("giveNumber", () 
             -> io.print("Give a number of reference: "));
         printViews.put("invalidReferenceType", () 
@@ -77,4 +81,5 @@ public class TextUi {
             -> io.println("Error occurred while exporting file: "));
         return printViews;
     }
+//CHECKSTYLE:ON
 }

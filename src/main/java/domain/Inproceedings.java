@@ -114,7 +114,7 @@ public class Inproceedings implements Reference {
     public void setID(String id) {
         this.id = id;
     }
-    
+//CHECKSTYLE:OFF 
     @Override
     public int hashCode() {
         int hash = 3;
@@ -124,7 +124,7 @@ public class Inproceedings implements Reference {
         }
         return hash;
     }
-
+//CHECKSTYLE:ON
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

@@ -61,8 +61,8 @@ public class BookTest {
     public void testEqualsMethodTrueWithSameButWithOtherHavingCapitals() {
         Book book = createMockBook();
         Book bookTest = createMockBook();
-        String publisherUpperCase = bookTest.getField("publisher").toUpperCase();
-        bookTest.setPublisher(publisherUpperCase);
+        String publishUpperCase = bookTest.getField("publisher").toUpperCase();
+        bookTest.setPublisher(publishUpperCase);
         assertTrue(book.equals(bookTest));
     }
     
@@ -138,7 +138,6 @@ public class BookTest {
         }
         assertTrue(result);
     }
-
     
     @Test
     public void setFieldFailsWithInvalidFieldType() {
