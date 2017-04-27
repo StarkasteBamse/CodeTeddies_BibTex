@@ -231,10 +231,7 @@ public class App {
             }
             io.print(inputField + " " + reqOrOpt + ": ");
             inputLine = io.readLine();
-<<<<<<< HEAD
-            
-=======
->>>>>>> master
+
             if (!validator.checkInput(inputField, inputLine, required)) {
                 io.println("");
                 io.println("Invalid " + inputField);
