@@ -15,7 +15,8 @@ public class Validator {
     //CHECKSTYLE:OFF
     public List<String> stringFields;
     public List<String> numericFields;
-    public final String regexString = "^[a-zA-Z0-9!@#$%&*(),.:;_+=|<>?{}\\s\\[\\]~-]*$";
+    public final String regexString = "^.*$";
+//    public final String regexString1 = "^[a-zA-Z0-9åäö!@#$%&*(),.:;_+=|<>?{}\\s\\[\\]~-]*$";
     public final String regexNumeric = "[0-9]+";
     // public final String regexMonth     = "";
     //CHECKSTYLE:ON
