@@ -23,16 +23,22 @@ public class Wrapper {
 
         String bib = "@" + type + "{" + key + "," + n;
         keyAdd++;
+        // Wrap fields that have been initiated
+        for (String field : reference.getFieldsMap().keySet()) {
+            bib += "\t" + field +" = {" + reference.getField(field) + "}," + n;
+        } 
+        /* Wrap required fields
         for (String field : reference.getRequiredFields()) {
             bib += "\t" + field + " = {" + reference.getField(field) + "}," + n;
         }
-        // Wrap optional fields
+        */       
+        /* Wrap optional fields
         for (String field : reference.getOptionalFields()) {
             if (reference.getField(field) != null) {
                 bib += "\t" + field + " = {" + reference.getField(field) + "}," + n;
             }
         }
-
+        */
         bib += "}";
 
         return bib;
