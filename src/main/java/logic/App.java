@@ -213,7 +213,7 @@ public class App {
             io.println("Not proper format!");
         }
     }
-
+//CHECKSTYLE:OFF
     private boolean inputFields(Reference reference, boolean required) {
         List<String> fields;
         if (required) {
@@ -246,5 +246,6 @@ public class App {
         }
         return true;
     }
+//CHECKSTYLE:ON
 
 }
