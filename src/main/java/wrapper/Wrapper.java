@@ -4,6 +4,8 @@ import domain.Reference;
 import domain.Article;
 import domain.Book;
 import domain.Inproceedings;
+import java.util.List;
+import java.util.Set;
 
 public class Wrapper {
 
@@ -24,8 +26,15 @@ public class Wrapper {
         String bib = "@" + type + "{" + key + "," + n;
         keyAdd++;
         // Wrap fields that have been initiated
-        for (String field : reference.getFieldsMap().keySet()) {
-            bib += "\t" + field +" = {" + reference.getField(field) + "}," + n;
+        Set<String> keys = reference.getFieldsMap().keySet();
+        int count = 0;
+        for (String field : keys) {
+            count++;
+            bib += "\t" + field +" = {" + reference.getField(field) + "}";
+            if (keys.size() != count) {
+                bib += ",";
+            }
+            bib += n;
         } 
         bib += "}";
 
