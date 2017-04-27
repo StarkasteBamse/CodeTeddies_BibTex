@@ -46,39 +46,24 @@ public class TextUi {
 //CHECKSTYLE:OFF
     public HashMap<String,Runnable> initializePrintViews() {
         HashMap<String,Runnable> printViews = new HashMap<>();
-        printViews.put("quit", () 
-            -> io.println("See you next time, "
+        printViews.put("quit", () -> io.println("See you next time, "
                     + "bye byeh..."));
-        printViews.put("whichType", () 
-            -> {
+        printViews.put("whichType", () -> {
                 io.println("");
                 io.println("Which reference type?");
                 });
-        printViews.put("giveNumber", () 
-            -> io.print("Give a number of reference: "));
-        printViews.put("invalidReferenceType", () 
-            -> io.println("Invalid reference type"));
-        printViews.put("referencesSaved", () 
-            -> io.println("References saved." + n));
-        printViews.put("loadDb", () 
-            -> io.println("References loaded to memory!"));
-        printViews.put("memoryClear", () 
-            -> io.println("MY MEMORIES ARE GONE!"));
-        printViews.put("dbClear", () 
-            -> io.println("DATABASE IS NOW GONE!"));
-        printViews.put("emptyMemory", () 
-            -> io.println("No articles in memory"));
-        printViews.put("noReferencesToExport", () 
-            -> io.println("No articles in memory, you don't "
-                        + "want an empty .bib file!"));
-        printViews.put("typeCommandAgain", () 
-            -> io.println("Please type in a command from list!"));
-        printViews.put("enterFilename", () 
-            -> io.print("Enter filename (.bib-format): "));
-        printViews.put("formatError", () 
-            -> io.println("Not proper format!"));
-        printViews.put("exportError", () 
-            -> io.println("Error occurred while exporting file: "));
+        printViews.put("giveNumber", () -> io.print("Give a number of reference: "));
+        printViews.put("invalidReferenceType", () -> io.println("Invalid reference type"));
+        printViews.put("referencesSaved", () -> io.println("References saved." + n));
+        printViews.put("loadDb", () -> io.println("References loaded to memory!"));
+        printViews.put("memoryClear", () -> io.println("MY MEMORIES ARE GONE!"));
+        printViews.put("dbClear", () -> io.println("DATABASE IS NOW GONE!"));
+        printViews.put("emptyMemory", () -> io.println("No articles in memory"));
+        printViews.put("noReferencesToExport", () -> io.println("No articles in memory, you don't want an empty .bib file!"));
+        printViews.put("typeCommandAgain", () -> io.println("Please type in a command from list!"));
+        printViews.put("enterFilename", () -> io.print("Enter filename (.bib-format): "));
+        printViews.put("formatError", () -> io.println("Not proper format!"));
+        printViews.put("exportError", () -> io.println("Error occurred while exporting file: "));
         return printViews;
     }
 //CHECKSTYLE:ON
