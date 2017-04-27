@@ -20,10 +20,11 @@ import static org.junit.Assert.*;
 public class Stepdefs {
 
     List<String> inputLines = new ArrayList<>();
+    List<String> errorLines = new ArrayList<>();
     App app;
     StubIO io;
     String bibFile = "";
-
+     
     @Given("^command \"([^\"]*)\" is selected$")
     public void command_selected(String command) throws Throwable {
         inputLines.add(command);
@@ -54,16 +55,49 @@ public class Stepdefs {
     public void invalid_input_are_entered_for_article() throws Throwable {
         //required fields
         inputLines.add("");
+        errorLines.add("Invalid author");
+        
+        inputLines.add("add");
+        inputLines.add("1");
+        
+        inputLines.add("author");
+        inputLines.add("");
+        errorLines.add("Invalid title");
+        
+        inputLines.add("add");
+        inputLines.add("1");
+        
+        inputLines.add("author");
         inputLines.add("title");
-        inputLines.add("journal");
-        inputLines.add("2000"); //year
-        inputLines.add("6");    //volume
-        //optional fields
-        inputLines.add("12");   //number
-        inputLines.add("1-2");  //pages
-        inputLines.add("12");   //month
-        inputLines.add("note");
-        inputLines.add("key");
+        inputLines.add("");
+        errorLines.add("Invalid journal");
+        
+        inputLines.add("add");
+        inputLines.add("1");
+        
+        inputLines.add("author");
+        inputLines.add("title");
+        inputLines.add("journal");        
+        inputLines.add("WRONG");
+        errorLines.add("Invalid year");
+        
+        inputLines.add("add");
+        inputLines.add("1");
+        
+        inputLines.add("author");
+        inputLines.add("title");
+        inputLines.add("journal");        
+        inputLines.add("2000");
+        inputLines.add("WRONGthisToo");
+        errorLines.add("Invalid volume");
+        
+           
+//        //optional fields
+//        inputLines.add("12");   //number
+//        inputLines.add("1-2");  //pages
+//        inputLines.add("12");   //month
+//        inputLines.add("note");
+//        inputLines.add("key");
     }
 
     @Given("^command book is selected$")
@@ -92,17 +126,40 @@ public class Stepdefs {
     public void invalid_input_are_entered_for_book() throws Throwable {
         //required fields
         inputLines.add("");
+        errorLines.add("Invalid author");
+        
+        inputLines.add("add");
+        inputLines.add("2");
+        
+        inputLines.add("author");
+        inputLines.add("");
+        errorLines.add("Invalid title");
+        
+        inputLines.add("add");
+        inputLines.add("2");
+        
+        inputLines.add("author");
+        inputLines.add("title");
+        inputLines.add("");
+        errorLines.add("Invalid publisher");
+        
+        inputLines.add("add");
+        inputLines.add("2");
+        
+        inputLines.add("author");
         inputLines.add("title");
         inputLines.add("publisher");
-        inputLines.add("2000"); //year
+        inputLines.add("IamWRONG");
+        errorLines.add("Invalid year");
+                               
         //optional fields
-        inputLines.add("666");  //number
-        inputLines.add("series");
-        inputLines.add("address");
-        inputLines.add("edition");
-        inputLines.add("1");    //month
-        inputLines.add("note");
-        inputLines.add("key");
+//        inputLines.add("666");  //number
+//        inputLines.add("series");
+//        inputLines.add("address");
+//        inputLines.add("edition");
+//        inputLines.add("1");    //month
+//        inputLines.add("note");
+//        inputLines.add("key");
     }
 
     @Given("^command inproceedings is selected$")
@@ -134,20 +191,44 @@ public class Stepdefs {
     public void invalid_input_are_entered_for_inproceedings() throws Throwable {
         //required fields
         inputLines.add("");
+        errorLines.add("Invalid author");
+        
+        inputLines.add("add");
+        inputLines.add("3");
+        
+        inputLines.add("author");
+        inputLines.add("");
+        errorLines.add("Invalid title");
+        
+        inputLines.add("add");
+        inputLines.add("3");
+        
+        inputLines.add("author");        
         inputLines.add("title");
+        inputLines.add("");
+        errorLines.add("Invalid booktitle");
+        
+        inputLines.add("add");
+        inputLines.add("3");
+        
+        inputLines.add("author");        
+        inputLines.add("title");       
         inputLines.add("booktitle");
-        inputLines.add("1");     //year
-        //optional fields    
-        inputLines.add("editor");
-        inputLines.add("666");   //volume
-        inputLines.add("series");
-        inputLines.add("1-2");    //pages
-        inputLines.add("address");
-        inputLines.add("7");    //month
-        inputLines.add("organization");
-        inputLines.add("publisher");
-        inputLines.add("note");
-        inputLines.add("key");
+        inputLines.add("iAmWrongYear");
+        errorLines.add("Invalid year");
+        
+        
+//        //optional fields    
+//        inputLines.add("editor");
+//        inputLines.add("666");   //volume
+//        inputLines.add("series");
+//        inputLines.add("1-2");    //pages
+//        inputLines.add("address");
+//        inputLines.add("7");    //month
+//        inputLines.add("organization");
+//        inputLines.add("publisher");
+//        inputLines.add("note");
+//        inputLines.add("key");
     }
 
     @Given("^filename \"([^\"]*)\" is entered")
@@ -169,6 +250,9 @@ public class Stepdefs {
             throws Throwable {
         runApp();
         assertTrue(io.getPrints().contains(expectedOutput));
+        for (String error : errorLines) {
+            assertTrue(io.getPrints().contains(error));
+        }
     }
 
     private void runApp() {
@@ -252,38 +336,5 @@ public class Stepdefs {
     }
 //CHECKSTYLE:ON
 
-//    @When("^author \"([^\"]*)\" are entered")
-//    public void a_author_are_entered(String author) {
-//        inputLines.add(author);
-//    }
-//
-//    @When("^title \"([^\"]*)\" are entered")
-//    public void a_title_are_entered(String title) {
-//        inputLines.add(title);
-//    }
-//
-//    @When("^booktitle \"([^\"]*)\" are entered$")
-//    public void a_booktitle_are_entered(String booktitle) {
-//        inputLines.add(booktitle);
-//    }
-//
-//    @When("^publisher \"([^\"]*)\" are entered")
-//    public void a_publisher_are_entered(String publisher) {
-//        inputLines.add(publisher);
-//    }
-//
-//    @When("^journal \"([^\"]*)\" are entered")
-//    public void a_journal_are_entered(String journal) {
-//        inputLines.add(journal);
-//    }
-//
-//    @When("^year \"([^\"]*)\" are entered")
-//    public void a_year_are_entered(String year) {
-//        inputLines.add(year);
-//    }
-//
-//    @When("^volume \"([^\"]*)\" are entered")
-//    public void a_volume_are_entered(String volume) {
-//        inputLines.add(volume);
-//    }
+
 }
