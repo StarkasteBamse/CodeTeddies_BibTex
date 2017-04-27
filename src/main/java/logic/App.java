@@ -16,6 +16,7 @@ import wrapper.Wrapper;
 
 public class App {
 
+    //CHECKSTYLE:OFF
     private IO io;
     private DAO dao;
     private Wrapper wrp;
@@ -239,5 +240,5 @@ public class App {
             io.println("");
         }
     }
-
+    //CHECKSTYLE:ON
 }

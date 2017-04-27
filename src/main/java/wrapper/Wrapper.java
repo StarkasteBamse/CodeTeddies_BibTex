@@ -11,6 +11,8 @@ public class Wrapper {
     private final int idLength = 6;
     private final int randomFactor = 100000;
 
+    //CHECKSTYLE:OFF
+    
     public String wrap(Reference reference) { // palauttaa bibtex-Stringinä
         String type = reference.toString();
         String key = reference.getField("title").replaceAll("\\s+", "");
@@ -43,4 +45,6 @@ public class Wrapper {
 
         return bib;
     }
+    
+    //CHECKSTYLE:ON
 }
