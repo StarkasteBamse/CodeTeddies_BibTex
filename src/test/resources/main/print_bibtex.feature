@@ -1,3 +1,4 @@
+
 Feature: application prints BibTex formatted block for an article
 
     Scenario: printing fails when no articles are added
@@ -15,5 +16,6 @@ Feature: application prints BibTex formatted block for an article
         And command print is selected
         And filename "sigproc.bib" is entered
         Then system will respond with a valid wrapping
+
 # Formatting the output as a string is not wise, better to create a logic for 
 # verification

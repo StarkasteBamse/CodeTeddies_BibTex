@@ -52,8 +52,7 @@ public class Article implements Reference {
     }
 //CHECKSTYLE:ON
 
-    @Override
-    public void initRequiredFields() {
+    private void initRequiredFields() {
         requiredFields.add("author");
         requiredFields.add("title");
         requiredFields.add("journal");
@@ -61,8 +60,7 @@ public class Article implements Reference {
         requiredFields.add("volume");
     }
     
-    @Override
-    public void initOptionalFields() {
+    private void initOptionalFields() {
         optionalFields.add("number");
         optionalFields.add("pages");
         optionalFields.add("month");

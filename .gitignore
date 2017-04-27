@@ -3,4 +3,4 @@
 /.gradle/
 /src/.gradle/
 .nb-gradle-properties
-/sigproc.bib
+/*.bib

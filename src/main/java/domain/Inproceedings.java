@@ -37,6 +37,26 @@ public class Inproceedings implements Reference {
         setField("booktitle", bookTitle);
     }
 
+    private void initRequiredFields() {
+        this.requiredFields.add("author");
+        this.requiredFields.add("title");
+        this.requiredFields.add("booktitle");
+        this.requiredFields.add("year");
+    }
+    
+    private void initOptionalFields() {
+        optionalFields.add("editor");
+        optionalFields.add("volume");
+        optionalFields.add("series");
+        optionalFields.add("pages");
+        optionalFields.add("address");
+        optionalFields.add("month");
+        optionalFields.add("organization");
+        optionalFields.add("publisher");
+        optionalFields.add("note");
+        optionalFields.add("key");
+    }
+
     @Override
     public boolean hasRequiredFields() {
         for (String field : this.requiredFields) {
@@ -45,14 +65,6 @@ public class Inproceedings implements Reference {
             }
         }
         return true;
-    }
-
-    @Override
-    public void initRequiredFields() {
-        this.requiredFields.add("author");
-        this.requiredFields.add("title");
-        this.requiredFields.add("booktitle");
-        this.requiredFields.add("year");
     }
 
     @Override
@@ -84,20 +96,6 @@ public class Inproceedings implements Reference {
     @Override
     public HashMap<String, String> getFieldsMap() {
         return this.fields;
-    }
-
-    @Override
-    public void initOptionalFields() {
-        optionalFields.add("editor");
-        optionalFields.add("volume");
-        optionalFields.add("series");
-        optionalFields.add("pages");
-        optionalFields.add("address");
-        optionalFields.add("month");
-        optionalFields.add("organization");
-        optionalFields.add("publisher");
-        optionalFields.add("note");
-        optionalFields.add("key");
     }
 
     @Override
