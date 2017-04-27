@@ -41,7 +41,7 @@ public class App {
         this(new ConsoleIO(), new ReferenceDAO(false));
         this.testMode = false;
     }
-
+//CHECKSTYLE:OFF
     private HashMap initSupRefs() {
         HashMap<Integer, String> supportedRefs = new HashMap<>();
         supportedRefs.put(1, "Article");
@@ -49,13 +49,13 @@ public class App {
         supportedRefs.put(3, "Inproceedings");
         return supportedRefs;
     }
-
+//CHECKSTYLE:ON
     private ArrayList<Reference> fetchDatabase() {
         ArrayList<Reference> fReferences = new ArrayList<>();
         fReferences.addAll(dao.getAll());
         return fReferences;
     }
-
+//CHECKSTYLE:OFF
     public void run() {
         while (true) {
             io.print("Commands: " + n
@@ -141,6 +141,7 @@ public class App {
 //            this.dao.clearDatabase();
 //        }
 //    }
+//CHECKSTYLE:ON
     public String readFileName() {
         String fileName = "";
         while (true) {
@@ -230,18 +231,19 @@ public class App {
             }
             io.print(inputField + " " + reqOrOpt + ": ");
             inputLine = io.readLine();
+<<<<<<< HEAD
             
+=======
+>>>>>>> master
             if (!validator.checkInput(inputField, inputLine, required)) {
                 io.println("");
                 io.println("Invalid " + inputField);
                 return false;
             }
-
             if (inputLine.isEmpty()) {
                 io.println("");
                 continue;
             }
-
             reference.setField(inputField, inputLine);
             io.println("");
         }
