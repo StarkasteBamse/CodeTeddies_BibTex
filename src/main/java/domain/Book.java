@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import logic.Validator;
 
 public class Book implements Reference {
 
-    private ArrayList<String> requiredFields;
+    ArrayList<String> requiredFields;
     private ArrayList<String> optionalFields;
     private HashMap<String, String> fields;
     private String id;
@@ -20,7 +21,6 @@ public class Book implements Reference {
         initRequiredFields();
         initOptionalFields();
     }
-//CHECKSTYLE:OFF
 
     public void setAuthor(String author) {
         setField("author", author);
@@ -47,7 +47,7 @@ public class Book implements Reference {
         }
         return true;
     }
-//CHECKSTYLE:ON
+
     private void initRequiredFields() {
         requiredFields.add("author");
         requiredFields.add("title");
@@ -107,6 +107,37 @@ public class Book implements Reference {
     @Override
     public void setID(String id) {
         this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        for (String requiredField : requiredFields) {
+            String fieldValue = this.getField(requiredField).toLowerCase();
+            hash = 11 * hash + Objects.hashCode(this.getField(fieldValue));
+        }
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Book other = (Book) obj;
+        
+        for (String requiredField : requiredFields) {
+            String thisValue = this.getField(requiredField).toLowerCase();
+            String otherValue = other.getField(requiredField).toLowerCase();
+            
+            if (!Objects.equals(thisValue, otherValue)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 

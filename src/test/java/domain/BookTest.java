@@ -28,10 +28,53 @@ public class BookTest {
         instance = new Book();
     }
 
+    public Book createMockBook() {
+        Book book = new Book();
+        book.setTitle("Prediction for real-time sampling of Robothands");
+        book.setPublisher("Caltech Arxiv");
+        book.setAuthor("Sandeep Mavadia, Jarrah Sastrawan, Ostawa Snapsahan");
+        book.setYear("2016");
+        return book;
+    }
+    
     @After
     public void tearDown() {
     }
 
+    @Test
+    public void testEqualsMethodTrueWithSameTitles() {
+        Book book = createMockBook();
+        Book bookIdentical = createMockBook();
+        assertTrue(book.equals(bookIdentical));
+    }
+    
+    @Test
+    public void testEqualsMethodFalseWithDifferentTitles() {
+        Book book = createMockBook();
+        Book articleTest = createMockBook();
+        articleTest.setField("title", "Prediction and real-time "
+                + "compensation of qubitons");
+        assertFalse(book.equals(articleTest));
+    }
+    
+    @Test
+    public void testEqualsMethodTrueWithSameButWithOtherHavingCapitals() {
+        Book book = createMockBook();
+        Book bookTest = createMockBook();
+        String publisherUpperCase = bookTest.getField("publisher").toUpperCase();
+        bookTest.setPublisher(publisherUpperCase);
+        assertTrue(book.equals(bookTest));
+    }
+    
+    @Test
+    public void testEqualsMethodTrueWithSameAndWithOptionalFields() {
+        Book book = createMockBook();
+        Book bookWithOptional = createMockBook();
+        bookWithOptional.setField("number", "222");
+        
+        assertTrue(book.equals(bookWithOptional));
+    }
+    
     @Test
     public void testSetTitle() {
         String testTitle = "testTitle";

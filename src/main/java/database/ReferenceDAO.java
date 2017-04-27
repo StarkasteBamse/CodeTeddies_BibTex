@@ -137,7 +137,4 @@ public class ReferenceDAO implements DAO<Reference> {
     public String getNewId() {
         return new ObjectId().toString();
     }
-
-    
-
 }
