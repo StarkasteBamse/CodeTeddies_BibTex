@@ -34,7 +34,6 @@ public class AppTest {
     @Before
     public void setUp() {
         mockDao = new DAO() {
-
             @Override
             public void delete(Object key) {
             }
