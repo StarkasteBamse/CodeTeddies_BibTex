@@ -50,7 +50,7 @@ public class Stepdefs {
         inputLines.add("note");
         inputLines.add("key");
     }
-
+//CHECKSTYLE:OFF
     @When("^invalid input are entered for article$")
     public void invalid_input_are_entered_for_article() throws Throwable {
         //required fields
@@ -99,7 +99,7 @@ public class Stepdefs {
 //        inputLines.add("note");
 //        inputLines.add("key");
     }
-
+//CHECKSTYLE:ON
     @Given("^command book is selected$")
     public void command_book_selected() throws Throwable {
         inputLines.add("2");
@@ -121,7 +121,7 @@ public class Stepdefs {
         inputLines.add("note");
         inputLines.add("key");
     }
-
+//CHECKSTYLE:OFF
     @When("^invalid input are entered for book$")
     public void invalid_input_are_entered_for_book() throws Throwable {
         //required fields
@@ -161,7 +161,7 @@ public class Stepdefs {
 //        inputLines.add("note");
 //        inputLines.add("key");
     }
-
+//CHECKSTYLE:ON
     @Given("^command inproceedings is selected$")
     public void command_inproceedings_selected() throws Throwable {
         inputLines.add("3");
@@ -186,7 +186,7 @@ public class Stepdefs {
         inputLines.add("note");
         inputLines.add("key");
     }
-
+//CHECKSTYLE:OFF
     @When("^invalid input are entered for inproceedings")
     public void invalid_input_are_entered_for_inproceedings() throws Throwable {
         //required fields
@@ -230,7 +230,7 @@ public class Stepdefs {
 //        inputLines.add("note");
 //        inputLines.add("key");
     }
-
+//CHECKSTYLE:ON
     @Given("^filename \"([^\"]*)\" is entered")
     public void filename_signed_is_entered(String fileName) throws Throwable {
         inputLines.add(fileName);
