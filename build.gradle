@@ -43,6 +43,18 @@ apply plugin: 'application'
 apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
 
+compileJava.options.encoding = 'UTF-8'
+
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+        
+    tasks.withType(Test) {
+       systemProperty "file.encoding", "UTF-8"
+    }
+}
+
 project.ext {
     cucumberVersion = '1.2.5'
     junitVersion = '4.12'

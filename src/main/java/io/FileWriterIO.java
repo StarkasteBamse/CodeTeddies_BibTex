@@ -5,9 +5,13 @@
  */
 package io;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 /**
  *
@@ -16,7 +20,7 @@ import java.io.IOException;
 public class FileWriterIO implements IO {
 
     private FileWriter filewriter;
-    
+
     @Override
     public void print(String toPrint) {
         throw new UnsupportedOperationException("Not supported.");
@@ -30,10 +34,14 @@ public class FileWriterIO implements IO {
     @Override
     public boolean writeFile(String filename, String toFile) {
         try {
-            File file = new File(filename);
-            filewriter = new FileWriter(file, false);
-            filewriter.write(toFile);
-            filewriter.close();
+//            File file = new File(filename);
+//            filewriter = new FileWriter(file, false);
+//            filewriter.write(toFile);
+//            filewriter.close();
+            Writer out = new BufferedWriter(new OutputStreamWriter(
+                            new FileOutputStream(filename), "UTF-8"));
+            out.write(toFile);
+            out.close();
             return true;
         } catch (IOException e) {
             return false;
@@ -44,5 +52,5 @@ public class FileWriterIO implements IO {
     public String readLine() {
         throw new UnsupportedOperationException("Not supported.");
     }
-    
+
 }
