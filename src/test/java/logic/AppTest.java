@@ -34,7 +34,6 @@ public class AppTest {
     @Before
     public void setUp() {
         mockDao = new DAO() {
-
             @Override
             public void delete(Object key) {
             }
@@ -55,6 +54,11 @@ public class AppTest {
             public List getAll() {
                 List list = new ArrayList();
                 return list;
+            }
+
+            @Override
+            public String getNewId() {
+                return "1";
             }
         };
     }

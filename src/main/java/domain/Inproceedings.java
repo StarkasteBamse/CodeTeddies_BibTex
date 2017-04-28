@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import logic.Validator;
 
 public class Inproceedings implements Reference {
@@ -11,6 +12,7 @@ public class Inproceedings implements Reference {
     private ArrayList<String> requiredFields;
     private ArrayList<String> optionalFields;
     private HashMap<String, String> fields;
+    private String id;
 
     public Inproceedings() {
         this.optionalFields = new ArrayList<>();
@@ -101,5 +103,46 @@ public class Inproceedings implements Reference {
     @Override
     public List<String> getOptionalFields() {
         return optionalFields;
+    }
+    
+    @Override
+    public String getID() {
+        return this.id;
+    }
+
+    @Override
+    public void setID(String id) {
+        this.id = id;
+    }
+//CHECKSTYLE:OFF 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        for (String requiredField : requiredFields) {
+            String fieldValue = this.getField(requiredField).toLowerCase();
+            hash = 11 * hash + Objects.hashCode(this.getField(fieldValue));
+        }
+        return hash;
+    }
+//CHECKSTYLE:ON
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Inproceedings other = (Inproceedings) obj;
+        
+        for (String requiredField : requiredFields) {
+            String thisValue = this.getField(requiredField).toLowerCase();
+            String otherValue = other.getField(requiredField).toLowerCase();
+            
+            if (!Objects.equals(thisValue, otherValue)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -42,6 +42,17 @@ public class ArticleTest {
         instance = new Article();
     }
     
+    public Article createMockArticle() {
+        Article article = new Article();
+        article.setTitle("Prediction and real-time compensation of qubit "
+                + "decoherence via machine learning");
+        article.setJournal("Caltech Arxiv");
+        article.setVolume("222");
+        article.setAuthor("Sandeep Mavadia, Jarrah Sastrawan");
+        article.setYear("2016");
+        return article;
+    }
+    
     @After
     public void tearDown() {
     }
@@ -56,6 +67,40 @@ public class ArticleTest {
         assertEquals(instance.getField("author"), author);
     }
 
+    @Test
+    public void testEqualsMethodTrueWithSameTitles() {
+        Article article = createMockArticle();
+        Article articleIdentical = createMockArticle();
+        assertTrue(article.equals(articleIdentical));
+    }
+    
+    @Test
+    public void testEqualsMethodFalseWithDifferentTitles() {
+        Article article = createMockArticle();
+        Article articleTest = createMockArticle();
+        articleTest.setField("title", "Prediction and real-time "
+                + "compensation of qubitons");
+        assertFalse(article.equals(articleTest));
+    }
+    
+    @Test
+    public void testEqualsMethodTrueWithSameButWithOtherHavingCapitals() {
+        Article article = createMockArticle();
+        Article articleTest = createMockArticle();
+        String journalUpperCase = articleTest.getField("journal").toUpperCase();
+        articleTest.setJournal(journalUpperCase);
+        assertTrue(article.equals(articleTest));
+    }
+    
+    @Test
+    public void testEqualsMethodTrueWithSameAndWithOptionalFields() {
+        Article article = createMockArticle();
+        Article articleWithOptional = createMockArticle();
+        articleWithOptional.setField("number", "222");
+        
+        assertTrue(article.equals(articleWithOptional));
+    }
+    
     /**
      * Test of setTitle method, of class Article.
      */
