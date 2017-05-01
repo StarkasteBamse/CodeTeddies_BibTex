@@ -12,6 +12,8 @@ import com.google.gson.JsonSyntaxException;
 import domain.Article;
 import domain.Book;
 import domain.Inproceedings;
+import domain.Manual;
+import domain.PhdThesis;
 import domain.Reference;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,6 +97,10 @@ public class ReferenceDAO implements DAO<Reference> {
         } else if (jsonCaseInsensitive.contains("\"type\" : "
                                               + "\"inproceedings\"")) {
             return new Inproceedings();
+        } else if (jsonCaseInsensitive.contains("\"type\" : \"phdthesis\"")) {
+            return new PhdThesis();
+        } else if (jsonCaseInsensitive.contains("\"type\" : \"manual\"")) {
+            return new Manual();
         }
         return null;
     }
