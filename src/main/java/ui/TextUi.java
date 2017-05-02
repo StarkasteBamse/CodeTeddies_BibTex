@@ -174,6 +174,7 @@ public class TextUi {
         }
     }
 
+    //CHECKSTYLE:OFF
     private void printDelete(String command) {
         io.println("which reference you want to delete");
         List<Reference> r1 = app.getReferences();
@@ -254,5 +255,5 @@ public class TextUi {
         }
         io.println("reference updated!");
     }
-    
+    //CHECKSTYLE:ON
 }

@@ -246,5 +246,28 @@ public class ArticleTest {
         instance.setID("abcd1234");
         assertEquals("abcd1234", instance.getID());
     }
+    
+    @Test
+    public void isNotEqualToOthers() {
+        instance = new Article();
+        Article comparable = new Article();
+        
+        instance.setField("title", "qwe");
+        instance.setField("author", "a");
+        instance.setField("journal", "b");
+        instance.setField("year", "2016");
+        instance.setField("volume", "2");
+
+        comparable.setField("title", "asd");
+        comparable.setField("author", "a");
+        comparable.setField("journal", "b");
+        comparable.setField("year", "2016");
+        comparable.setField("volume", "2");
+
+        boolean expResult = false;
+        assertEquals(expResult, instance.equals(comparable));
+        assertEquals(expResult, instance.equals(null));
+        assertEquals(expResult, instance.hashCode() == comparable.hashCode());
+    }
 }
 

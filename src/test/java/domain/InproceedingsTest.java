@@ -136,4 +136,26 @@ public class InproceedingsTest {
         instance.setID("abcd1234");
         assertEquals("abcd1234", instance.getID());
     }
+    
+    @Test
+    public void isNotEqualToOthers() {
+        instance = new Inproceedings();
+        Inproceedings comparable = new Inproceedings();
+        
+        instance.setField("author", "Matti");
+        instance.setField("title", "asd");
+        instance.setField("booktitle", "asdfa");
+        instance.setField("year", "2016");
+        
+        comparable.setField("author", "Ville");
+        comparable.setField("title", "asd");
+        comparable.setField("booktitle", "asdfa");
+        comparable.setField("year", "2016");
+        
+        
+        boolean expResult = false;
+        assertEquals(expResult, instance.equals(comparable));
+        assertEquals(expResult, instance.equals(null));
+        assertEquals(expResult, instance.hashCode() == comparable.hashCode());
+    }
 }

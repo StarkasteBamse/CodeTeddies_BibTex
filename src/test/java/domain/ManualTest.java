@@ -1,6 +1,7 @@
 package domain;
 
 import domain.Manual;
+import java.util.Objects;
 import logic.Validator;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -182,5 +183,19 @@ public class ManualTest {
         
         instance.setID("abcd1234");
         assertEquals("abcd1234", instance.getID());
+    }
+    
+    @Test
+    public void isNotEqualToOthers() {
+        instance = new Manual();
+        Manual comparable = new Manual();
+        
+        instance.setField("title", "qwegiohakg");
+        comparable.setField("title", "ASC");
+
+        boolean expResult = false;
+        assertEquals(expResult, instance.equals(comparable));
+        assertEquals(expResult, instance.equals(null));
+        assertEquals(expResult, instance.hashCode() == comparable.hashCode());
     }
 }

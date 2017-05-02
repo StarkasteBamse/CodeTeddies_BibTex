@@ -119,7 +119,7 @@ public class Article implements Reference {
         int hash = 3;
         for (String requiredField : requiredFields) {
             String fieldValue = this.getField(requiredField).toLowerCase();
-            hash = 11 * hash + Objects.hashCode(this.getField(fieldValue));
+            hash = 11 * hash + Objects.hashCode(fieldValue);
         }
         return hash;
     }
