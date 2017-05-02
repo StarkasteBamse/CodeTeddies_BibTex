@@ -12,41 +12,41 @@ import static org.junit.Assert.*;
 public class ManualTest {
 //CHECKSTYLE:OFF
     private Manual instance;
-    private final String[] mockValues = {"Mornom Random", 
-                                        "Uni. Madagaskar", 
-                                        "Too bad C 23", 
-                                        "Sovietlux", 
-                                        "February", 
+    private final String[] mockValues = {"Mornom Random",
+                                        "Uni. Madagaskar",
+                                        "Too bad C 23",
+                                        "Sovietlux",
+                                        "February",
                                         "2099",
                                         "the key"};
-//CHECKSTYLE:ON  
+//CHECKSTYLE:ON
     @Before
     public void setUp() {
         instance = new Manual();
     }
-    
+
     public Manual createMockManual() {
         Manual manual = new Manual();
-        manual.setTitle("Prediction and real-time compensation of qubit "
-                + "decoherence via machine learning");
-        
+        manual.setField("title", "Prediction and real-time compensation " +
+                "of qubitdecoherence via machine learning");
+
         for (int i = 0; i < this.mockValues.length; i++) {
             manual.setField(manual.getOptionalFields().get(i), mockValues[i]);
         }
         return manual;
     }
-    
+
     @After
     public void tearDown() {
     }
 
     /**
-     * Test of setAuthor method, of class Manual.
+     * Test of setField method, of class Manual.
      */
     @Test
-    public void testSetTitle() {
+    public void testSetField() {
         String title = "Manual of Cooperation: Sixth sense for code smells";
-        instance.setTitle(title);
+        instance.setField("title", title);
         assertEquals(instance.getField("title"), title);
     }
 
@@ -56,7 +56,7 @@ public class ManualTest {
         Manual manualIdentical = createMockManual();
         assertTrue(manual.equals(manualIdentical));
     }
-    
+
     @Test
     public void testEqualsMethodFalseWithDifferentTitles() {
         Manual manual = createMockManual();
@@ -65,22 +65,22 @@ public class ManualTest {
                 + "compensation of qubitons");
         assertFalse(manual.equals(manualTest));
     }
-    
+
     @Test
     public void testEqualsMethodTrueWithSameButWithOtherHavingCapitals() {
         Manual manual = createMockManual();
         Manual manualTest = createMockManual();
         String titleUpperCase = manualTest.getField("title").toUpperCase();
-        manualTest.setTitle(titleUpperCase);
+        manualTest.setField("title", titleUpperCase);
         assertTrue(manual.equals(manualTest));
     }
-    
+
     @Test
     public void testEqualsMethodTrueWithSameAndWithOptionalFields() {
         Manual manual = createMockManual();
         Manual manualWithOptional = createMockManual();
         manualWithOptional.setField("author", "222");
-        
+
         assertTrue(manual.equals(manualWithOptional));
     }
 
@@ -92,47 +92,48 @@ public class ManualTest {
         boolean expResult = false;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
-        instance.setTitle("testT");
+        instance.setField("title", "testT");
         assertEquals(true, instance.hasRequiredFields());
     }
-    
+
     /**
-     * Test of hasRequiredFields method when all fields are set, 
+     * Test of hasRequiredFields method when all fields are set,
      * of class Manual.
      */
     @Test
     public void testHasRequiredFieldsWhenFieldsAreSet() {
         instance = new Manual();
-        instance.setTitle("My doctoral dissertation: never getting it ready");
+        instance.setField("title", "My doctoral dissertation:" +
+              " never getting it ready");
         boolean expResult = true;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void getFieldReturnsNull() {
         instance = new Manual();
-        instance.setTitle(null);
+        instance.setField("title", null);
         boolean result = false;
         if(instance.getField("author") == null) {
             result = true;
         }
         assertTrue(result);
     }
-    
+
     @Test
     public void setFieldFailsWithInvalidFieldType() {
         instance = new Manual();
         instance.setField("invaliidi", "I won't be used");
-        
+
         String expResult = null;
         assertEquals(expResult, instance.getField("invaliidi"));
     }
-    
+
     @Test
     public void setOptionalFieldsWorksOnRightTypes() {
         instance = new Manual();
-        
+
         instance.setField("author", "1");
         instance.setField("organization", "2");
         instance.setField("address", "Jollantie 22");
@@ -140,7 +141,7 @@ public class ManualTest {
         instance.setField("year", "2055");
         instance.setField("note", "helloworld");
         instance.setField("key", "ABCD1234");
-        
+
         assertEquals("1", instance.getField("author"));
         assertEquals("2", instance.getField("organization"));
         assertEquals("2055", instance.getField("year"));
@@ -150,4 +151,3 @@ public class ManualTest {
         assertEquals("ABCD1234", instance.getField("key"));
     }
 }
-

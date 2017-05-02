@@ -35,60 +35,39 @@ public class InproceedingsTest {
     @Test
     public void testSetTitle() {
         String testTitle = "testTitle";
-        instance.setTitle(testTitle);
+        instance.setField("title", testTitle);
         assertEquals(testTitle, instance.getField("title"));
-    }
-
-    @Test
-    public void testSetAuthor() {
-        String testAuthor = "testAuthor";
-        instance.setAuthor(testAuthor);
-        assertEquals(testAuthor, instance.getField("author"));
-    }
-
-    @Test
-    public void testSetBookTitle() {
-        String testBookTitle = "testBookTitle";
-        instance.setBookTitle(testBookTitle);
-        assertEquals(testBookTitle, instance.getField("booktitle"));
-    }
-
-    @Test
-    public void testSetYear() {
-        String testYear = "1984";
-        instance.setYear(testYear);
-        assertEquals(testYear, instance.getField("year"));
     }
 
     @Test
     public void testHasRequiredFieldsWhenEmpty() {
         // Test  all required fields one by one
         assertEquals(false, instance.hasRequiredFields());
-        instance.setAuthor("testA");
+        instance.setField("author", "testA");
         assertEquals(false, instance.hasRequiredFields());
-        instance.setTitle("testT");
+        instance.setField("title", "testT");
         assertEquals(false, instance.hasRequiredFields());
-        instance.setBookTitle("testBT");
+        instance.setField("booktitle", "testBT");
         assertEquals(false, instance.hasRequiredFields());
     }
 
     @Test
     public void testHasRequiredFieldsReturnsTrueWhenSet() {
         String testAuthor = "testAuthor";
-        instance.setAuthor(testAuthor);
+        instance.setField("author", testAuthor);
         String testTitle = "testTitle";
-        instance.setTitle(testTitle);
+        instance.setField("title", testTitle);
         String testBookTitle = "testBookTitle";
-        instance.setBookTitle(testBookTitle);
+        instance.setField("booktitle", testBookTitle);
         String testYear = "1984";
-        instance.setYear(testYear);
+        instance.setField("year", testYear);
         assertEquals(true, instance.hasRequiredFields());
     }
 
     @Test
     public void getFieldReturnsNull() {
         instance = new Inproceedings();
-        instance.setAuthor(null);
+        instance.setField("author", null);
         boolean result = false;
         if (instance.getField("author") == null) {
             result = true;

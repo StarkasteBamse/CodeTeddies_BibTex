@@ -23,21 +23,6 @@ public class Inproceedings implements Reference {
 
     }
 
-    public void setAuthor(String author) {
-        setField("author", author);
-    }
-
-    public void setTitle(String title) {
-        setField("title", title);
-    }
-
-    public void setYear(String year) {
-        setField("year", year);
-    }
-
-    public void setBookTitle(String bookTitle) {
-        setField("booktitle", bookTitle);
-    }
 
     private void initRequiredFields() {
         this.requiredFields.add("author");
@@ -45,7 +30,7 @@ public class Inproceedings implements Reference {
         this.requiredFields.add("booktitle");
         this.requiredFields.add("year");
     }
-    
+
     private void initOptionalFields() {
         optionalFields.add("editor");
         optionalFields.add("volume");
@@ -104,7 +89,7 @@ public class Inproceedings implements Reference {
     public List<String> getOptionalFields() {
         return optionalFields;
     }
-    
+
     @Override
     public String getID() {
         return this.id;
@@ -114,7 +99,7 @@ public class Inproceedings implements Reference {
     public void setID(String id) {
         this.id = id;
     }
-//CHECKSTYLE:OFF 
+//CHECKSTYLE:OFF
     @Override
     public int hashCode() {
         int hash = 3;
@@ -134,17 +119,17 @@ public class Inproceedings implements Reference {
             return false;
         }
         final Inproceedings other = (Inproceedings) obj;
-        
+
         for (String requiredField : requiredFields) {
             String thisValue = this.getField(requiredField).toLowerCase();
             String otherValue = other.getField(requiredField).toLowerCase();
-            
+
             if (!Objects.equals(thisValue, otherValue)) {
                 return false;
             }
         }
         return true;
     }
-    
-    
+
+
 }
