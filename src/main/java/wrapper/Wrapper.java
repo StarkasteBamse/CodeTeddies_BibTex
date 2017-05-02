@@ -1,9 +1,6 @@
 package wrapper;
 
-import domain.Reference;
-import domain.Article;
-import domain.Book;
-import domain.Inproceedings;
+import domain.*;
 import java.util.List;
 import java.util.Set;
 
