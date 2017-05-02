@@ -44,8 +44,8 @@ public class ArticleTest {
 
     public Article createMockArticle() {
         Article article = new Article();
-        article.setField("title", "Prediction and real-time compensation"
-          + "of qubit decoherence via machine learning");
+        article.setField("title", "Prediction and real-time compensation "
+              + "of qubit decoherence via machine learning");
         article.setField("journal", "Caltech Arxiv");
         article.setField("volume", "222");
         article.setField("author", "Sandeep Mavadia, Jarrah Sastrawan");
@@ -130,7 +130,7 @@ public class ArticleTest {
         instance.setField("author", "Arto Hellas");
         instance.setField("journal", "SSCSI");
         instance.setField("title",
-          "My doctoral dissertation: never getting it ready");
+              "My doctoral dissertation: never getting it ready");
         instance.setField("year", "2014");
         instance.setField("volume", "13");
         boolean expResult = true;

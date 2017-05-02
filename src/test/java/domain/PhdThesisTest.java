@@ -125,7 +125,8 @@ public class PhdThesisTest {
         instance = new PhdThesis();
         instance.setField("author", "Arto Hellas");
         instance.setField("school", "University of Nakkila");
-        instance.setField("title", "My doctoral dissertation: never getting it ready");
+        instance.setField("title", "My doctoral dissertation: " +
+              "never getting it ready");
         instance.setField("year", "2060");
         boolean expResult = true;
         boolean result = instance.hasRequiredFields();
