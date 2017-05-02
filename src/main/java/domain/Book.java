@@ -139,6 +139,16 @@ public class Book implements Reference {
         }
         return true;
     }
+
+    @Override
+    public boolean removeField(String field) {
+        if (fields.containsKey(field)) {
+            fields.remove(field);
+            return true;
+        }
+        return false;
+
+    }
     
    
 }

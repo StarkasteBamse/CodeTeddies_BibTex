@@ -214,5 +214,29 @@ public class ArticleTest {
         assertEquals("helloworld", instance.getField("note"));
         assertEquals("ABCD1234", instance.getField("key"));
     }
+    
+    @Test
+    public void removeFieldEmptiesProperly() {
+        instance = new Article();
+        
+        instance.setField("author", "Testerman");
+        instance.removeField("author");
+        assertEquals(null, instance.getField("author"));
+    }
+    
+    @Test
+    public void removeFieldReturnsTrue() {
+        instance = new Article();
+        
+        instance.setField("author", "Testerman");
+        assertEquals(true, instance.removeField("author"));
+    }
+
+    @Test
+    public void removeFieldFailsOnUnsetField() {
+        instance = new Article();
+        
+        assertEquals(false, instance.removeField("author"));
+    }
 }
 

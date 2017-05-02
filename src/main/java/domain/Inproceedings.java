@@ -45,7 +45,7 @@ public class Inproceedings implements Reference {
         this.requiredFields.add("booktitle");
         this.requiredFields.add("year");
     }
-    
+
     private void initOptionalFields() {
         optionalFields.add("editor");
         optionalFields.add("volume");
@@ -104,7 +104,7 @@ public class Inproceedings implements Reference {
     public List<String> getOptionalFields() {
         return optionalFields;
     }
-    
+
     @Override
     public String getID() {
         return this.id;
@@ -115,6 +115,7 @@ public class Inproceedings implements Reference {
         this.id = id;
     }
 //CHECKSTYLE:OFF 
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -125,6 +126,7 @@ public class Inproceedings implements Reference {
         return hash;
     }
 //CHECKSTYLE:ON
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -134,17 +136,26 @@ public class Inproceedings implements Reference {
             return false;
         }
         final Inproceedings other = (Inproceedings) obj;
-        
+
         for (String requiredField : requiredFields) {
             String thisValue = this.getField(requiredField).toLowerCase();
             String otherValue = other.getField(requiredField).toLowerCase();
-            
+
             if (!Objects.equals(thisValue, otherValue)) {
                 return false;
             }
         }
         return true;
     }
-    
-    
+
+    @Override
+    public boolean removeField(String field) {
+        if (fields.containsKey(field)) {
+            fields.remove(field);
+            return true;
+        }
+        return false;
+
+    }
+
 }

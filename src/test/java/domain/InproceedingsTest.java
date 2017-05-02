@@ -105,4 +105,27 @@ public class InproceedingsTest {
         assertEquals(expResult, instance.getField("invaliidi"));
     }
 
+    @Test
+    public void removeFieldEmptiesProperly() {
+        instance = new Inproceedings();
+
+        instance.setField("author", "Testerman");
+        instance.removeField("author");
+        assertEquals(null, instance.getField("author"));
+    }
+
+    @Test
+    public void removeFieldReturnsTrue() {
+        instance = new Inproceedings();
+
+        instance.setField("author", "Testerman");
+        assertEquals(true, instance.removeField("author"));
+    }
+
+    @Test
+    public void removeFieldFailsOnUnsetField() {
+        instance = new Inproceedings();
+
+        assertEquals(false, instance.removeField("author"));
+    }
 }

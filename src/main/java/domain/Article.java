@@ -21,7 +21,7 @@ public class Article implements Reference {
         initRequiredFields();
         initOptionalFields();
     }
-    
+
     public void setAuthor(String author) {
         setField("author", author);
     }
@@ -59,7 +59,7 @@ public class Article implements Reference {
         requiredFields.add("year");
         requiredFields.add("volume");
     }
-    
+
     private void initOptionalFields() {
         optionalFields.add("number");
         optionalFields.add("pages");
@@ -88,7 +88,7 @@ public class Article implements Reference {
     public List<String> getRequiredFields() {
         return this.requiredFields;
     }
-    
+
     public List<String> getOptionalFields() {
         return this.optionalFields;
     }
@@ -113,6 +113,7 @@ public class Article implements Reference {
         this.id = id;
     }
 //CHECKSTYLE:OFF
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -133,11 +134,11 @@ public class Article implements Reference {
             return false;
         }
         final Article other = (Article) obj;
-        
+
         for (String requiredField : requiredFields) {
             String thisValue = this.getField(requiredField).toLowerCase();
             String otherValue = other.getField(requiredField).toLowerCase();
-            
+
             if (!Objects.equals(thisValue, otherValue)) {
                 return false;
             }
@@ -145,7 +146,14 @@ public class Article implements Reference {
         return true;
     }
 
-    
-    
-    
+    @Override
+    public boolean removeField(String field) {
+        if (fields.containsKey(field)) {
+            this.fields.remove(field);
+            return true;
+        }
+        return false;
+
+    }
+
 }

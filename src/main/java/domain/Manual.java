@@ -21,7 +21,7 @@ public class Manual implements Reference {
         initRequiredFields();
         initOptionalFields();
     }
-    
+
     public void setTitle(String title) {
         setField("title", title);
     }
@@ -39,7 +39,7 @@ public class Manual implements Reference {
     private void initRequiredFields() {
         requiredFields.add("title");
     }
-    
+
     private void initOptionalFields() {
         optionalFields.add("author");
         optionalFields.add("organization");
@@ -71,7 +71,7 @@ public class Manual implements Reference {
     public List<String> getRequiredFields() {
         return this.requiredFields;
     }
-    
+
     public List<String> getOptionalFields() {
         return this.optionalFields;
     }
@@ -96,6 +96,7 @@ public class Manual implements Reference {
         this.id = id;
     }
 //CHECKSTYLE:OFF
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -116,19 +117,26 @@ public class Manual implements Reference {
             return false;
         }
         final Manual other = (Manual) obj;
-        
+
         for (String requiredField : requiredFields) {
             String thisValue = this.getField(requiredField).toLowerCase();
             String otherValue = other.getField(requiredField).toLowerCase();
-            
+
             if (!Objects.equals(thisValue, otherValue)) {
                 return false;
             }
         }
         return true;
     }
-    
-    
-    
-    
+
+    @Override
+    public boolean removeField(String field) {
+        if (fields.containsKey(field)) {
+            this.fields.remove(field);
+            return true;
+        }
+        return false;
+
+    }
+
 }

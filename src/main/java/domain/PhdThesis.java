@@ -21,7 +21,7 @@ public class PhdThesis implements Reference {
         initRequiredFields();
         initOptionalFields();
     }
-    
+
     public void setAuthor(String author) {
         setField("author", author);
     }
@@ -54,7 +54,7 @@ public class PhdThesis implements Reference {
         requiredFields.add("school");
         requiredFields.add("year");
     }
-    
+
     private void initOptionalFields() {
         optionalFields.add("type");
         optionalFields.add("address");
@@ -83,7 +83,7 @@ public class PhdThesis implements Reference {
     public List<String> getRequiredFields() {
         return this.requiredFields;
     }
-    
+
     public List<String> getOptionalFields() {
         return this.optionalFields;
     }
@@ -108,6 +108,7 @@ public class PhdThesis implements Reference {
         this.id = id;
     }
 //CHECKSTYLE:OFF
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -128,17 +129,26 @@ public class PhdThesis implements Reference {
             return false;
         }
         final PhdThesis other = (PhdThesis) obj;
-        
+
         for (String requiredField : requiredFields) {
             String thisValue = this.getField(requiredField).toLowerCase();
             String otherValue = other.getField(requiredField).toLowerCase();
-            
+
             if (!Objects.equals(thisValue, otherValue)) {
                 return false;
             }
         }
         return true;
     }
-    
-   
+
+    @Override
+    public boolean removeField(String field) {
+        if (fields.containsKey(field)) {
+            fields.remove(field);
+            return true;
+        }
+        return false;
+
+    }
+
 }

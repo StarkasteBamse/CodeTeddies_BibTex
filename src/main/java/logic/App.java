@@ -114,7 +114,7 @@ public class App {
         if (validator.checkInput(field, data, 
                             reference.getRequiredFields().contains(field))) {
             if (data.equals("")) {
-                reference.getFieldsMap().remove(field);
+                reference.removeField(field);
             } else {
                 reference.setField(field, data);
             }

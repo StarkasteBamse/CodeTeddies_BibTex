@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -23,25 +23,25 @@ import static org.junit.Assert.*;
  * @author Willburner
  */
 public class PhdThesisTest {
-    
+
     private PhdThesis instance;
-    
+
     public PhdThesisTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         instance = new PhdThesis();
     }
-    
+
     public PhdThesis createMockPhdThesis() {
         PhdThesis thesis = new PhdThesis();
         thesis.setTitle("Prediction and real-time compensation of qubit "
@@ -51,7 +51,7 @@ public class PhdThesisTest {
         thesis.setYear("2016");
         return thesis;
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -72,7 +72,7 @@ public class PhdThesisTest {
         PhdThesis thesisIdentical = createMockPhdThesis();
         assertTrue(thesis.equals(thesisIdentical));
     }
-    
+
     @Test
     public void testEqualsMethodFalseWithDifferentTitles() {
         PhdThesis thesis = createMockPhdThesis();
@@ -81,7 +81,7 @@ public class PhdThesisTest {
                 + "compensation of qubitons");
         assertFalse(thesis.equals(thesisTest));
     }
-    
+
     @Test
     public void testEqualsMethodTrueWithSameButWithOtherHavingCapitals() {
         PhdThesis thesis = createMockPhdThesis();
@@ -90,16 +90,16 @@ public class PhdThesisTest {
         thesisTest.setSchool(schoolUpperCase);
         assertTrue(thesis.equals(thesisTest));
     }
-    
+
     @Test
     public void testEqualsMethodTrueWithSameAndWithOptionalFields() {
         PhdThesis thesis = createMockPhdThesis();
         PhdThesis thesisWithOptional = createMockPhdThesis();
         thesisWithOptional.setField("number", "222");
-        
+
         assertTrue(thesis.equals(thesisWithOptional));
     }
-    
+
     /**
      * Test of setTitle method, of class PhdThesis.
      */
@@ -145,10 +145,10 @@ public class PhdThesisTest {
         instance.setSchool("testJ");
         assertEquals(expResult, instance.hasRequiredFields());
     }
-    
+
     /**
-     * Test of hasRequiredFields method when all fields are set, 
-     * of class PhdThesis.
+     * Test of hasRequiredFields method when all fields are set, of class
+     * PhdThesis.
      */
     @Test
     public void testHasRequiredFieldsWhenFieldsAreSet() {
@@ -161,41 +161,63 @@ public class PhdThesisTest {
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void getFieldReturnsNull() {
         instance = new PhdThesis();
         instance.setAuthor(null);
         boolean result = false;
-        if(instance.getField("author") == null) {
+        if (instance.getField("author") == null) {
             result = true;
         }
         assertTrue(result);
     }
-    
-    
+
     @Test
     public void setFieldFailsWithInvalidFieldType() {
         instance = new PhdThesis();
         instance.setField("invaliidi", "I won't be used");
-        
+
         String expResult = null;
         assertEquals(expResult, instance.getField("invaliidi"));
     }
-    
+
     @Test
     public void setOptionalFieldsWorksOnRightTypes() {
         instance = new PhdThesis();
-        
+
         instance.setField("month", "march");
         instance.setField("address", "Jukutitie25");
         instance.setField("note", "helloworld");
         instance.setField("key", "ABCD1234");
-        
+
         assertEquals("Jukutitie25", instance.getField("address"));
         assertEquals("march", instance.getField("month"));
         assertEquals("helloworld", instance.getField("note"));
         assertEquals("ABCD1234", instance.getField("key"));
     }
-}
 
+    @Test
+    public void removeFieldEmptiesProperly() {
+        instance = new PhdThesis();
+
+        instance.setField("author", "Testerman");
+        instance.removeField("author");
+        assertEquals(null, instance.getField("author"));
+    }
+
+    @Test
+    public void removeFieldReturnsTrue() {
+        instance = new PhdThesis();
+
+        instance.setField("author", "Testerman");
+        assertEquals(true, instance.removeField("author"));
+    }
+
+    @Test
+    public void removeFieldFailsOnUnsetField() {
+        instance = new PhdThesis();
+
+        assertEquals(false, instance.removeField("author"));
+    }
+}

@@ -36,7 +36,7 @@ public class BookTest {
         book.setYear("2016");
         return book;
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -47,7 +47,7 @@ public class BookTest {
         Book bookIdentical = createMockBook();
         assertTrue(book.equals(bookIdentical));
     }
-    
+
     @Test
     public void testEqualsMethodFalseWithDifferentTitles() {
         Book book = createMockBook();
@@ -56,7 +56,7 @@ public class BookTest {
                 + "compensation of qubitons");
         assertFalse(book.equals(articleTest));
     }
-    
+
     @Test
     public void testEqualsMethodTrueWithSameButWithOtherHavingCapitals() {
         Book book = createMockBook();
@@ -65,16 +65,16 @@ public class BookTest {
         bookTest.setPublisher(publishUpperCase);
         assertTrue(book.equals(bookTest));
     }
-    
+
     @Test
     public void testEqualsMethodTrueWithSameAndWithOptionalFields() {
         Book book = createMockBook();
         Book bookWithOptional = createMockBook();
         bookWithOptional.setField("number", "222");
-        
+
         assertTrue(book.equals(bookWithOptional));
     }
-    
+
     @Test
     public void testSetTitle() {
         String testTitle = "testTitle";
@@ -138,7 +138,7 @@ public class BookTest {
         }
         assertTrue(result);
     }
-    
+
     @Test
     public void setFieldFailsWithInvalidFieldType() {
         instance = new Book();
@@ -147,5 +147,29 @@ public class BookTest {
         String expResult = null;
         assertEquals(expResult, instance.getField("invaliidi"));
     }
-    
+
+    @Test
+    public void removeFieldEmptiesProperly() {
+        instance = new Book();
+
+        instance.setField("author", "Testerman");
+        instance.removeField("author");
+        assertEquals(null, instance.getField("author"));
+    }
+
+    @Test
+    public void removeFieldReturnsTrue() {
+        instance = new Book();
+
+        instance.setField("author", "Testerman");
+        assertEquals(true, instance.removeField("author"));
+    }
+
+    @Test
+    public void removeFieldFailsOnUnsetField() {
+        instance = new Book();
+
+        assertEquals(false, instance.removeField("author"));
+    }
+
 }
