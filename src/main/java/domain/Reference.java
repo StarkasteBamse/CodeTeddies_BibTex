@@ -16,4 +16,6 @@ public interface Reference {
     boolean hasRequiredFields();
     List<String> getOptionalFields();
     HashMap<String, String> getFieldsMap();
+    
+      
 }

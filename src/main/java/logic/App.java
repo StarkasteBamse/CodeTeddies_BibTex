@@ -35,12 +35,13 @@ public class App {
         this.wrp = new Wrapper();
         this.references = new ArrayList<>();
         this.numerics = new ArrayList<>();
-        this.validator = new Validator();     
+        this.validator = new Validator();
         this.supportedRefs = initSupportedReferences();
         this.testMode = true;
-        
+
     }
 //CHECKSTYLE:OFF    
+
     public HashMap initSupportedReferences() {
         HashMap<Integer, Reference> supportedRefs = new HashMap<>();
         supportedRefs.put(1, new Article());
@@ -48,11 +49,11 @@ public class App {
         supportedRefs.put(3, new Inproceedings());
         supportedRefs.put(4, new PhdThesis());
         supportedRefs.put(5, new Manual());
-        
+
         return supportedRefs;
     }
 //CHECKSTYLE:ON
-    
+
     public App() {
         this(new ConsoleIO(), new ReferenceDAO(false));
         this.testMode = false;
@@ -61,7 +62,7 @@ public class App {
     public void run() {
         TextUi ui = new TextUi(io, this);
         ui.readCommandPrompt();
-        
+
         if (this.testMode) {
             this.dao.clearDatabase();
         }
@@ -70,11 +71,11 @@ public class App {
     public void loadDatabase() {
         references = new ArrayList<>(dao.getAll());
     }
-    
+
     public boolean isMemoryEmpty() {
         return references.isEmpty();
     }
-    
+
     public void clearMemory() {
         this.references = new ArrayList<>();
     }
@@ -82,9 +83,9 @@ public class App {
     public void clearDatabase() {
         this.dao.clearDatabase();
     }
-    
+
     public void printReference() {
-        
+
         for (Reference reference : references) {
             String bib = wrp.wrap(reference);
             io.println(bib);
@@ -102,19 +103,40 @@ public class App {
         return true;
     }
 
+    public void deleteReference(Reference reference) {
+        this.dao.delete(reference);
+        this.references.remove(reference);
+    }
+
+    public boolean updateReference(Reference reference, 
+                                   String field, 
+                                   String data) {
+        if (validator.checkInput(field, data, 
+                            reference.getRequiredFields().contains(field))) {
+            if (data.equals("")) {
+                reference.getFieldsMap().remove(field);
+            } else {
+                reference.setField(field, data);
+            }
+            this.dao.update(reference);
+            return true;
+        }
+        return false;
+    }
+
     public boolean addReference(int referenceType) {
         Reference reference = supportedRefs.get(referenceType);
         io.println("BibTex an " + reference + "!");
-        
+
         boolean allRequiredFields = inputFields(reference, true);
         boolean isValidReference = false;
-        
+
         if (allRequiredFields) {
             isValidReference = inputFields(reference, false);
         }
-        
-        // Add parse input for optional fields
+       
         if (isValidReference && validator.checkRequiredFields(reference)) {
+            reference.setID(dao.getNewId());
             this.references.add(reference);
             dao.add(reference);
             return true;
@@ -122,20 +144,17 @@ public class App {
             return false;
         }
     }
-    
+
 //CHECKSTYLE:OFF
     private boolean inputFields(Reference reference, boolean required) {
-        List<String> fields;
-        if (reference.getID() == null) {
-            reference.setID(dao.getNewId());
-        }
-        
+        List<String> fields;       
+
         if (required) {
             fields = reference.getRequiredFields();
         } else {
             fields = reference.getOptionalFields();
         }
-        
+
         for (String inputField : fields) {
             String inputLine;
             String reqOrOpt;

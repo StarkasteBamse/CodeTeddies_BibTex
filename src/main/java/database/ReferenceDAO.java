@@ -130,13 +130,14 @@ public class ReferenceDAO implements DAO<Reference> {
     }
     
     @Override
-    public void delete(Reference key) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public void delete(Reference reference) {       
+        this.collection.deleteOne(new Document("_id", reference.getID()));
     }
     
     @Override
-    public void update(Reference key) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public void update(Reference reference) {
+        delete(reference);
+        add(reference);
     }
 
     @Override
