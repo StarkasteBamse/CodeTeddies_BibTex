@@ -220,4 +220,12 @@ public class PhdThesisTest {
 
         assertEquals(false, instance.removeField("author"));
     }
+    
+    @Test
+    public void setAndGetIDWork() {
+        instance = new PhdThesis();
+        
+        instance.setID("abcd1234");
+        assertEquals("abcd1234", instance.getID());
+    }
 }

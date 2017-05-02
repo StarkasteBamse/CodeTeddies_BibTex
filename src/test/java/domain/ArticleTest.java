@@ -238,5 +238,13 @@ public class ArticleTest {
         
         assertEquals(false, instance.removeField("author"));
     }
+    
+    @Test
+    public void setAndGetIDWork() {
+        instance = new Article();
+        
+        instance.setID("abcd1234");
+        assertEquals("abcd1234", instance.getID());
+    }
 }
 
