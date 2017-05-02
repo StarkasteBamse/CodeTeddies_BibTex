@@ -22,26 +22,6 @@ public class Article implements Reference {
         initOptionalFields();
     }
 
-    public void setAuthor(String author) {
-        setField("author", author);
-    }
-
-    public void setTitle(String title) {
-        setField("title", title);
-    }
-
-    public void setYear(String year) {
-        setField("year", year);
-    }
-
-    public void setJournal(String journal) {
-        setField("journal", journal);
-    }
-
-    public void setVolume(String volume) {
-        setField("volume", volume);
-    }
-
     @Override
     public boolean hasRequiredFields() {
         for (String field : this.requiredFields) {

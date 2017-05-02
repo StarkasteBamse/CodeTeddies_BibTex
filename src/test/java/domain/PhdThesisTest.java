@@ -44,26 +44,16 @@ public class PhdThesisTest {
 
     public PhdThesis createMockPhdThesis() {
         PhdThesis thesis = new PhdThesis();
-        thesis.setTitle("Prediction and real-time compensation of qubit "
-                + "decoherence via machine learning");
-        thesis.setSchool("Caltech Arxiv");
-        thesis.setAuthor("Sandeep Mavadia, Jarrah Sastrawan");
-        thesis.setYear("2016");
+        thesis.setField("title", "Prediction and real-time compensation of " +
+              "qubit decoherence via machine learning");
+        thesis.setField("school", "Caltech Arxiv");
+        thesis.setField("author", "Sandeep Mavadia, Jarrah Sastrawan");
+        thesis.setField("year", "2016");
         return thesis;
     }
 
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of setAuthor method, of class PhdThesis.
-     */
-    @Test
-    public void testSetAuthor() {
-        String author = "tekija";
-        instance.setAuthor(author);
-        assertEquals(instance.getField("author"), author);
     }
 
     @Test
@@ -87,7 +77,7 @@ public class PhdThesisTest {
         PhdThesis thesis = createMockPhdThesis();
         PhdThesis thesisTest = createMockPhdThesis();
         String schoolUpperCase = thesisTest.getField("school").toUpperCase();
-        thesisTest.setSchool(schoolUpperCase);
+        thesisTest.setField("school", schoolUpperCase);
         assertTrue(thesis.equals(thesisTest));
     }
 
@@ -101,33 +91,13 @@ public class PhdThesisTest {
     }
 
     /**
-     * Test of setTitle method, of class PhdThesis.
+     * Test of setField method, of class PhdThesis.
      */
     @Test
-    public void testSetTitle() {
+    public void testSetField() {
         String title = "title";
-        instance.setTitle(title);
+        instance.setField("title", title);
         assertEquals(instance.getField("title"), title);
-    }
-
-    /**
-     * Test of setSchool method, of class PhdThesis.
-     */
-    @Test
-    public void testSetJournal() {
-        String school = "school";
-        instance.setSchool(school);
-        assertEquals(instance.getField("school"), school);
-    }
-
-    /**
-     * Test of setYear method, of class PhdThesis.
-     */
-    @Test
-    public void testSetYear() {
-        String year = "2015";
-        instance.setYear(year);
-        assertEquals(instance.getField("year"), year);
     }
 
     /**
@@ -138,25 +108,26 @@ public class PhdThesisTest {
         boolean expResult = false;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
-        instance.setAuthor("testA");
+        instance.setField("author", "testA");
         assertEquals(expResult, instance.hasRequiredFields());
-        instance.setTitle("testT");
+        instance.setField("title", "testT");
         assertEquals(expResult, instance.hasRequiredFields());
-        instance.setSchool("testJ");
+        instance.setField("school", "testJ");
         assertEquals(expResult, instance.hasRequiredFields());
     }
 
     /**
-     * Test of hasRequiredFields method when all fields are set, of class
-     * PhdThesis.
+     * Test of hasRequiredFields method when all fields are set,
+     * of class PhdThesis.
      */
     @Test
     public void testHasRequiredFieldsWhenFieldsAreSet() {
         instance = new PhdThesis();
-        instance.setAuthor("Arto Hellas");
-        instance.setSchool("University of Nakkila");
-        instance.setTitle("My doctoral dissertation: never getting it ready");
-        instance.setYear("2060");
+        instance.setField("author", "Arto Hellas");
+        instance.setField("school", "University of Nakkila");
+        instance.setField("title", "My doctoral dissertation: " +
+              "never getting it ready");
+        instance.setField("year", "2060");
         boolean expResult = true;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
@@ -165,7 +136,7 @@ public class PhdThesisTest {
     @Test
     public void getFieldReturnsNull() {
         instance = new PhdThesis();
-        instance.setAuthor(null);
+        instance.setField("author", null);
         boolean result = false;
         if (instance.getField("author") == null) {
             result = true;
@@ -250,4 +221,5 @@ public class PhdThesisTest {
         assertEquals(expResult, instance.equals(null));
         assertEquals(expResult, instance.hashCode() == comparable.hashCode());
     }
+
 }

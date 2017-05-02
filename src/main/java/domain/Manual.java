@@ -22,10 +22,6 @@ public class Manual implements Reference {
         initOptionalFields();
     }
 
-    public void setTitle(String title) {
-        setField("title", title);
-    }
-
     @Override
     public boolean hasRequiredFields() {
         for (String field : this.requiredFields) {

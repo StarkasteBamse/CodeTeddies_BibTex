@@ -15,14 +15,13 @@ public class ManualTest {
 
     private Manual instance;
     private final String[] mockValues = {"Mornom Random",
-        "Uni. Madagaskar",
-        "Too bad C 23",
-        "Sovietlux",
-        "February",
-        "2099",
-        "the key"};
-//CHECKSTYLE:ON  
-
+                                        "Uni. Madagaskar",
+                                        "Too bad C 23",
+                                        "Sovietlux",
+                                        "February",
+                                        "2099",
+                                        "the key"};
+//CHECKSTYLE:ON
     @Before
     public void setUp() {
         instance = new Manual();
@@ -30,8 +29,8 @@ public class ManualTest {
 
     public Manual createMockManual() {
         Manual manual = new Manual();
-        manual.setTitle("Prediction and real-time compensation of qubit "
-                + "decoherence via machine learning");
+        manual.setField("title", "Prediction and real-time compensation " +
+                "of qubitdecoherence via machine learning");
 
         for (int i = 0; i < this.mockValues.length; i++) {
             manual.setField(manual.getOptionalFields().get(i), mockValues[i]);
@@ -44,12 +43,12 @@ public class ManualTest {
     }
 
     /**
-     * Test of setAuthor method, of class Manual.
+     * Test of setField method, of class Manual.
      */
     @Test
-    public void testSetTitle() {
+    public void testSetField() {
         String title = "Manual of Cooperation: Sixth sense for code smells";
-        instance.setTitle(title);
+        instance.setField("title", title);
         assertEquals(instance.getField("title"), title);
     }
 
@@ -74,7 +73,7 @@ public class ManualTest {
         Manual manual = createMockManual();
         Manual manualTest = createMockManual();
         String titleUpperCase = manualTest.getField("title").toUpperCase();
-        manualTest.setTitle(titleUpperCase);
+        manualTest.setField("title", titleUpperCase);
         assertTrue(manual.equals(manualTest));
     }
 
@@ -95,18 +94,19 @@ public class ManualTest {
         boolean expResult = false;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
-        instance.setTitle("testT");
+        instance.setField("title", "testT");
         assertEquals(true, instance.hasRequiredFields());
     }
 
     /**
-     * Test of hasRequiredFields method when all fields are set, of class
-     * Manual.
+     * Test of hasRequiredFields method when all fields are set,
+     * of class Manual.
      */
     @Test
     public void testHasRequiredFieldsWhenFieldsAreSet() {
         instance = new Manual();
-        instance.setTitle("My doctoral dissertation: never getting it ready");
+        instance.setField("title", "My doctoral dissertation:" +
+              " never getting it ready");
         boolean expResult = true;
         boolean result = instance.hasRequiredFields();
         assertEquals(expResult, result);
@@ -115,7 +115,7 @@ public class ManualTest {
     @Test
     public void getFieldReturnsNull() {
         instance = new Manual();
-        instance.setTitle(null);
+        instance.setField("title", null);
         boolean result = false;
         if (instance.getField("author") == null) {
             result = true;

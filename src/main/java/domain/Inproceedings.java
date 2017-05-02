@@ -23,21 +23,6 @@ public class Inproceedings implements Reference {
 
     }
 
-    public void setAuthor(String author) {
-        setField("author", author);
-    }
-
-    public void setTitle(String title) {
-        setField("title", title);
-    }
-
-    public void setYear(String year) {
-        setField("year", year);
-    }
-
-    public void setBookTitle(String bookTitle) {
-        setField("booktitle", bookTitle);
-    }
 
     private void initRequiredFields() {
         this.requiredFields.add("author");
@@ -114,8 +99,8 @@ public class Inproceedings implements Reference {
     public void setID(String id) {
         this.id = id;
     }
-//CHECKSTYLE:OFF 
 
+//CHECKSTYLE:OFF
     @Override
     public int hashCode() {
         int hash = 3;

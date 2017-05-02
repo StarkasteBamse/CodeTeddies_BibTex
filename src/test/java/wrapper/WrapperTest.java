@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 
 public class WrapperTest {
-    
+
     private Article a;
     private String author;
     private String journal;
@@ -23,21 +23,21 @@ public class WrapperTest {
         author = "author";
         journal = "journal";
         title = "title";
-        a.setAuthor(author);
-        a.setJournal(journal);
-        a.setTitle(title);
-        a.setYear(year);
-        a.setVolume(volume);
+        a.setField("author", author);
+        a.setField("journal", journal);
+        a.setField("title", title);
+        a.setField("year", year);
+        a.setField("volume", volume);
         a.setID("0000000001");
     }
-    
+
     @Before
     public void setUp() {
     }
 
     @Test
     public void keyCorrect() {
-        
+
         String key = a.getField("title").substring(0, idLength)
                 + a.getID().substring(idLength);
         Wrapper wrp = new Wrapper();
@@ -53,7 +53,7 @@ public class WrapperTest {
         }
         assertTrue(correct);
     }
-    
+
     @Test
     public void authorCorrect() {
         String comp = author;
@@ -70,7 +70,7 @@ public class WrapperTest {
         }
         assertTrue(correct);
     }
-    
+
     @Test
     public void journalCorrect() {
         String comp = journal;
@@ -87,7 +87,7 @@ public class WrapperTest {
         }
         assertTrue(correct);
     }
-    
+
     @Test
     public void titleCorrect() {
         String comp = title;
@@ -104,7 +104,7 @@ public class WrapperTest {
         }
         assertTrue(correct);
     }
-    
+
     @Test
     public void yearCorrect() {
         String comp = "" + year;
@@ -121,7 +121,7 @@ public class WrapperTest {
         }
         assertTrue(correct);
     }
-    
+
     @Test
     public void volumeCorrect() {
         String comp = "" + volume;

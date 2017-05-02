@@ -17,6 +17,5 @@ public interface Reference {
     List<String> getOptionalFields();
     HashMap<String, String> getFieldsMap();
     boolean removeField(String field);
-    
-      
+
 }
