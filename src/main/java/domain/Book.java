@@ -22,22 +22,6 @@ public class Book implements Reference {
         initOptionalFields();
     }
 
-    public void setAuthor(String author) {
-        setField("author", author);
-    }
-    
-    public void setTitle(String title) {
-        setField("title", title);
-    }
-    
-    public void setYear(String year) {
-        setField("year", year);
-    }
-    
-    public void setPublisher(String publisher) {
-        setField("publisher", publisher);
-    }
-
     @Override
     public boolean hasRequiredFields() {
         for (String field : this.requiredFields) {
@@ -54,7 +38,7 @@ public class Book implements Reference {
         requiredFields.add("publisher");
         requiredFields.add("year");
     }
-    
+
     private void initOptionalFields() {
         optionalFields.add("number");
         optionalFields.add("series");
@@ -78,7 +62,7 @@ public class Book implements Reference {
             return null;
         } else return this.fields.get(field);
     }
-    
+
     @Override
     public List<String> getRequiredFields() {
         return this.requiredFields;
@@ -98,7 +82,7 @@ public class Book implements Reference {
     public List<String> getOptionalFields() {
         return optionalFields;
     }
-    
+
     @Override
     public String getID() {
         return this.id;
@@ -128,18 +112,17 @@ public class Book implements Reference {
             return false;
         }
         final Book other = (Book) obj;
-        
+
         for (String requiredField : requiredFields) {
             String thisValue = this.getField(requiredField).toLowerCase();
             String otherValue = other.getField(requiredField).toLowerCase();
-            
+
             if (!Objects.equals(thisValue, otherValue)) {
                 return false;
             }
         }
         return true;
     }
-    
-   
-}
 
+
+}

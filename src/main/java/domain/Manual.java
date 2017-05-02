@@ -21,10 +21,6 @@ public class Manual implements Reference {
         initRequiredFields();
         initOptionalFields();
     }
-    
-    public void setTitle(String title) {
-        setField("title", title);
-    }
 
     @Override
     public boolean hasRequiredFields() {
@@ -39,7 +35,7 @@ public class Manual implements Reference {
     private void initRequiredFields() {
         requiredFields.add("title");
     }
-    
+
     private void initOptionalFields() {
         optionalFields.add("author");
         optionalFields.add("organization");
@@ -71,7 +67,7 @@ public class Manual implements Reference {
     public List<String> getRequiredFields() {
         return this.requiredFields;
     }
-    
+
     public List<String> getOptionalFields() {
         return this.optionalFields;
     }
@@ -116,19 +112,19 @@ public class Manual implements Reference {
             return false;
         }
         final Manual other = (Manual) obj;
-        
+
         for (String requiredField : requiredFields) {
             String thisValue = this.getField(requiredField).toLowerCase();
             String otherValue = other.getField(requiredField).toLowerCase();
-            
+
             if (!Objects.equals(thisValue, otherValue)) {
                 return false;
             }
         }
         return true;
     }
-    
-    
-    
-    
+
+
+
+
 }

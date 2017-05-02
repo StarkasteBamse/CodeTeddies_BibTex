@@ -21,26 +21,6 @@ public class Article implements Reference {
         initRequiredFields();
         initOptionalFields();
     }
-    
-    public void setAuthor(String author) {
-        setField("author", author);
-    }
-
-    public void setTitle(String title) {
-        setField("title", title);
-    }
-
-    public void setYear(String year) {
-        setField("year", year);
-    }
-
-    public void setJournal(String journal) {
-        setField("journal", journal);
-    }
-
-    public void setVolume(String volume) {
-        setField("volume", volume);
-    }
 
     @Override
     public boolean hasRequiredFields() {
@@ -59,7 +39,7 @@ public class Article implements Reference {
         requiredFields.add("year");
         requiredFields.add("volume");
     }
-    
+
     private void initOptionalFields() {
         optionalFields.add("number");
         optionalFields.add("pages");
@@ -88,7 +68,7 @@ public class Article implements Reference {
     public List<String> getRequiredFields() {
         return this.requiredFields;
     }
-    
+
     public List<String> getOptionalFields() {
         return this.optionalFields;
     }
@@ -133,11 +113,11 @@ public class Article implements Reference {
             return false;
         }
         final Article other = (Article) obj;
-        
+
         for (String requiredField : requiredFields) {
             String thisValue = this.getField(requiredField).toLowerCase();
             String otherValue = other.getField(requiredField).toLowerCase();
-            
+
             if (!Objects.equals(thisValue, otherValue)) {
                 return false;
             }
@@ -145,7 +125,7 @@ public class Article implements Reference {
         return true;
     }
 
-    
-    
-    
+
+
+
 }
