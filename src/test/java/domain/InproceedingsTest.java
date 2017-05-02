@@ -84,4 +84,57 @@ public class InproceedingsTest {
         assertEquals(expResult, instance.getField("invaliidi"));
     }
 
+    @Test
+    public void removeFieldEmptiesProperly() {
+        instance = new Inproceedings();
+
+        instance.setField("author", "Testerman");
+        instance.removeField("author");
+        assertEquals(null, instance.getField("author"));
+    }
+
+    @Test
+    public void removeFieldReturnsTrue() {
+        instance = new Inproceedings();
+
+        instance.setField("author", "Testerman");
+        assertEquals(true, instance.removeField("author"));
+    }
+
+    @Test
+    public void removeFieldFailsOnUnsetField() {
+        instance = new Inproceedings();
+
+        assertEquals(false, instance.removeField("author"));
+    }
+    
+    @Test
+    public void setAndGetIDWork() {
+        instance = new Inproceedings();
+        
+        instance.setID("abcd1234");
+        assertEquals("abcd1234", instance.getID());
+    }
+    
+    @Test
+    public void isNotEqualToOthers() {
+        instance = new Inproceedings();
+        Inproceedings comparable = new Inproceedings();
+        
+        instance.setField("author", "Matti");
+        instance.setField("title", "asd");
+        instance.setField("booktitle", "asdfa");
+        instance.setField("year", "2016");
+        
+        comparable.setField("author", "Ville");
+        comparable.setField("title", "asd");
+        comparable.setField("booktitle", "asdfa");
+        comparable.setField("year", "2016");
+        
+        
+        boolean expResult = false;
+        assertEquals(expResult, instance.equals(comparable));
+        assertEquals(expResult, instance.equals(null));
+        assertEquals(expResult, instance.hashCode() == comparable.hashCode());
+    }
 }

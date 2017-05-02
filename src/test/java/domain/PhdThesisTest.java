@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -138,12 +138,11 @@ public class PhdThesisTest {
         instance = new PhdThesis();
         instance.setField("author", null);
         boolean result = false;
-        if(instance.getField("author") == null) {
+        if (instance.getField("author") == null) {
             result = true;
         }
         assertTrue(result);
     }
-
 
     @Test
     public void setFieldFailsWithInvalidFieldType() {
@@ -168,4 +167,59 @@ public class PhdThesisTest {
         assertEquals("helloworld", instance.getField("note"));
         assertEquals("ABCD1234", instance.getField("key"));
     }
+
+    @Test
+    public void removeFieldEmptiesProperly() {
+        instance = new PhdThesis();
+
+        instance.setField("author", "Testerman");
+        instance.removeField("author");
+        assertEquals(null, instance.getField("author"));
+    }
+
+    @Test
+    public void removeFieldReturnsTrue() {
+        instance = new PhdThesis();
+
+        instance.setField("author", "Testerman");
+        assertEquals(true, instance.removeField("author"));
+    }
+
+    @Test
+    public void removeFieldFailsOnUnsetField() {
+        instance = new PhdThesis();
+
+        assertEquals(false, instance.removeField("author"));
+    }
+    
+    @Test
+    public void setAndGetIDWork() {
+        instance = new PhdThesis();
+        
+        instance.setID("abcd1234");
+        assertEquals("abcd1234", instance.getID());
+    }
+    
+    @Test
+    public void isNotEqualToOthers() {
+        instance = new PhdThesis();
+        PhdThesis comparable = new PhdThesis();
+        
+        instance.setField("author", "Matti");
+        instance.setField("title", "asd");
+        instance.setField("school", "asdfa");
+        instance.setField("year", "2016");
+        
+        comparable.setField("author", "Ville");
+        comparable.setField("title", "asd");
+        comparable.setField("school", "asdfa");
+        comparable.setField("year", "2016");
+        
+        
+        boolean expResult = false;
+        assertEquals(expResult, instance.equals(comparable));
+        assertEquals(expResult, instance.equals(null));
+        assertEquals(expResult, instance.hashCode() == comparable.hashCode());
+    }
+
 }

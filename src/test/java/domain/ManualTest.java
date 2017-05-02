@@ -1,6 +1,7 @@
 package domain;
 
 import domain.Manual;
+import java.util.Objects;
 import logic.Validator;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,6 +12,7 @@ import static org.junit.Assert.*;
 
 public class ManualTest {
 //CHECKSTYLE:OFF
+
     private Manual instance;
     private final String[] mockValues = {"Mornom Random",
                                         "Uni. Madagaskar",
@@ -115,7 +117,7 @@ public class ManualTest {
         instance = new Manual();
         instance.setField("title", null);
         boolean result = false;
-        if(instance.getField("author") == null) {
+        if (instance.getField("author") == null) {
             result = true;
         }
         assertTrue(result);
@@ -149,5 +151,51 @@ public class ManualTest {
         assertEquals("Jollantie 22", instance.getField("address"));
         assertEquals("helloworld", instance.getField("note"));
         assertEquals("ABCD1234", instance.getField("key"));
+    }
+
+    @Test
+    public void removeFieldEmptiesProperly() {
+        instance = new Manual();
+
+        instance.setField("author", "Testerman");
+        instance.removeField("author");
+        assertEquals(null, instance.getField("author"));
+    }
+
+    @Test
+    public void removeFieldReturnsTrue() {
+        instance = new Manual();
+
+        instance.setField("author", "Testerman");
+        assertEquals(true, instance.removeField("author"));
+    }
+
+    @Test
+    public void removeFieldFailsOnUnsetField() {
+        instance = new Manual();
+
+        assertEquals(false, instance.removeField("author"));
+    }
+    
+    @Test
+    public void setAndGetIDWork() {
+        instance = new Manual();
+        
+        instance.setID("abcd1234");
+        assertEquals("abcd1234", instance.getID());
+    }
+    
+    @Test
+    public void isNotEqualToOthers() {
+        instance = new Manual();
+        Manual comparable = new Manual();
+        
+        instance.setField("title", "qwegiohakg");
+        comparable.setField("title", "ASC");
+
+        boolean expResult = false;
+        assertEquals(expResult, instance.equals(comparable));
+        assertEquals(expResult, instance.equals(null));
+        assertEquals(expResult, instance.hashCode() == comparable.hashCode());
     }
 }

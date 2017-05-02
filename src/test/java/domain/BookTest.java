@@ -150,4 +150,56 @@ public class BookTest {
         assertEquals(expResult, instance.getField("invaliidi"));
     }
 
+    @Test
+    public void removeFieldEmptiesProperly() {
+        instance = new Book();
+
+        instance.setField("author", "Testerman");
+        instance.removeField("author");
+        assertEquals(null, instance.getField("author"));
+    }
+
+    @Test
+    public void removeFieldReturnsTrue() {
+        instance = new Book();
+
+        instance.setField("author", "Testerman");
+        assertEquals(true, instance.removeField("author"));
+    }
+
+    @Test
+    public void removeFieldFailsOnUnsetField() {
+        instance = new Book();
+
+        assertEquals(false, instance.removeField("author"));
+    }
+
+    @Test
+    public void setAndGetIDWork() {
+        instance = new Book();
+        
+        instance.setID("abcd1234");
+        assertEquals("abcd1234", instance.getID());
+    }
+    
+    @Test
+    public void isNotEqualToOthers() {
+        instance = new Book();
+        Book comparable = new Book();
+        
+        instance.setField("title", "qwe");
+        instance.setField("author", "a");
+        instance.setField("publisher", "b");
+        instance.setField("year", "2016");
+
+        comparable.setField("title", "asd");
+        comparable.setField("author", "a");
+        comparable.setField("publisher", "b");
+        comparable.setField("year", "2016");
+
+        boolean expResult = false;
+        assertEquals(expResult, instance.equals(comparable));
+        assertEquals(expResult, instance.equals(null));
+        assertEquals(expResult, instance.hashCode() == comparable.hashCode());
+    }
 }

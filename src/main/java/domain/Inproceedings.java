@@ -99,17 +99,19 @@ public class Inproceedings implements Reference {
     public void setID(String id) {
         this.id = id;
     }
+
 //CHECKSTYLE:OFF
     @Override
     public int hashCode() {
         int hash = 3;
         for (String requiredField : requiredFields) {
             String fieldValue = this.getField(requiredField).toLowerCase();
-            hash = 11 * hash + Objects.hashCode(this.getField(fieldValue));
+            hash = 11 * hash + Objects.hashCode(fieldValue);
         }
         return hash;
     }
 //CHECKSTYLE:ON
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -131,5 +133,14 @@ public class Inproceedings implements Reference {
         return true;
     }
 
+    @Override
+    public boolean removeField(String field) {
+        if (fields.containsKey(field)) {
+            fields.remove(field);
+            return true;
+        }
+        return false;
+
+    }
 
 }

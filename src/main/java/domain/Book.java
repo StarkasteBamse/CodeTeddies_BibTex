@@ -98,7 +98,7 @@ public class Book implements Reference {
         int hash = 3;
         for (String requiredField : requiredFields) {
             String fieldValue = this.getField(requiredField).toLowerCase();
-            hash = 11 * hash + Objects.hashCode(this.getField(fieldValue));
+            hash = 11 * hash + Objects.hashCode(fieldValue);
         }
         return hash;
     }
@@ -124,5 +124,15 @@ public class Book implements Reference {
         return true;
     }
 
+    @Override
+    public boolean removeField(String field) {
+        if (fields.containsKey(field)) {
+            fields.remove(field);
+            return true;
+        }
+        return false;
 
+    }
+    
+   
 }

@@ -87,111 +87,17 @@ public class TextUi {
                 printView(command);
                 return true;
             case "add":
-                printView("whichType");
-                for (Integer i : app.getSupportedRefs().keySet()) {
-                    io.println("\t" + i + ". " + app.getSupportedRefs().get(i));
-                }
-                printView("giveNumber");
-                String referenceType = io.readLine();
-                io.println("");
-
-                if (referenceType.matches("[12345]")) {
-                    int referenceCode = Integer.parseInt(referenceType);
-                    if (!app.addReference(referenceCode)) {
-                        printView("formatError");
-                    } else {
-                        io.println("New " + app.getSupportedRefs()
-                                .get(referenceCode).toString()
-                                + " added successfully");
-                    }
-                } else {
-                    printView("invalidReferenceType");
-                }
+                printAdd(command);
                 break;
 //            case "save":
 //                printView("referencesSaved");
 //                break;
             case "delete":
-                io.println("which reference you want to delete");
-                List<Reference> r1 = app.getReferences();
-
-                for (int i = 0; i < r1.size(); i++) {
-                    io.println("[" + (i + 1) + "] " + r1.get(i).toString());
-                    HashMap<String, String> fieldsMap = r1.get(i).getFieldsMap();
-
-                    for (String fields : fieldsMap.keySet()) {
-                        io.println(fields + "\t:\t" + fieldsMap.get(fields));
-                    }
-                    io.println("");
-                }
-                io.print("give number what you want to delete (0 for cancel): ");
-
-                int number = 0;
-                try {
-                    number = Integer.parseInt(io.readLine());
-                } catch (Exception e) {
-                    io.println("this ain't no number");
-                }
-
-                if (number == 0) {
-                    break;
-                } else {
-                    app.deleteReference(r1.get(number - 1));
-                    io.println("reference deleted!");
-                }
+                printDelete(command);
                 break;
 
             case "edit":
-                io.println("which reference you want to edit");
-                List<Reference> r2 = app.getReferences();
-
-                for (int i = 0; i < r2.size(); i++) {
-                    io.println("[" + (i + 1) + "] " + r2.get(i).toString());
-                    HashMap<String, String> fieldsMap = r2.get(i).getFieldsMap();
-
-                    for (String fields : fieldsMap.keySet()) {
-                        io.println(fields + "\t:\t" + fieldsMap.get(fields));
-                    }
-                    io.println("");
-                }
-                io.print("give number what you want to edit (0 for cancel): ");
-
-                int num = 0;
-                try {
-                    num = Integer.parseInt(io.readLine());
-                } catch (Exception e) {
-                    io.println("this ain't no number");
-                }
-
-                if (num == 0) {
-                    break;
-                }
-
-                Reference ref = r2.get(num - 1);
-                io.println("FIELDS\t:\tVALUES");
-                HashMap<String, String> fieldsMap = ref.getFieldsMap();
-                //list fields with data
-                for (String fields : fieldsMap.keySet()) {
-                    io.println(fields + "\t:\t" + fieldsMap.get(fields));
-                }
-                //list fields with no data
-                for (String emptyField : ref.getOptionalFields()) {
-                    if (!fieldsMap.containsKey(emptyField)) {
-                        io.println(emptyField + "\t:");
-                    }
-                }
-                io.println("give field what you want to edit (enter return): ");
-                String field = io.readLine();
-                if (field.equals("")) {
-                    break;
-                }
-                io.println("give new value for field");
-                String value = io.readLine();
-
-                if (!app.updateReference(ref, field, value)) {
-                    io.println("invalid input value for field " + field);
-                }
-                io.println("reference updated!");
+                printEdit(command);
                 break;
             case "load":
                 app.loadDatabase();
@@ -244,4 +150,110 @@ public class TextUi {
         }
         return fileName;
     }
+
+    private void printAdd(String command) {
+        printView("whichType");
+        for (Integer i : app.getSupportedRefs().keySet()) {
+            io.println("\t" + i + ". " + app.getSupportedRefs().get(i));
+        }
+        printView("giveNumber");
+        String referenceType = io.readLine();
+        io.println("");
+
+        if (referenceType.matches("[12345]")) {
+            int referenceCode = Integer.parseInt(referenceType);
+            if (!app.addReference(referenceCode)) {
+                printView("formatError");
+            } else {
+                io.println("New " + app.getSupportedRefs()
+                        .get(referenceCode).toString()
+                        + " added successfully");
+            }
+        } else {
+            printView("invalidReferenceType");
+        }
+    }
+
+    //CHECKSTYLE:OFF
+    private void printDelete(String command) {
+        io.println("which reference you want to delete");
+        List<Reference> r1 = app.getReferences();
+
+        for (int i = 0; i < r1.size(); i++) {
+            io.println("[" + (i + 1) + "] " + r1.get(i).toString());
+            HashMap<String, String> fieldsMap = r1.get(i).getFieldsMap();
+
+            for (String fields : fieldsMap.keySet()) {
+                io.println(fields + "\t:\t" + fieldsMap.get(fields));
+            }
+            io.println("");
+        }
+        io.print("give number what you want to delete (0 for cancel): ");
+
+        int number = 0;
+        try {
+            number = Integer.parseInt(io.readLine());
+        } catch (Exception e) {
+            io.println("this ain't no number");
+        }
+
+        if (number != 0) {
+            app.deleteReference(r1.get(number - 1));
+            io.println("reference deleted!");
+        }
+    }
+
+    private void printEdit(String command) {
+        io.println("which reference you want to edit");
+        List<Reference> r2 = app.getReferences();
+
+        for (int i = 0; i < r2.size(); i++) {
+            io.println("[" + (i + 1) + "] " + r2.get(i).toString());
+            HashMap<String, String> fieldsMap = r2.get(i).getFieldsMap();
+
+            for (String fields : fieldsMap.keySet()) {
+                io.println(fields + "\t:\t" + fieldsMap.get(fields));
+            }
+            io.println("");
+        }
+        io.print("give number what you want to edit (0 for cancel): ");
+
+        int num = 0;
+        try {
+            num = Integer.parseInt(io.readLine());
+        } catch (Exception e) {
+            io.println("this ain't no number");
+        }
+
+        if (num == 0) {
+            return;
+        }
+
+        Reference ref = r2.get(num - 1);
+        io.println("FIELDS\t:\tVALUES");
+        HashMap<String, String> fieldsMap = ref.getFieldsMap();
+        //list fields with data
+        for (String fields : fieldsMap.keySet()) {
+            io.println(fields + "\t:\t" + fieldsMap.get(fields));
+        }
+        //list fields with no data
+        for (String emptyField : ref.getOptionalFields()) {
+            if (!fieldsMap.containsKey(emptyField)) {
+                io.println(emptyField + "\t:");
+            }
+        }
+        io.println("give field what you want to edit (enter return): ");
+        String field = io.readLine();
+        if (field.equals("")) {
+            return;
+        }
+        io.println("give new value for field");
+        String value = io.readLine();
+
+        if (!app.updateReference(ref, field, value)) {
+            io.println("invalid input value for field " + field);
+        }
+        io.println("reference updated!");
+    }
+    //CHECKSTYLE:ON
 }
