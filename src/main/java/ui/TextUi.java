@@ -19,7 +19,6 @@ public class TextUi {
         this.printViewMap = initializePrintViews();
         this.n = System.getProperty("line.separator");
     }
-//CHECKSTYLE:OFF
     
     public void readCommandPrompt() {
         OUTER:
@@ -32,7 +31,7 @@ public class TextUi {
             }
         }
     }
-    
+//CHECKSTYLE:OFF  
     public HashMap<String,Runnable> initializePrintViews() {
         HashMap<String,Runnable> printViews = new HashMap<>();
         printViews.put("quit", () -> io.println("See you next time, "
@@ -42,7 +41,7 @@ public class TextUi {
                 io.println("Which reference type?");
                 });
         printViews.put("giveNumber", () -> io.print("Give a number of reference: "));
-        printViews.put("invalidReferenceType", () -> io.println("Invalid reference type"));
+        printViews.put("invalidReferenceType", () -> io.println(n + "Invalid reference type"));
         printViews.put("referencesSaved", () -> io.println("References saved." + n));
         printViews.put("loadDb", () -> io.println("References loaded to memory!"));
         printViews.put("memoryClear", () -> io.println("MY MEMORIES ARE GONE!"));
@@ -105,9 +104,9 @@ public class TextUi {
                     printView("invalidReferenceType");
                 }
                 break;
-//          case "save":
-//                ui.printView("referencesSaved");
-//              break;
+//            case "save":
+//                printView("referencesSaved");
+//                break;
             case "load":
                 app.loadDatabase();
                 printView("loadDb");

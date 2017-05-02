@@ -61,6 +61,7 @@ public class App {
     public void run() {
         TextUi ui = new TextUi(io, this);
         ui.readCommandPrompt();
+        
         if (this.testMode) {
             this.dao.clearDatabase();
         }
@@ -101,16 +102,6 @@ public class App {
         return true;
     }
 
-    private void addReferenceToList(Reference reference) {
-        
-        if (validator.checkRequiredFields(reference)) {
-            this.references.add(reference);
-            dao.add(reference);
-        } else {
-            io.print("");
-        }
-    }
-
     public boolean addReference(int referenceType) {
         Reference reference = supportedRefs.get(referenceType);
         io.println("BibTex an " + reference + "!");
@@ -123,8 +114,9 @@ public class App {
         }
         
         // Add parse input for optional fields
-        if (isValidReference) { //needed check for optional fields
-            addReferenceToList(reference);
+        if (isValidReference && validator.checkRequiredFields(reference)) {
+            this.references.add(reference);
+            dao.add(reference);
             return true;
         } else {
             return false;
@@ -134,7 +126,9 @@ public class App {
 //CHECKSTYLE:OFF
     private boolean inputFields(Reference reference, boolean required) {
         List<String> fields;
-        reference.setID(dao.getNewId());
+        if (reference.getID() == null) {
+            reference.setID(dao.getNewId());
+        }
         
         if (required) {
             fields = reference.getRequiredFields();
