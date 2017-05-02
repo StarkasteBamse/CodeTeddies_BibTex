@@ -23,4 +23,4 @@ tulee vastaavasti ajaa komento terminaalissa:
 
   java -jar miniprojekti-all.jar
 
-[__MongoDb-ohje (Devaajille)__](https://github.com/StarkasteBamse/CodeTeddies_BibTex/MongoDBohje.md)
+[__MongoDb-ohje (Devaajille)__](https://github.com/StarkasteBamse/CodeTeddies_BibTex/blob/master/MongoDBohje.md)
