@@ -17,7 +17,7 @@ public class WrapperTest {
     private String title;
     private final String year = "1999";
     private final String volume = "12";
-    private final int idLength = 6;
+    private final int idLength = 3;
     public WrapperTest() {
         a = new Article();
         author = "author";
@@ -37,7 +37,9 @@ public class WrapperTest {
 
     @Test
     public void keyCorrect() {
-        String key = a.getID().substring(0, idLength);
+        
+        String key = a.getField("title").substring(0, idLength)
+                + a.getID().substring(idLength);
         Wrapper wrp = new Wrapper();
         String bib = wrp.wrap(a);
         Scanner scn = new Scanner(bib);

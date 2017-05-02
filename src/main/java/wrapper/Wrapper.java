@@ -9,11 +9,12 @@ import java.util.Set;
 
 public class Wrapper {
 
-    private final int idLength = 6;
+    private final int idLength = 3;
 
     public String wrap(Reference reference) { // palauttaa bibtex-Stringinä
         String type = reference.toString();
-        String key = reference.getID().substring(0, idLength);
+        String key = reference.getField("title").substring(0, idLength) 
+                     + reference.getID().substring(idLength);
         String n = System.getProperty("line.separator");
         String bib = "@" + type + "{" + key + "," + n;
 
