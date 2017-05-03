@@ -83,7 +83,8 @@ public class TextUi {
     public boolean equalsCommand(String command) {
         switch (command) {
             case "quit":
-                printView(command);
+                new Quit(io, app).run();
+//                printView(command);
                 return true;
             case "add":
                 new Add(io, app).run();
@@ -93,11 +94,13 @@ public class TextUi {
 //                printView("referencesSaved");
 //                break;
             case "delete":
-                printDelete(command);
+                new Delete(io, app).run();
+//                printDelete(command);
                 break;
 
             case "edit":
-                printEdit(command);
+                new Edit(io, app).run();
+//                printEdit(command);
                 break;
             case "load":
                 new Load(io, app).run();
@@ -115,25 +118,28 @@ public class TextUi {
 //                printView("dbClear");
                 break;
             case "print":
-                if (app.isMemoryEmpty()) {
-                    printView("emptyMemory");
-                } else {
-                    app.printReference();
-                }
+                new Print(io, app).run();
+//                if (app.isMemoryEmpty()) {
+//                    printView("emptyMemory");
+//                } else {
+//                    app.printReference();
+//                }
                 break;
             case "file":
-                if (app.isMemoryEmpty()) {
-                    printView("noReferencesToExport");
-                } else {
-                    String fileName = readFileName();
-                    if (!app.exportReference(fileName)) {
-                        printView("exportError");
-                        io.println(fileName);
-                    }
-                }
+                new File(io, app).run();
+//                if (app.isMemoryEmpty()) {
+//                    printView("noReferencesToExport");
+//                } else {
+//                    String fileName = readFileName();
+//                    if (!app.exportReference(fileName)) {
+//                        printView("exportError");
+//                        io.println(fileName);
+//                    }
+//                }
                 break;
             default:
-                printView("typeCommandAgain");
+                new Invalid(io, app).run();
+//                printView("typeCommandAgain");
                 break;
         }
         return false;
