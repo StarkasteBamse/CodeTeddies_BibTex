@@ -12,12 +12,12 @@ public class TextUi {
     private IO io;
     private String n;
     private App app;
-    private HashMap<String, Runnable> printViewMap;
+    private HashMap<String, Command> commandMap;
 
     public TextUi(IO io, App app) {
         this.app = app;
         this.io = io;
-        this.printViewMap = initializePrintViews();
+        this.commandMap = initializeCommands();
         this.n = System.getProperty("line.separator");
     }
 
@@ -27,35 +27,37 @@ public class TextUi {
             printCommands();
             String command = io.readLine().toLowerCase();
             io.println("");
-            if (equalsCommand(command)) {
+            if (command.matches("quit")) {
+                commandMap.get(command).run();
                 break OUTER;
+            } else {
+                runCommand(command);
             }
         }
     }
-//CHECKSTYLE:OFF  
-
-    public HashMap<String, Runnable> initializePrintViews() {
-        HashMap<String, Runnable> printViews = new HashMap<>();
-        printViews.put("quit", () -> io.println("See you next time!"));
-        printViews.put("whichType", () -> {
-            io.println("");
-            io.println("Which reference type?");
-        });
-        printViews.put("giveNumber", () -> io.print("Give a number of reference: "));
-        printViews.put("invalidReferenceType", () -> io.println("Invalid reference type"));
-        printViews.put("referencesSaved", () -> io.println("References saved." + n));
-        printViews.put("loadDb", () -> io.println("References loaded to memory!"));
-        printViews.put("memoryClear", () -> io.println("MY MEMORIES ARE GONE!"));
-        printViews.put("dbClear", () -> io.println("DATABASE IS NOW GONE!"));
-        printViews.put("emptyMemory", () -> io.println("No articles in memory"));
-        printViews.put("noReferencesToExport", () -> io.println("No articles in memory, you don't want an empty .bib file!"));
-        printViews.put("typeCommandAgain", () -> io.println("Please type in a command from list!"));
-        printViews.put("enterFilename", () -> io.print("Enter filename (.bib-format): "));
-        printViews.put("formatError", () -> io.println("Not proper format!"));
-        printViews.put("exportError", () -> io.println("Error occurred while exporting file: "));
-        return printViews;
+    
+    public void runCommand(String command) {
+        if (commandMap.containsKey(command)) {
+            commandMap.get(command).run();
+        } else {
+            commandMap.get("invalid").run();
+        }
     }
-//CHECKSTYLE:ON
+
+    public HashMap<String, Command> initializeCommands() {
+        HashMap<String, Command> commands = new HashMap<>();
+        commands.put("add", new Add(io, app));
+        commands.put("delete", new Delete(io, app));
+        commands.put("edit", new Edit(io, app));
+        commands.put("load", new Load(io, app));
+        commands.put("clear", new Clear(io, app));
+        commands.put("deletedb", new DeleteDB(io, app));
+        commands.put("print", new Print(io, app));
+        commands.put("file", new File(io, app));
+        commands.put("invalid", new Invalid(io, app));
+        commands.put("quit", new Quit(io, app));
+        return commands;
+    }
 
     public void printCommands() {
         io.print("Commands: " + n
@@ -74,185 +76,4 @@ public class TextUi {
                 + "(quit) Stop using this program" + n
                 + "Command: ");
     }
-
-    public void printView(String command) {
-        this.printViewMap.get(command).run();
-    }
-
-//CHECKSTYLE:OFF    
-    public boolean equalsCommand(String command) {
-        switch (command) {
-            case "quit":
-                printView(command);
-                return true;
-            case "add":
-                printAdd(command);
-                break;
-//            case "save":
-//                printView("referencesSaved");
-//                break;
-            case "delete":
-                printDelete(command);
-                break;
-
-            case "edit":
-                printEdit(command);
-                break;
-            case "load":
-                app.loadDatabase();
-                printView("loadDb");
-                break;
-            case "clear":
-                app.clearMemory();
-                printView("memoryClear");
-                break;
-            case "deletedb":
-                app.clearDatabase();
-                printView("dbClear");
-                break;
-            case "print":
-                if (app.isMemoryEmpty()) {
-                    printView("emptyMemory");
-                } else {
-                    app.printReference();
-                }
-                break;
-            case "file":
-                if (app.isMemoryEmpty()) {
-                    printView("noReferencesToExport");
-                } else {
-                    String fileName = readFileName();
-                    if (!app.exportReference(fileName)) {
-                        printView("exportError");
-                        io.println(fileName);
-                    }
-                }
-                break;
-            default:
-                printView("typeCommandAgain");
-                break;
-        }
-        return false;
-    }
-//CHECKSTYLE:ON
-
-    public String readFileName() {
-        String fileName = "";
-        while (true) {
-            printView("enterFilename");
-            fileName = io.readLine();
-            if (fileName.contains(".bib")
-                    && fileName.length() > ".bib".length()) {
-                break;
-            }
-            io.println("");
-        }
-        return fileName;
-    }
-
-    private void printAdd(String command) {
-        printView("whichType");
-        for (Integer i : app.getSupportedRefs().keySet()) {
-            io.println("\t" + i + ". " + app.getSupportedRefs().get(i));
-        }
-        printView("giveNumber");
-        String referenceType = io.readLine();
-        io.println("");
-
-        if (referenceType.matches("[12345]")) {
-            int referenceCode = Integer.parseInt(referenceType);
-            if (!app.addReference(referenceCode)) {
-                printView("formatError");
-            } else {
-                io.println("New " + app.getSupportedRefs()
-                        .get(referenceCode).toString()
-                        + " added successfully");
-            }
-        } else {
-            printView("invalidReferenceType");
-        }
-    }
-
-    //CHECKSTYLE:OFF
-    private void printDelete(String command) {
-        io.println("which reference do you want to delete");
-        List<Reference> r1 = app.getReferences();
-
-        for (int i = 0; i < r1.size(); i++) {
-            io.println("[" + (i + 1) + "] " + r1.get(i).toString());
-            HashMap<String, String> fieldsMap = r1.get(i).getFieldsMap();
-
-            for (String fields : fieldsMap.keySet()) {
-                io.println(fields + "\t:\t" + fieldsMap.get(fields));
-            }
-            io.println("");
-        }
-        io.print("give the number of the reference you want to delete (0 for cancel): ");
-
-        int number = 0;
-        try {
-            number = Integer.parseInt(io.readLine());
-        } catch (Exception e) {
-            io.println("this ain't no number");
-        }
-
-        if (number != 0) {
-            app.deleteReference(r1.get(number - 1));
-            io.println("reference deleted!");
-        }
-    }
-
-    private void printEdit(String command) {
-        io.println("which reference do you want to edit");
-        List<Reference> r2 = app.getReferences();
-
-        for (int i = 0; i < r2.size(); i++) {
-            io.println("[" + (i + 1) + "] " + r2.get(i).toString());
-            HashMap<String, String> fieldsMap = r2.get(i).getFieldsMap();
-
-            for (String fields : fieldsMap.keySet()) {
-                io.println(fields + "\t:\t" + fieldsMap.get(fields));
-            }
-            io.println("");
-        }
-        io.print("give the number of the reference you want to edit (0 to cancel): ");
-
-        int num = 0;
-        try {
-            num = Integer.parseInt(io.readLine());
-        } catch (Exception e) {
-            io.println("this ain't no number");
-        }
-
-        if (num == 0) {
-            return;
-        }
-
-        Reference ref = r2.get(num - 1);
-        io.println("FIELDS\t:\tVALUES");
-        HashMap<String, String> fieldsMap = ref.getFieldsMap();
-        //list fields with data
-        for (String fields : fieldsMap.keySet()) {
-            io.println(fields + "\t:\t" + fieldsMap.get(fields));
-        }
-        //list fields with no data
-        for (String emptyField : ref.getOptionalFields()) {
-            if (!fieldsMap.containsKey(emptyField)) {
-                io.println(emptyField + "\t:");
-            }
-        }
-        io.println("give the name of the field you want to edit (enter return): ");
-        String field = io.readLine();
-        if (field.equals("")) {
-            return;
-        }
-        io.println("give a new value for the field");
-        String value = io.readLine();
-
-        if (!app.updateReference(ref, field, value)) {
-            io.println("invalid input value for the field: " + field);
-        }
-        io.println("reference updated!");
-    }
-    //CHECKSTYLE:ON
 }

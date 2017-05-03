@@ -34,6 +34,28 @@ public class Stepdefs {
     public void command_article_selected() throws Throwable {
         inputLines.add("1");
     }
+    
+    @Given("^an article has been created$")
+    public void an_article_has_been_created() throws Throwable {
+        inputLines.add("add");
+        inputLines.add("1");
+        this.valid_input_are_entered_for_article();
+    }
+    
+    @Given("^an article has been created with required fields$")
+    public void an_article_has_been_created_w_req_fields() throws Throwable {
+        final int lim = 5;
+        inputLines.add("add");
+        inputLines.add("1");
+        inputLines.add("Tommi Pelkonen");
+        inputLines.add("Hyppaa hyppaa");
+        inputLines.add("AAC");
+        inputLines.add("2006"); //year
+        inputLines.add("12");    //volume
+        for (int i = 0; i < lim; i++) {
+            inputLines.add("");
+        }
+    }
 
     @When("^valid input are entered for article$")
     public void valid_input_are_entered_for_article() throws Throwable {
@@ -186,6 +208,26 @@ public class Stepdefs {
         inputLines.add("note");
         inputLines.add("key");
     }
+    
+    @When("^valid input are entered for editing")
+    public void valid_input_are_entered_for_editing() throws Throwable {
+        inputLines.add("1");
+        inputLines.add("title");
+        inputLines.add("korjattu_title");
+    }
+    
+    @When("^invalid input are entered for editing")
+    public void invalid_input_are_entered_for_editing() throws Throwable {
+        inputLines.add("1");
+        inputLines.add("year");
+        inputLines.add("ei_numeerinen_vuosi");
+    }
+    
+    @When("^empty field is given")
+    public void empty_field_is_given() throws Throwable {
+        inputLines.add("1");
+        inputLines.add("");
+    }
 //CHECKSTYLE:OFF
     @When("^invalid input are entered for inproceedings")
     public void invalid_input_are_entered_for_inproceedings() throws Throwable {
@@ -253,6 +295,13 @@ public class Stepdefs {
         for (String error : errorLines) {
             assertTrue(io.getPrints().contains(error));
         }
+    }
+    
+    @Then("^system will not respond with \"([^\"]*)\"$")
+    public void system_will_not_respond_with(String expectedOutput)
+            throws Throwable {
+        runApp();
+        assertTrue(!io.getPrints().contains(expectedOutput));
     }
 
     private void runApp() {
