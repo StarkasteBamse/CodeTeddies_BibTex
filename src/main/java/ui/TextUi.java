@@ -86,7 +86,8 @@ public class TextUi {
                 printView(command);
                 return true;
             case "add":
-                printAdd(command);
+                new Add(io, app).run();
+                //printAdd
                 break;
 //            case "save":
 //                printView("referencesSaved");
@@ -99,16 +100,19 @@ public class TextUi {
                 printEdit(command);
                 break;
             case "load":
-                app.loadDatabase();
-                printView("loadDb");
+                new Load(io, app).run();
+//                app.loadDatabase();
+//                printView("loadDb");
                 break;
             case "clear":
-                app.clearMemory();
-                printView("memoryClear");
+                new Clear(io, app).run();
+//                app.clearMemory();
+//                printView("memoryClear");
                 break;
             case "deletedb":
-                app.clearDatabase();
-                printView("dbClear");
+                new DeleteDB(io, app).run();
+//                app.clearDatabase();
+//                printView("dbClear");
                 break;
             case "print":
                 if (app.isMemoryEmpty()) {
