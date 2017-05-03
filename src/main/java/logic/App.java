@@ -1,13 +1,7 @@
 package logic;
 
-import database.DAO;
-import database.ReferenceDAO;
-import domain.Article;
-import domain.Reference;
-import domain.Inproceedings;
-import domain.Book;
-import domain.Manual;
-import domain.PhdThesis;
+import database.*;
+import domain.*;
 import io.*;
 import ui.TextUi;
 import wrapper.Wrapper;
