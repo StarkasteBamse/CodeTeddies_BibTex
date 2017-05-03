@@ -21,17 +21,9 @@ public class Edit implements Command {
     public void run() {
         io.println("which reference do you want to edit");
         List<Reference> r2 = app.getReferences();
-
-        for (int i = 0; i < r2.size(); i++) {
-            io.println("[" + (i + 1) + "] " + r2.get(i).toString());
-            HashMap<String, String> fieldsMap = r2.get(i).getFieldsMap();
-
-            for (String fields : fieldsMap.keySet()) {
-                io.println(fields + "\t:\t" + fieldsMap.get(fields));
-            }
-            io.println("");
-        }
-        io.print("give the number of the reference you want to edit (0 to cancel): ");
+        listReferences(r2);
+        io.print("give the number of the reference " +
+                "you want to edit (0 to cancel): ");
 
         int num = 0;
         try {
@@ -45,6 +37,23 @@ public class Edit implements Command {
         }
 
         Reference ref = r2.get(num - 1);
+        listFields(ref);
+        updateField(ref);
+    }
+    
+    public void listReferences(List<Reference> r2) {
+        for (int i = 0; i < r2.size(); i++) {
+            io.println("[" + (i + 1) + "] " + r2.get(i).toString());
+            HashMap<String, String> fieldsMap = r2.get(i).getFieldsMap();
+
+            for (String fields : fieldsMap.keySet()) {
+                io.println(fields + "\t:\t" + fieldsMap.get(fields));
+            }
+            io.println("");
+        }
+    }
+    
+    public void listFields(Reference ref) {
         io.println("FIELDS\t:\tVALUES");
         HashMap<String, String> fieldsMap = ref.getFieldsMap();
         //list fields with data
@@ -57,7 +66,11 @@ public class Edit implements Command {
                 io.println(emptyField + "\t:");
             }
         }
-        io.println("give the name of the field you want to edit (enter return): ");
+    }
+    
+    public void updateField(Reference ref) {
+        io.println("give the name of the field " + 
+                "you want to edit (enter return): ");
         String field = io.readLine();
         if (field.equals("")) {
             return;

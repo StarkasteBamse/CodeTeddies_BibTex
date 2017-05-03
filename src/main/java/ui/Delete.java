@@ -31,7 +31,8 @@ public class Delete implements Command {
             }
             io.println("");
         }
-        io.print("give the number of the reference you want to delete (0 for cancel): ");
+        io.print("give the number of the reference " +
+                "you want to delete (0 to cancel): ");
 
         int number = 0;
         try {

@@ -43,7 +43,8 @@ public class Stepdefs {
     }
     
     @Given("^an article has been created with required fields$")
-    public void an_article_has_been_created_with_required_fields() throws Throwable {
+    public void an_article_has_been_created_w_req_fields() throws Throwable {
+        final int lim = 5;
         inputLines.add("add");
         inputLines.add("1");
         inputLines.add("Tommi Pelkonen");
@@ -51,7 +52,7 @@ public class Stepdefs {
         inputLines.add("AAC");
         inputLines.add("2006"); //year
         inputLines.add("12");    //volume
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < lim; i++) {
             inputLines.add("");
         }
     }

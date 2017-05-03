@@ -17,7 +17,8 @@ public class File implements Command {
     @Override
     public void run() {
         if (app.isMemoryEmpty()) {
-            io.println("No articles in memory, you don't want an empty .bib file!");
+            io.println("No articles in memory, " +
+                    "you don't want an empty .bib file!");
         } else {
             String fileName = readFileName();
             if (!app.exportReference(fileName)) {
