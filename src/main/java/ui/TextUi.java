@@ -36,8 +36,7 @@ public class TextUi {
 
     public HashMap<String, Runnable> initializePrintViews() {
         HashMap<String, Runnable> printViews = new HashMap<>();
-        printViews.put("quit", () -> io.println("See you next time, "
-                + "bye byeh..."));
+        printViews.put("quit", () -> io.println("See you next time!"));
         printViews.put("whichType", () -> {
             io.println("");
             io.println("Which reference type?");
@@ -64,14 +63,14 @@ public class TextUi {
                 // + "(save) Save references to database" + n
                 // at the moment (add)automaticly saves new reference to
                 // database, need dublicate regocnition for (save) to work
-                + "(delete) deletes reference from memory and database" + n
-                + "(edit) edit fields of excisting reference" + n
+                + "(delete) Deletes reference from memory and database" + n
+                + "(edit) Edit fields of excisting reference" + n
                 + "(load) Load references from database" + n
                 + "(clear) Clear memory, Warning deletes all "
                 + "data from memory" + n
                 + "(deletedb) Delete database, Warning deletes all data" + n
                 + "(print) Print to screen references in" + n
-                + "(file) Export references in to a file" + n
+                + "(file) Export references into a file" + n
                 + "(quit) Stop using this program" + n
                 + "Command: ");
     }
@@ -107,7 +106,7 @@ public class TextUi {
                 app.clearMemory();
                 printView("memoryClear");
                 break;
-            case "deleteDB":
+            case "deletedb":
                 app.clearDatabase();
                 printView("dbClear");
                 break;
@@ -176,7 +175,7 @@ public class TextUi {
 
     //CHECKSTYLE:OFF
     private void printDelete(String command) {
-        io.println("which reference you want to delete");
+        io.println("which reference do you want to delete");
         List<Reference> r1 = app.getReferences();
 
         for (int i = 0; i < r1.size(); i++) {
@@ -188,7 +187,7 @@ public class TextUi {
             }
             io.println("");
         }
-        io.print("give number what you want to delete (0 for cancel): ");
+        io.print("give the number of the reference you want to delete (0 for cancel): ");
 
         int number = 0;
         try {
@@ -204,7 +203,7 @@ public class TextUi {
     }
 
     private void printEdit(String command) {
-        io.println("which reference you want to edit");
+        io.println("which reference do you want to edit");
         List<Reference> r2 = app.getReferences();
 
         for (int i = 0; i < r2.size(); i++) {
@@ -216,7 +215,7 @@ public class TextUi {
             }
             io.println("");
         }
-        io.print("give number what you want to edit (0 for cancel): ");
+        io.print("give the number of the reference you want to edit (0 to cancel): ");
 
         int num = 0;
         try {
@@ -242,16 +241,16 @@ public class TextUi {
                 io.println(emptyField + "\t:");
             }
         }
-        io.println("give field what you want to edit (enter return): ");
+        io.println("give the name of the field you want to edit (enter return): ");
         String field = io.readLine();
         if (field.equals("")) {
             return;
         }
-        io.println("give new value for field");
+        io.println("give a new value for the field");
         String value = io.readLine();
 
         if (!app.updateReference(ref, field, value)) {
-            io.println("invalid input value for field " + field);
+            io.println("invalid input value for the field: " + field);
         }
         io.println("reference updated!");
     }
