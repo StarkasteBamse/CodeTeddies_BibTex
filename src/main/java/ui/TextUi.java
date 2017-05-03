@@ -35,6 +35,14 @@ public class TextUi {
             }
         }
     }
+    
+    public void runCommand(String command) {
+        if (commandMap.containsKey(command)) {
+            commandMap.get(command).run();
+        } else {
+            commandMap.get("invalid").run();
+        }
+    }
 
     public HashMap<String, Command> initializeCommands() {
         HashMap<String, Command> commands = new HashMap<>();
@@ -67,13 +75,5 @@ public class TextUi {
                 + "(file) Export references into a file" + n
                 + "(quit) Stop using this program" + n
                 + "Command: ");
-    }
-
-    public void runCommand(String command) {
-        if (commandMap.containsKey(command)) {
-            commandMap.get(command).run();
-        } else {
-            commandMap.get("invalid").run();
-        }
     }
 }
