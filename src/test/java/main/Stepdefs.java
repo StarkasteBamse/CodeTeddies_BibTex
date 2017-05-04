@@ -303,6 +303,12 @@ public class Stepdefs {
         runApp();
         assertTrue(!io.getPrints().contains(expectedOutput));
     }
+    
+    @When("^created article is selected to be deleted$")
+    public void created_article_is_selected() throws Throwable {
+        inputLines.add("1");
+    }
+
 
     private void runApp() {
         inputLines.add("quit");
