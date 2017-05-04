@@ -24,7 +24,7 @@ public class Stepdefs {
     App app;
     StubIO io;
     String bibFile = "";
-     
+
     @Given("^command \"([^\"]*)\" is selected$")
     public void command_selected(String command) throws Throwable {
         inputLines.add(command);
@@ -34,14 +34,14 @@ public class Stepdefs {
     public void command_article_selected() throws Throwable {
         inputLines.add("1");
     }
-    
+
     @Given("^an article has been created$")
     public void an_article_has_been_created() throws Throwable {
         inputLines.add("add");
         inputLines.add("1");
         this.valid_input_are_entered_for_article();
     }
-    
+
     @Given("^an article has been created with required fields$")
     public void an_article_has_been_created_w_req_fields() throws Throwable {
         final int lim = 5;
@@ -73,47 +73,43 @@ public class Stepdefs {
         inputLines.add("key");
     }
 //CHECKSTYLE:OFF
+
     @When("^invalid input are entered for article$")
     public void invalid_input_are_entered_for_article() throws Throwable {
         //required fields
         inputLines.add("");
         errorLines.add("Invalid author");
-        
         inputLines.add("add");
         inputLines.add("1");
-        
+
         inputLines.add("author");
         inputLines.add("");
         errorLines.add("Invalid title");
-        
         inputLines.add("add");
         inputLines.add("1");
-        
+
         inputLines.add("author");
         inputLines.add("title");
         inputLines.add("");
         errorLines.add("Invalid journal");
-        
         inputLines.add("add");
         inputLines.add("1");
-        
+
         inputLines.add("author");
         inputLines.add("title");
-        inputLines.add("journal");        
+        inputLines.add("journal");
         inputLines.add("WRONG");
         errorLines.add("Invalid year");
-        
         inputLines.add("add");
         inputLines.add("1");
-        
+
         inputLines.add("author");
         inputLines.add("title");
-        inputLines.add("journal");        
+        inputLines.add("journal");
         inputLines.add("2000");
         inputLines.add("WRONGthisToo");
         errorLines.add("Invalid volume");
-        
-           
+
 //        //optional fields
 //        inputLines.add("12");   //number
 //        inputLines.add("1-2");  //pages
@@ -122,6 +118,7 @@ public class Stepdefs {
 //        inputLines.add("key");
     }
 //CHECKSTYLE:ON
+
     @Given("^command book is selected$")
     public void command_book_selected() throws Throwable {
         inputLines.add("2");
@@ -144,36 +141,34 @@ public class Stepdefs {
         inputLines.add("key");
     }
 //CHECKSTYLE:OFF
+
     @When("^invalid input are entered for book$")
     public void invalid_input_are_entered_for_book() throws Throwable {
         //required fields
         inputLines.add("");
         errorLines.add("Invalid author");
-        
         inputLines.add("add");
         inputLines.add("2");
-        
+
         inputLines.add("author");
         inputLines.add("");
         errorLines.add("Invalid title");
-        
         inputLines.add("add");
         inputLines.add("2");
-        
+
         inputLines.add("author");
         inputLines.add("title");
         inputLines.add("");
         errorLines.add("Invalid publisher");
-        
         inputLines.add("add");
         inputLines.add("2");
-        
+
         inputLines.add("author");
         inputLines.add("title");
         inputLines.add("publisher");
         inputLines.add("IamWRONG");
         errorLines.add("Invalid year");
-                               
+
         //optional fields
 //        inputLines.add("666");  //number
 //        inputLines.add("series");
@@ -184,6 +179,7 @@ public class Stepdefs {
 //        inputLines.add("key");
     }
 //CHECKSTYLE:ON
+
     @Given("^command inproceedings is selected$")
     public void command_inproceedings_selected() throws Throwable {
         inputLines.add("3");
@@ -208,58 +204,55 @@ public class Stepdefs {
         inputLines.add("note");
         inputLines.add("key");
     }
-    
+
     @When("^valid input are entered for editing")
     public void valid_input_are_entered_for_editing() throws Throwable {
         inputLines.add("1");
         inputLines.add("title");
         inputLines.add("korjattu_title");
     }
-    
+
     @When("^invalid input are entered for editing")
     public void invalid_input_are_entered_for_editing() throws Throwable {
         inputLines.add("1");
         inputLines.add("year");
         inputLines.add("ei_numeerinen_vuosi");
     }
-    
+
     @When("^empty field is given")
     public void empty_field_is_given() throws Throwable {
         inputLines.add("1");
         inputLines.add("");
     }
 //CHECKSTYLE:OFF
+
     @When("^invalid input are entered for inproceedings")
     public void invalid_input_are_entered_for_inproceedings() throws Throwable {
         //required fields
         inputLines.add("");
         errorLines.add("Invalid author");
-        
         inputLines.add("add");
         inputLines.add("3");
-        
+
         inputLines.add("author");
         inputLines.add("");
         errorLines.add("Invalid title");
-        
         inputLines.add("add");
         inputLines.add("3");
-        
-        inputLines.add("author");        
+
+        inputLines.add("author");
         inputLines.add("title");
         inputLines.add("");
         errorLines.add("Invalid booktitle");
-        
         inputLines.add("add");
         inputLines.add("3");
-        
-        inputLines.add("author");        
-        inputLines.add("title");       
+
+        inputLines.add("author");
+        inputLines.add("title");
         inputLines.add("booktitle");
         inputLines.add("iAmWrongYear");
         errorLines.add("Invalid year");
-        
-        
+
 //        //optional fields    
 //        inputLines.add("editor");
 //        inputLines.add("666");   //volume
@@ -273,18 +266,117 @@ public class Stepdefs {
 //        inputLines.add("key");
     }
 //CHECKSTYLE:ON
+
+    @Given("^command manual is selected$")
+    public void command_manual_is_selected() throws Throwable {
+        inputLines.add("5");
+    }
+
+    @When("^valid input are entered for manual$")
+    public void valid_input_are_entered_for_manual() throws Throwable {
+        //required fields
+        inputLines.add("Title");
+
+        //optional fields    
+        inputLines.add("Author");
+        inputLines.add("Organization");
+        inputLines.add("Address");
+        inputLines.add("Edition");
+        inputLines.add("12"); //Month
+        inputLines.add("1"); //Year
+        inputLines.add("Note");
+        inputLines.add("Key");
+
+    }
+
+//CHECKSTYLE:OFF
+    @When("^invalid input are entered for manual$")
+    public void invalid_input_are_entered_for_manual() throws Throwable {
+        //required fields
+        inputLines.add("");
+        errorLines.add("Invalid title");
+//        //optional fields    
+//        inputLines.add("Author");       
+//        inputLines.add("Organization");
+//        inputLines.add("Address");
+//        inputLines.add("Edition");
+//        inputLines.add("12"); //Month
+//        inputLines.add("1"); //Year
+//        inputLines.add("Note");
+//        inputLines.add("Key");
+    }
+//CHECKSTYLE:ON
+
+    @Given("^command phdthesis is selected$")
+    public void command_phdthesis_is_selected() throws Throwable {
+        inputLines.add("4");
+    }
+
+    @When("^valid input are entered for phdthesis$")
+    public void valid_input_are_entered_for_phdthesis() throws Throwable {
+        //required fields
+        inputLines.add("Author");
+        inputLines.add("Title");
+        inputLines.add("School");
+        inputLines.add("1048");
+
+        //optional fields
+        inputLines.add("Type");
+        inputLines.add("Address");
+        inputLines.add("6"); //Month
+        inputLines.add("Note");
+        inputLines.add("Key");
+    }
+
+//CHECKSTYLE:OFF
+    @When("^invalid input are entered for phdthesis$")
+    public void invalid_input_are_entered_for_phdthesis() throws Throwable {
+        //required fields
+        inputLines.add("");
+        errorLines.add("Invalid author");
+        inputLines.add("add");
+        inputLines.add("4");
+        
+        inputLines.add("author");
+        inputLines.add("");
+        errorLines.add("Invalid title");
+        inputLines.add("add");
+        inputLines.add("4");
+        
+        inputLines.add("author");
+        inputLines.add("title");
+        inputLines.add("");
+        errorLines.add("Invalid school");
+        inputLines.add("add");
+        inputLines.add("4");
+        
+        inputLines.add("author");
+        inputLines.add("title");
+        inputLines.add("school");
+        inputLines.add("IamNotAYear");
+        errorLines.add("Invalid year");
+
+//        //optional fields
+//        inputLines.add("Type");
+//        inputLines.add("Address");
+//        inputLines.add("6"); //Month
+//        inputLines.add("Note");
+//        inputLines.add("Key");
+    }
+//CHECKSTYLE:ON
+
     @Given("^filename \"([^\"]*)\" is entered")
     public void filename_signed_is_entered(String fileName) throws Throwable {
         inputLines.add(fileName);
         bibFile = fileName;
     }
-    
+
     @Given("^valid article is added$")
     public void valid_article_is_added() throws Throwable {
         command_selected("add");
         command_article_selected();
         valid_input_are_entered_for_article();
-        
+
     }
 
     @Then("^system will respond with \"([^\"]*)\"$")
@@ -296,12 +388,17 @@ public class Stepdefs {
             assertTrue(io.getPrints().contains(error));
         }
     }
-    
+
     @Then("^system will not respond with \"([^\"]*)\"$")
     public void system_will_not_respond_with(String expectedOutput)
             throws Throwable {
         runApp();
         assertTrue(!io.getPrints().contains(expectedOutput));
+    }
+
+    @When("^created article is selected to be deleted$")
+    public void created_article_is_selected() throws Throwable {
+        inputLines.add("1");
     }
 
     private void runApp() {
@@ -384,6 +481,5 @@ public class Stepdefs {
         return true;
     }
 //CHECKSTYLE:ON
-
 
 }
