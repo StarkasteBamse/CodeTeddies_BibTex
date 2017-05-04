@@ -45,7 +45,7 @@ public class ReferenceDAO implements DAO<Reference> {
     }
     
     private void setLogging() {
-        Logger mongoLogger = Logger.getLogger("com.mongodb");
+        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
         mongoLogger.setLevel(Level.SEVERE);
     }
 //CHECKSTYLE:ON    
