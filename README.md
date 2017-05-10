@@ -4,6 +4,7 @@
 
 * [Speksi] (https://github.com/mluukkai/ohtu2017/wiki/miniprojekti-speksi) 
 * [Backlogs] (https://docs.google.com/spreadsheets/d/1SRH5Wl2S941oJ2RSSWVe4ZDMs6_j_8OO5ymFnmnr7v8/)
+* [Raportti] (https://github.com/StarkasteBamse/CodeTeddies_BibTex/blob/master/Raportti.pdf)
 ---
 [![Build Status](https://travis-ci.org/StarkasteBamse/CodeTeddies_BibTex.svg?branch=master)](https://travis-ci.org/StarkasteBamse/CodeTeddies_BibTex) 
  
